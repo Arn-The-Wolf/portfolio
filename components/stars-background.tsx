@@ -18,7 +18,7 @@ interface StarsBackgroundProps {
 }
 
 export default function StarsBackground({ variant = "fixed" }: StarsBackgroundProps) {
-  const { isDark } = useTheme()
+  const { isDark, theme } = useTheme()
   const palette = isDark ? STARFIELD.dark : STARFIELD.light
 
   return (
@@ -29,10 +29,10 @@ export default function StarsBackground({ variant = "fixed" }: StarsBackgroundPr
       )}
       aria-hidden
     >
-      <div className="absolute inset-0" style={{ background: palette.background }} />
+      <div className="absolute inset-0" style={{ backgroundColor: palette.background }} />
       <div className="absolute inset-0">
         <DynamicCanvas
-          key={isDark ? "page-stars-dark" : "page-stars-light"}
+          key={`page-canvas-${theme}`}
           camera={{ position: [0, 0, 1] }}
           gl={{ alpha: false, antialias: true, powerPreference: "low-power" }}
           dpr={[1, 1.5]}
@@ -43,14 +43,9 @@ export default function StarsBackground({ variant = "fixed" }: StarsBackgroundPr
           </Suspense>
         </DynamicCanvas>
       </div>
-      <div
-        className={cn(
-          "absolute inset-0",
-          isDark
-            ? "bg-gradient-to-b from-background/10 via-background/55 to-background/95"
-            : "bg-gradient-to-b from-transparent via-transparent to-background/40"
-        )}
-      />
+      {isDark && (
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/70" />
+      )}
     </div>
   )
 }

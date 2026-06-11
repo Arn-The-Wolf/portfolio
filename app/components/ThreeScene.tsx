@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useTheme } from '@/hooks/use-theme';
 import { STARFIELD } from '@/lib/theme-colors';
-import { cn } from '@/lib/utils';
 
 const DynamicCanvas = dynamic(
   () => import('@react-three/fiber').then((mod) => mod.Canvas),
@@ -30,7 +29,7 @@ function ErrorFallback({ error }: { error: Error }) {
 
 export function ThreeScene() {
   const [mounted, setMounted] = useState(false);
-  const { isDark } = useTheme();
+  const { isDark, theme } = useTheme();
   const palette = isDark ? STARFIELD.dark : STARFIELD.light;
 
   useEffect(() => {
@@ -38,15 +37,15 @@ export function ThreeScene() {
   }, []);
 
   if (!mounted) {
-    return <div className="absolute inset-0 z-0 bg-[#0a0f0c]" aria-hidden />;
+    return <div className="absolute inset-0 z-0 bg-background" aria-hidden />;
   }
 
   return (
     <div className="absolute inset-0 z-0" aria-hidden>
-      <div className="absolute inset-0" style={{ background: palette.background }} />
+      <div className="absolute inset-0" style={{ backgroundColor: palette.background }} />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <DynamicCanvas
-          key={isDark ? 'hero-dark' : 'hero-light'}
+          key={`hero-canvas-${theme}`}
           camera={{ position: [0, 0, 5], fov: 60 }}
           gl={{ antialias: true, alpha: false }}
           dpr={[1, 1.5]}
@@ -58,14 +57,9 @@ export function ThreeScene() {
           </Suspense>
         </DynamicCanvas>
       </ErrorBoundary>
-      <div
-        className={cn(
-          'absolute inset-0 pointer-events-none',
-          isDark
-            ? 'bg-gradient-to-b from-transparent via-background/20 to-background/80'
-            : 'bg-gradient-to-b from-transparent via-transparent to-background/50'
-        )}
-      />
+      {isDark && (
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/10 to-black/60" />
+      )}
     </div>
   );
 }

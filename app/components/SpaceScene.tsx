@@ -11,35 +11,37 @@ export function SpaceScene() {
   const groupRef = useRef<THREE.Group>(null);
   const { isDark } = useTheme();
   const palette = isDark ? STARFIELD.dark : STARFIELD.light;
+  const layers = isDark ? STAR_LAYERS.dark : STAR_LAYERS.light;
+  const [layerA, layerB] = layers;
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * 0.1;
     }
   });
 
-  const [layerA, layerB] = STAR_LAYERS;
-
   return (
     <group ref={groupRef}>
       <color attach="background" args={[palette.background]} />
       <Stars
+        key={`stars-a-${isDark ? 'dark' : 'light'}`}
         radius={layerA.radius}
         depth={layerA.depth}
         count={layerA.count}
         factor={layerA.factor}
         saturation={0}
-        fade
+        fade={palette.starFade}
         speed={layerA.speed}
         color={palette.starPrimary}
       />
       <Stars
+        key={`stars-b-${isDark ? 'dark' : 'light'}`}
         radius={layerB.radius}
         depth={layerB.depth}
         count={layerB.count}
         factor={layerB.factor}
         saturation={0}
-        fade
+        fade={palette.starFade}
         speed={layerB.speed}
         color={palette.starSecondary}
       />
@@ -51,7 +53,9 @@ export function SpaceScene() {
           <meshStandardMaterial
             color={palette.meshSphere}
             emissive={palette.meshSphereEmissive}
-            emissiveIntensity={isDark ? 0.2 : 0.12}
+            emissiveIntensity={isDark ? 0.2 : 0.15}
+            transparent={!isDark}
+            opacity={isDark ? 1 : 0.85}
           />
         </mesh>
       </Float>
@@ -61,7 +65,9 @@ export function SpaceScene() {
           <meshStandardMaterial
             color={palette.meshBox}
             emissive={palette.meshBoxEmissive}
-            emissiveIntensity={isDark ? 0.1 : 0.08}
+            emissiveIntensity={isDark ? 0.1 : 0.12}
+            transparent={!isDark}
+            opacity={isDark ? 1 : 0.8}
           />
         </mesh>
       </Float>
