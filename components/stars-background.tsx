@@ -22,9 +22,9 @@ export default function StarsBackground() {
         <DynamicCanvas
           key={isDark ? "dark-stars" : "light-stars"}
           camera={{ position: [0, 0, 1] }}
-          gl={{ alpha: true, antialias: false, powerPreference: "low-power" }}
+          gl={{ alpha: false, antialias: true, powerPreference: "low-power" }}
           dpr={[1, 1.5]}
-          style={{ background: "transparent" }}
+          style={{ background: isDark ? "#0a0f0c" : "#eef2ef" }}
         >
           <Suspense fallback={null}>
             <DynamicStarsScene />
@@ -36,7 +36,7 @@ export default function StarsBackground() {
           "absolute inset-0",
           isDark
             ? "bg-gradient-to-b from-background/10 via-background/55 to-background/95"
-            : "bg-gradient-to-b from-background/20 via-background/45 to-background/90"
+            : "bg-gradient-to-b from-background/5 via-background/25 to-background/75"
         )}
       />
     </div>

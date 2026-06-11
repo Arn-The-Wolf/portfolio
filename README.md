@@ -25,7 +25,7 @@ Personal portfolio and project showcase for **RUYANGE Arnold**, a full-stack dev
 ```bash
 npm install --legacy-peer-deps
 cp .env.example .env.local   # set ADMIN_PASSWORD, optional RESEND_API_KEY
-npm run dev                  # http://localhost:3000
+npm run dev                  # kills port 3000 first, then http://localhost:3000
 ```
 
 ## Admin

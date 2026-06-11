@@ -15,12 +15,10 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement
-  if (theme === "dark") {
-    root.classList.add("dark")
-  } else {
-    root.classList.remove("dark")
-  }
-  root.setAttribute("data-theme", theme)
+  const isDark = theme !== "light"
+  root.classList.toggle("dark", isDark)
+  root.setAttribute("data-theme", isDark ? "dark" : "light")
+  root.style.colorScheme = isDark ? "dark" : "light"
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -28,8 +26,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as Theme | null
+    const saved = localStorage.getItem("theme")
+    // Default is always dark unless the user explicitly chose light.
     const initial: Theme = saved === "light" ? "light" : "dark"
+    if (saved !== "light" && saved !== "dark") {
+      localStorage.setItem("theme", "dark")
+    }
     setThemeState(initial)
     applyTheme(initial)
     setMounted(true)

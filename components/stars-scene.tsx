@@ -8,26 +8,26 @@ export default function StarsScene() {
 
   return (
     <>
-      <color attach="background" args={[isDark ? "#000000" : "#e8f5e9"]} />
+      <color attach="background" args={[isDark ? "#0a0f0c" : "#eef2ef"]} />
       <Stars
         radius={90}
         depth={50}
-        count={isDark ? 2800 : 2200}
-        factor={isDark ? 3.2 : 4.5}
-        saturation={isDark ? 0 : 0.35}
+        count={isDark ? 2800 : 3200}
+        factor={isDark ? 3.2 : 7}
+        saturation={0}
         fade
         speed={0.4}
-        color={isDark ? "#4ade80" : "#15803d"}
+        color={isDark ? "#4ade80" : "#000000"}
       />
       <Stars
         radius={50}
         depth={30}
-        count={isDark ? 800 : 600}
-        factor={2}
+        count={isDark ? 800 : 1100}
+        factor={isDark ? 2 : 3.5}
         saturation={0}
         fade
         speed={0.2}
-        color={isDark ? "#86efac" : "#22c55e"}
+        color={isDark ? "#86efac" : "#1a1a1a"}
       />
     </>
   )
