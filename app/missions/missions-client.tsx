@@ -76,9 +76,9 @@ export default function MissionsClient({
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-            <p className="text-sm text-gray-400 mb-2">Portfolio & GitHub repositories</p>
-            <h1 className="text-4xl md:text-5xl font-display font-bold text-green-400">Projects</h1>
-            <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
+            <p className="text-sm text-muted-foreground mb-2">Portfolio & GitHub repositories</p>
+            <h1 className="page-heading">Projects</h1>
+            <p className="text-muted-foreground text-sm mt-3 max-w-xl mx-auto">
               {allProjects.length} repositories — filter by stack. Projects can appear in multiple categories.
             </p>
           </motion.div>
@@ -91,8 +91,8 @@ export default function MissionsClient({
                 onClick={() => setSelectedFilter(f)}
                 className={
                   selectedFilter === f
-                    ? "bg-green-600 hover:bg-green-500 text-black text-xs capitalize"
-                    : "border-green-400/30 text-green-400/70 hover:bg-green-400/10 text-xs capitalize bg-black/40"
+                    ? "bg-primary hover:bg-primary/90 text-primary-foreground text-xs capitalize"
+                    : "border-border text-card-foreground hover:bg-accent text-xs capitalize bg-card/90"
                 }
               >
                 {f === "all" ? "All" : f}
@@ -113,63 +113,63 @@ export default function MissionsClient({
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: index * 0.04 }}
                 >
-                  <Card className="bg-black/70 border-green-400/20 h-full flex flex-col group hover:border-green-400/50 transition-all backdrop-blur-md overflow-hidden">
-                    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-green-400/10 to-blue-500/5 flex items-center justify-center">
+                  <Card className="surface-card h-full flex flex-col group hover:border-primary/40 transition-all overflow-hidden">
+                    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-accent flex items-center justify-center">
                       {isGithub ? (
-                        <FolderGit2 className="h-12 w-12 text-green-400/30 group-hover:text-green-400/50 transition-colors" />
+                        <FolderGit2 className="h-12 w-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
                       ) : (
-                        <span className="font-display text-4xl text-green-400/25 group-hover:text-green-400/40 transition-colors">
+                        <span className="font-display text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
                           {project.title?.charAt(0)}
                         </span>
                       )}
                       <div className="absolute top-3 right-3 flex gap-1">
                         {project.featured && (
-                          <Badge className="bg-green-600 text-black text-[10px]">Featured</Badge>
+                          <Badge className="bg-primary text-primary-foreground text-[10px]">Featured</Badge>
                         )}
                         {isGithub && (
-                          <Badge variant="outline" className="border-green-400/40 text-green-400 text-[10px]">
+                          <Badge variant="outline" className="border-primary/40 text-primary text-[10px]">
                             GitHub
                           </Badge>
                         )}
                       </div>
                     </div>
-                    <CardContent className="p-5 flex-grow flex flex-col">
-                      <h3 className="font-display text-lg text-green-400 mb-1">{project.title}</h3>
-                      <p className="text-xs text-gray-500 mb-2">{project.subtitle}</p>
-                      <p className="text-gray-400 text-sm mb-3 flex-grow line-clamp-2">{project.description}</p>
+                    <CardContent className="p-5 flex-grow flex flex-col text-card-foreground">
+                      <h3 className="font-display text-lg text-foreground mb-1">{project.title}</h3>
+                      <p className="text-xs text-muted-foreground mb-2">{project.subtitle}</p>
+                      <p className="text-muted-foreground text-sm mb-3 flex-grow line-clamp-2">{project.description}</p>
                       <div className="flex flex-wrap gap-1 mb-3">
                         {project.categories.slice(0, 3).map((cat) => (
-                          <Badge key={cat} variant="secondary" className="bg-white/5 text-[10px] capitalize">
+                          <Badge key={cat} variant="secondary" className="text-[10px] capitalize">
                             {cat}
                           </Badge>
                         ))}
                       </div>
                       <div className="flex flex-wrap gap-1.5 mb-4">
                         {(project.technologies || []).slice(0, 4).map((tech) => (
-                          <Badge key={tech} variant="outline" className="border-green-400/20 text-[10px] text-gray-400">
+                          <Badge key={tech} variant="outline" className="border-border text-[10px] text-muted-foreground">
                             {tech}
                           </Badge>
                         ))}
                       </div>
-                      <div className="flex justify-between items-center pt-3 border-t border-green-400/10">
-                        <div className="flex items-center gap-3 text-gray-500">
+                      <div className="flex justify-between items-center pt-3 border-t border-border">
+                        <div className="flex items-center gap-3 text-muted-foreground">
                           {stars > 0 && (
                             <span className="flex items-center gap-1 text-xs">
                               <Star className="h-3 w-3" /> {stars}
                             </span>
                           )}
                           {project.github && (
-                            <Link href={project.github} target="_blank" className="hover:text-green-400 transition-colors">
+                            <Link href={project.github} target="_blank" className="hover:text-primary transition-colors">
                               <Github className="h-4 w-4" />
                             </Link>
                           )}
                           {project.demo && (
-                            <Link href={project.demo} target="_blank" className="hover:text-green-400 transition-colors">
+                            <Link href={project.demo} target="_blank" className="hover:text-primary transition-colors">
                               <ExternalLink className="h-4 w-4" />
                             </Link>
                           )}
                         </div>
-                        <Button asChild variant="ghost" size="sm" className="text-green-400 text-xs p-0 h-auto">
+                        <Button asChild variant="ghost" size="sm" className="text-primary text-xs p-0 h-auto">
                           <Link href={href} target={isGithub ? "_blank" : undefined}>
                             {isGithub ? "View repo" : "Details"} <ChevronRight className="ml-1 h-3 w-3" />
                           </Link>
@@ -183,7 +183,7 @@ export default function MissionsClient({
           </div>
 
           {filtered.length === 0 && (
-            <p className="text-center text-gray-500 py-16">No projects match this filter.</p>
+            <p className="text-center text-muted-foreground py-16">No projects match this filter.</p>
           )}
         </div>
       </section>

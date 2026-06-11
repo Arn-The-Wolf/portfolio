@@ -41,7 +41,7 @@ export default function Portfolio() {
               className="relative shrink-0"
             >
               <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-green-400/60 via-green-500/20 to-green-400/60 blur-sm" />
-              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-green-400/50 shadow-[0_0_40px_rgba(74,222,128,0.25)]">
+              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-primary/50 shadow-[0_0_40px_hsl(var(--primary)/0.25)]">
                 <Image src={PROFILE_IMAGE} alt="RUYANGE Arnold" fill priority className="object-cover object-top" sizes="(max-width: 768px) 192px, 224px" />
               </div>
               <Badge className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-green-600 text-black text-xs whitespace-nowrap">
@@ -104,8 +104,8 @@ export default function Portfolio() {
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 {statsInView &&
                   statsData.map((stat, index) => (
-                    <div key={index} className="border border-border p-4 rounded-lg bg-card/60 backdrop-blur-sm">
-                      <div className="text-2xl font-display font-bold text-primary">
+                    <div key={index} className="surface-card p-4 rounded-lg">
+                      <div className="text-2xl font-display font-bold text-card-foreground">
                         <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
                       </div>
                       <div className="text-xs text-muted-foreground">{stat.label}</div>
@@ -115,7 +115,7 @@ export default function Portfolio() {
             </div>
             <div className="relative h-96 border border-border rounded-lg overflow-hidden">
               <Image src={PROFILE_IMAGE} alt="RUYANGE Arnold" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-primary text-sm">Full-Stack · AI · Cybersecurity</p>
               </div>

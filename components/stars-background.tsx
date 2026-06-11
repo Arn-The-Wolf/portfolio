@@ -17,7 +17,12 @@ export default function StarsBackground() {
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden>
-      <div className={cn("absolute inset-0", isDark ? "bg-black" : "bg-emerald-50/90")} />
+      <div
+        className={cn(
+          "absolute inset-0",
+          isDark ? "bg-black" : "bg-gradient-to-b from-sky-100 via-blue-50 to-slate-100"
+        )}
+      />
       <div className="absolute inset-0">
         <DynamicCanvas
           key={isDark ? "dark-stars" : "light-stars"}
@@ -36,7 +41,7 @@ export default function StarsBackground() {
           "absolute inset-0",
           isDark
             ? "bg-gradient-to-b from-black/20 via-black/50 to-black/90"
-            : "bg-gradient-to-b from-emerald-50/40 via-white/50 to-slate-100/90"
+            : "bg-gradient-to-b from-white/10 via-white/30 to-slate-100/70"
         )}
       />
     </div>

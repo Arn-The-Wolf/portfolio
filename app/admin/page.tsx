@@ -257,13 +257,13 @@ export default function AdminDashboard() {
   ]
 
   const renderListItem = (item: any, type: string, primary: string, secondary?: string, onEdit?: () => void) => (
-    <div key={item.id} className="flex justify-between items-center p-4 rounded-xl bg-black/50 border border-green-400/10 hover:border-green-400/30 transition-colors group">
+    <div key={item.id} className="flex justify-between items-center p-4 rounded-xl surface-card-muted hover:border-primary/30 transition-colors group">
       <div className="min-w-0 flex-1">
-        <p className="font-mono text-green-400 truncate">{primary}</p>
-        {secondary && <p className="text-xs text-gray-500 truncate mt-0.5">{secondary}</p>}
+        <p className="font-mono text-card-foreground truncate">{primary}</p>
+        {secondary && <p className="text-xs text-muted-foreground truncate mt-0.5">{secondary}</p>}
       </div>
       <div className="flex gap-1 ml-3 opacity-70 group-hover:opacity-100">
-        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-green-400" onClick={() => (onEdit ? onEdit() : (setEditing(item), setFormOpen(true)))}>
+        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-primary" onClick={() => (onEdit ? onEdit() : (setEditing(item), setFormOpen(true)))}>
           <Edit className="h-3.5 w-3.5" />
         </Button>
         <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-red-400" onClick={() => deleteItem(type, item.id)}>
@@ -285,23 +285,23 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-green-400 flex">
+    <div className="min-h-screen bg-background text-foreground flex">
       {sidebarOpen && (
         <button className="fixed inset-0 bg-black/60 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} aria-label="Close menu" />
       )}
 
       <aside className={cn(
-        "fixed lg:sticky top-0 left-0 z-50 h-screen w-64 border-r border-green-400/20 bg-black/95 backdrop-blur-xl flex flex-col transition-transform lg:translate-x-0",
+        "fixed lg:sticky top-0 left-0 z-50 h-screen w-64 border-r border-border bg-card/95 backdrop-blur-xl flex flex-col transition-transform lg:translate-x-0",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="p-5 border-b border-green-400/20">
+        <div className="p-5 border-b border-border">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-green-400/40 shrink-0">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-primary/40 shrink-0">
               <Image src={PROFILE_IMAGE} alt="Admin" fill className="object-cover object-top" sizes="40px" />
             </div>
             <div>
-              <p className="font-display text-sm text-green-400">COMMAND CENTER</p>
-              <p className="text-[10px] font-mono text-gray-500">ARNOLD.DEV</p>
+              <p className="font-display text-sm text-primary">COMMAND CENTER</p>
+              <p className="text-[10px] font-mono text-muted-foreground">ARNOLD.DEV</p>
             </div>
           </div>
         </div>
@@ -314,21 +314,21 @@ export default function AdminDashboard() {
               className={cn(
                 "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-mono transition-all",
                 tab === id
-                  ? "bg-green-400/15 text-green-400 border border-green-400/30"
-                  : "text-gray-400 hover:text-green-400 hover:bg-green-400/5"
+                  ? "bg-green-400/15 text-primary border border-border"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
               )}
             >
               <Icon className="h-4 w-4 shrink-0" />
               {label}
               {id === "messages" && unread > 0 && (
-                <Badge className="ml-auto bg-green-600 text-black text-[10px] h-5 px-1.5">{unread}</Badge>
+                <Badge className="ml-auto bg-primary text-primary-foreground text-[10px] h-5 px-1.5">{unread}</Badge>
               )}
             </button>
           ))}
         </nav>
 
-        <div className="p-3 border-t border-green-400/20 space-y-2">
-          <Button variant="outline" size="sm" className="w-full border-green-400/30 text-green-400 font-mono text-xs" asChild>
+        <div className="p-3 border-t border-border space-y-2">
+          <Button variant="outline" size="sm" className="w-full border-border text-primary font-mono text-xs" asChild>
             <a href="/" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-3 w-3 mr-2" /> VIEW SITE
             </a>
@@ -340,20 +340,20 @@ export default function AdminDashboard() {
       </aside>
 
       <main className="flex-1 min-w-0 pt-16 lg:pt-0">
-        <header className="sticky top-0 z-30 border-b border-green-400/20 bg-black/80 backdrop-blur-md px-4 lg:px-8 py-4">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-md px-4 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="sm" className="lg:hidden text-green-400" onClick={() => setSidebarOpen(true)}>
+              <Button variant="ghost" size="sm" className="lg:hidden text-primary" onClick={() => setSidebarOpen(true)}>
                 <Shield className="h-5 w-5" />
               </Button>
               <div>
-                <h1 className="font-display text-xl md:text-2xl text-green-400">
+                <h1 className="font-display text-xl md:text-2xl text-primary">
                   {tab === "overview" ? "Dashboard Overview" : panelTitle[tab]}
                 </h1>
-                <p className="text-xs font-mono text-gray-500 hidden sm:block">Secure content management</p>
+                <p className="text-xs font-mono text-muted-foreground hidden sm:block">Secure content management</p>
               </div>
             </div>
-            <Badge className="bg-green-600 text-black font-mono text-xs shrink-0">AUTHENTICATED</Badge>
+            <Badge className="bg-primary text-primary-foreground font-mono text-xs shrink-0">AUTHENTICATED</Badge>
           </div>
         </header>
 
@@ -362,31 +362,31 @@ export default function AdminDashboard() {
             <div className="space-y-8">
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
                 {stats.map(({ label, value, icon: Icon, color }) => (
-                  <Card key={label} className={cn("bg-gradient-to-br border-green-400/20 overflow-hidden", color)}>
+                  <Card key={label} className={cn("bg-gradient-to-br border-border overflow-hidden", color)}>
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between">
                         <div>
-                          <p className="text-[10px] font-mono text-gray-500 uppercase tracking-wider">{label}</p>
+                          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">{label}</p>
                           <p className="text-3xl font-display font-bold mt-1">{value}</p>
                         </div>
-                        <Icon className="h-5 w-5 text-green-400/40" />
+                        <Icon className="h-5 w-5 text-primary/40" />
                       </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
 
-              <Card className="bg-black/40 border-green-400/20">
+              <Card className="surface-card-muted">
                 <CardHeader>
-                  <CardTitle className="font-display text-green-400">Quick Actions</CardTitle>
-                  <CardDescription className="text-gray-500 font-mono text-xs">Jump to any content section</CardDescription>
+                  <CardTitle className="font-display text-primary">Quick Actions</CardTitle>
+                  <CardDescription className="text-muted-foreground font-mono text-xs">Jump to any content section</CardDescription>
                 </CardHeader>
                 <CardContent className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {NAV.filter((n) => n.id !== "overview").map(({ id, label, icon: Icon }) => (
                     <Button
                       key={id}
                       variant="outline"
-                      className="justify-start border-green-400/20 text-green-400 hover:bg-green-400/10 font-mono text-xs h-auto py-3"
+                      className="justify-start border-border text-primary hover:bg-green-400/10 font-mono text-xs h-auto py-3"
                       onClick={() => setTab(id)}
                     >
                       <Icon className="h-4 w-4 mr-2 shrink-0" />
@@ -397,10 +397,10 @@ export default function AdminDashboard() {
               </Card>
 
               {unread > 0 && (
-                <Card className="bg-green-400/5 border-green-400/30">
+                <Card className="bg-green-400/5 border-border">
                   <CardContent className="p-4 flex items-center justify-between">
                     <p className="font-mono text-sm">{unread} unread message{unread !== 1 ? "s" : ""} awaiting review</p>
-                    <Button size="sm" className="bg-green-600 text-black" onClick={() => setTab("messages")}>Open Inbox</Button>
+                    <Button size="sm" className="bg-primary text-primary-foreground" onClick={() => setTab("messages")}>Open Inbox</Button>
                   </CardContent>
                 </Card>
               )}
@@ -410,31 +410,31 @@ export default function AdminDashboard() {
           {tab === "missions" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500 font-mono">{projects.length} project{projects.length !== 1 ? "s" : ""}</p>
-                <Button size="sm" className="bg-green-600 text-black font-mono" onClick={openCreate}>
+                <p className="text-sm text-muted-foreground font-mono">{projects.length} project{projects.length !== 1 ? "s" : ""}</p>
+                <Button size="sm" className="bg-primary text-primary-foreground font-mono" onClick={openCreate}>
                   <Plus className="h-4 w-4 mr-1" /> Add Mission
                 </Button>
               </div>
               {formOpen && tab === "missions" && (
-                <Card className="bg-black/60 border-green-400/30">
+                <Card className="surface-card">
                   <CardHeader className="pb-3">
                     <div className="flex justify-between items-center">
-                      <CardTitle className="text-sm font-mono text-green-400">{editing ? "Edit Mission" : "New Mission"}</CardTitle>
+                      <CardTitle className="text-sm font-mono text-primary">{editing ? "Edit Mission" : "New Mission"}</CardTitle>
                       <Button variant="ghost" size="sm" onClick={closeForm}><X className="h-4 w-4" /></Button>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={saveProject} className="space-y-3">
-                    <Input name="title" defaultValue={editing?.title} placeholder="Title" className="bg-black/60 border-green-400/30 text-green-400" required />
-                    <Input name="subtitle" defaultValue={editing?.subtitle} placeholder="Subtitle" className="bg-black/60 border-green-400/30 text-green-400" />
-                    <Textarea name="problem" defaultValue={editing?.problem} placeholder="Problem" className="bg-black/60 border-green-400/30 text-green-400" required />
-                    <Textarea name="built" defaultValue={editing?.built} placeholder="What you built" className="bg-black/60 border-green-400/30 text-green-400" required />
-                    <Textarea name="description" defaultValue={editing?.description} placeholder="Short summary" className="bg-black/60 border-green-400/30 text-green-400" required />
-                    <Textarea name="outcome" defaultValue={editing?.outcome} placeholder="Outcome / results" className="bg-black/60 border-green-400/30 text-green-400" />
-                    <Input name="github" defaultValue={editing?.github} placeholder="GitHub URL" className="bg-black/60 border-green-400/30 text-green-400" />
-                    <Input name="demo" defaultValue={editing?.demo} placeholder="Demo URL" className="bg-black/60 border-green-400/30 text-green-400" />
-                    <Input name="technologies" defaultValue={editing?.technologies?.join(", ")} placeholder="Technologies (comma separated)" className="bg-black/60 border-green-400/30 text-green-400" />
-                    <Button type="submit" className="bg-green-600 text-black"><Save className="h-4 w-4 mr-1" /> Save Project</Button>
+                    <Input name="title" defaultValue={editing?.title} placeholder="Title" className="input-surface" required />
+                    <Input name="subtitle" defaultValue={editing?.subtitle} placeholder="Subtitle" className="input-surface" />
+                    <Textarea name="problem" defaultValue={editing?.problem} placeholder="Problem" className="input-surface" required />
+                    <Textarea name="built" defaultValue={editing?.built} placeholder="What you built" className="input-surface" required />
+                    <Textarea name="description" defaultValue={editing?.description} placeholder="Short summary" className="input-surface" required />
+                    <Textarea name="outcome" defaultValue={editing?.outcome} placeholder="Outcome / results" className="input-surface" />
+                    <Input name="github" defaultValue={editing?.github} placeholder="GitHub URL" className="input-surface" />
+                    <Input name="demo" defaultValue={editing?.demo} placeholder="Demo URL" className="input-surface" />
+                    <Input name="technologies" defaultValue={editing?.technologies?.join(", ")} placeholder="Technologies (comma separated)" className="input-surface" />
+                    <Button type="submit" className="bg-primary text-primary-foreground"><Save className="h-4 w-4 mr-1" /> Save Project</Button>
                     </form>
                   </CardContent>
                 </Card>
@@ -448,56 +448,56 @@ export default function AdminDashboard() {
           {tab === "documents" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500 font-mono">Resumes, CVs, cover letters & more</p>
-                <Button size="sm" className="bg-green-600 text-black font-mono" onClick={openCreate}>
+                <p className="text-sm text-muted-foreground font-mono">Resumes, CVs, cover letters & more</p>
+                <Button size="sm" className="bg-primary text-primary-foreground font-mono" onClick={openCreate}>
                   <Plus className="h-4 w-4 mr-1" /> Add Document
                 </Button>
               </div>
               {formOpen && tab === "documents" && (
-                <Card className="bg-black/60 border-green-400/30">
+                <Card className="surface-card">
                   <CardHeader className="pb-3">
                     <div className="flex justify-between items-center">
-                      <CardTitle className="text-sm font-mono text-green-400">{editing ? "Edit Document" : "New Document"}</CardTitle>
+                      <CardTitle className="text-sm font-mono text-primary">{editing ? "Edit Document" : "New Document"}</CardTitle>
                       <Button variant="ghost" size="sm" onClick={closeForm}><X className="h-4 w-4" /></Button>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={saveDocument} className="grid sm:grid-cols-2 gap-3">
-                      <Input name="title" defaultValue={editing?.title} placeholder="Document title" className="bg-black/60 border-green-400/30 text-green-400 sm:col-span-2" required />
-                      <Input name="subtitle" defaultValue={editing?.subtitle} placeholder="Subtitle" className="bg-black/60 border-green-400/30 text-green-400 sm:col-span-2" />
+                      <Input name="title" defaultValue={editing?.title} placeholder="Document title" className="input-surface sm:col-span-2" required />
+                      <Input name="subtitle" defaultValue={editing?.subtitle} placeholder="Subtitle" className="input-surface sm:col-span-2" />
                       <div>
-                        <label className="text-xs font-mono text-gray-500 mb-1 block">Document Type</label>
+                        <label className="text-xs font-mono text-muted-foreground mb-1 block">Document Type</label>
                         <Select value={docType} onValueChange={setDocType}>
-                          <SelectTrigger className="bg-black/60 border-green-400/30 text-green-400">
+                          <SelectTrigger className="input-surface">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="bg-black border-green-400/30">
+                          <SelectContent className="bg-card border-border text-card-foreground">
                             {DOCUMENT_TYPES.map((t) => (
-                              <SelectItem key={t} value={t} className="font-mono text-green-400">{t}</SelectItem>
+                              <SelectItem key={t} value={t} className="font-mono text-primary">{t}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
                       </div>
                       <div>
-                        <label className="text-xs font-mono text-gray-500 mb-1 block">Format</label>
+                        <label className="text-xs font-mono text-muted-foreground mb-1 block">Format</label>
                         <Select value={docFormat} onValueChange={setDocFormat}>
-                          <SelectTrigger className="bg-black/60 border-green-400/30 text-green-400">
+                          <SelectTrigger className="input-surface">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="bg-black border-green-400/30">
+                          <SelectContent className="bg-card border-border text-card-foreground">
                             {FILE_FORMATS.map((f) => (
-                              <SelectItem key={f} value={f} className="font-mono text-green-400">{f}</SelectItem>
+                              <SelectItem key={f} value={f} className="font-mono text-primary">{f}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
                       </div>
-                      <Input name="fileUrl" defaultValue={editing?.fileUrl || "/api/resume"} placeholder="File URL or /api/resume" className="bg-black/60 border-green-400/30 text-green-400 sm:col-span-2" />
-                      <Input name="version" defaultValue={editing?.version} placeholder="Version (e.g. 2026)" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="language" defaultValue={editing?.language || "English"} placeholder="Language" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Textarea name="description" defaultValue={editing?.description} placeholder="Description" className="bg-black/60 border-green-400/30 text-green-400 sm:col-span-2" />
-                      <Input name="tags" defaultValue={editing?.tags?.join(", ")} placeholder="Tags (comma separated)" className="bg-black/60 border-green-400/30 text-green-400 sm:col-span-2" />
+                      <Input name="fileUrl" defaultValue={editing?.fileUrl || "/api/resume"} placeholder="File URL or /api/resume" className="input-surface sm:col-span-2" />
+                      <Input name="version" defaultValue={editing?.version} placeholder="Version (e.g. 2026)" className="input-surface" />
+                      <Input name="language" defaultValue={editing?.language || "English"} placeholder="Language" className="input-surface" />
+                      <Textarea name="description" defaultValue={editing?.description} placeholder="Description" className="input-surface sm:col-span-2" />
+                      <Input name="tags" defaultValue={editing?.tags?.join(", ")} placeholder="Tags (comma separated)" className="input-surface sm:col-span-2" />
                       <div className="sm:col-span-2">
-                        <Button type="submit" className="bg-green-600 text-black"><Save className="h-4 w-4 mr-1" /> Save Document</Button>
+                        <Button type="submit" className="bg-primary text-primary-foreground"><Save className="h-4 w-4 mr-1" /> Save Document</Button>
                       </div>
                     </form>
                   </CardContent>
@@ -512,35 +512,35 @@ export default function AdminDashboard() {
           {tab === "cases" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500 font-mono">{cases.length} case stud{cases.length !== 1 ? "ies" : "y"}</p>
-                <Button size="sm" className="bg-green-600 text-black font-mono" onClick={openCreate}>
+                <p className="text-sm text-muted-foreground font-mono">{cases.length} case stud{cases.length !== 1 ? "ies" : "y"}</p>
+                <Button size="sm" className="bg-primary text-primary-foreground font-mono" onClick={openCreate}>
                   <Plus className="h-4 w-4 mr-1" /> Add Case Study
                 </Button>
               </div>
               {formOpen && tab === "cases" && (
-                <Card className="bg-black/60 border-green-400/30">
+                <Card className="surface-card">
                   <CardHeader className="pb-3">
                     <div className="flex justify-between items-center">
-                      <CardTitle className="text-sm font-mono text-green-400">{editing ? "Edit Case Study" : "New Case Study"}</CardTitle>
+                      <CardTitle className="text-sm font-mono text-primary">{editing ? "Edit Case Study" : "New Case Study"}</CardTitle>
                       <Button variant="ghost" size="sm" onClick={closeForm}><X className="h-4 w-4" /></Button>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={saveCase} className="space-y-3">
-                      <Input name="title" defaultValue={editing?.title} placeholder="Title" className="bg-black/60 border-green-400/30 text-green-400" required />
+                      <Input name="title" defaultValue={editing?.title} placeholder="Title" className="input-surface" required />
                       <div className="grid sm:grid-cols-2 gap-3">
-                        <Input name="client" defaultValue={editing?.client} placeholder="Client" className="bg-black/60 border-green-400/30 text-green-400" />
-                        <Input name="industry" defaultValue={editing?.industry} placeholder="Industry" className="bg-black/60 border-green-400/30 text-green-400" />
-                        <Input name="duration" defaultValue={editing?.duration} placeholder="Duration" className="bg-black/60 border-green-400/30 text-green-400" />
-                        <Input name="team" defaultValue={editing?.team} placeholder="Team size" className="bg-black/60 border-green-400/30 text-green-400" />
+                        <Input name="client" defaultValue={editing?.client} placeholder="Client" className="input-surface" />
+                        <Input name="industry" defaultValue={editing?.industry} placeholder="Industry" className="input-surface" />
+                        <Input name="duration" defaultValue={editing?.duration} placeholder="Duration" className="input-surface" />
+                        <Input name="team" defaultValue={editing?.team} placeholder="Team size" className="input-surface" />
                       </div>
-                      <Textarea name="challenge" defaultValue={editing?.challenge} placeholder="Challenge" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Textarea name="solution" defaultValue={editing?.solution} placeholder="Solution" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="technologies" defaultValue={editing?.technologies?.join(", ")} placeholder="Technologies" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="image" defaultValue={editing?.image || "/images/profile.png"} placeholder="Image path" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="testimonial" defaultValue={editing?.testimonial} placeholder="Testimonial quote" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="testimonialAuthor" defaultValue={editing?.testimonialAuthor} placeholder="Testimonial author" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Button type="submit" className="bg-green-600 text-black"><Save className="h-4 w-4 mr-1" /> Save Case Study</Button>
+                      <Textarea name="challenge" defaultValue={editing?.challenge} placeholder="Challenge" className="input-surface" />
+                      <Textarea name="solution" defaultValue={editing?.solution} placeholder="Solution" className="input-surface" />
+                      <Input name="technologies" defaultValue={editing?.technologies?.join(", ")} placeholder="Technologies" className="input-surface" />
+                      <Input name="image" defaultValue={editing?.image || "/images/profile.png"} placeholder="Image path" className="input-surface" />
+                      <Input name="testimonial" defaultValue={editing?.testimonial} placeholder="Testimonial quote" className="input-surface" />
+                      <Input name="testimonialAuthor" defaultValue={editing?.testimonialAuthor} placeholder="Testimonial author" className="input-surface" />
+                      <Button type="submit" className="bg-primary text-primary-foreground"><Save className="h-4 w-4 mr-1" /> Save Case Study</Button>
                     </form>
                   </CardContent>
                 </Card>
@@ -554,8 +554,8 @@ export default function AdminDashboard() {
           {tab === "skills" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500 font-mono">Edit skills JSON directly</p>
-                <Button size="sm" className="bg-green-600 text-black font-mono" onClick={saveSkills}>
+                <p className="text-sm text-muted-foreground font-mono">Edit skills JSON directly</p>
+                <Button size="sm" className="bg-primary text-primary-foreground font-mono" onClick={saveSkills}>
                   <Save className="h-4 w-4 mr-1" /> Save All
                 </Button>
               </div>
@@ -563,7 +563,7 @@ export default function AdminDashboard() {
                 value={JSON.stringify(skills, null, 2)}
                 onChange={(e) => { try { setSkills(JSON.parse(e.target.value)) } catch { /* typing */ } }}
                 rows={24}
-                className="bg-black/60 border-green-400/30 text-green-400 font-mono text-xs"
+                className="input-surface font-mono text-xs"
               />
             </section>
           )}
@@ -571,49 +571,49 @@ export default function AdminDashboard() {
           {tab === "history" && (
             <section className="space-y-6">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">Education, work, hackathons, freelance — add entries below</p>
-                <Button size="sm" className="bg-green-600 text-black" onClick={saveHistory}>
+                <p className="text-sm text-muted-foreground">Education, work, hackathons, freelance — add entries below</p>
+                <Button size="sm" className="bg-primary text-primary-foreground" onClick={saveHistory}>
                   <Save className="h-4 w-4 mr-1" /> Save All
                 </Button>
               </div>
 
-              <Card className="bg-black/40 border-green-400/20">
-                <CardHeader><CardTitle className="text-sm text-green-400">Experience</CardTitle></CardHeader>
+              <Card className="surface-card-muted">
+                <CardHeader><CardTitle className="text-sm text-primary">Experience</CardTitle></CardHeader>
                 <CardContent className="space-y-3">
                   {history.experience?.map((exp: any, idx: number) => (
-                    <div key={exp.id ?? idx} className="p-3 border border-green-400/10 rounded-lg space-y-2">
+                    <div key={exp.id ?? idx} className="p-3 border border-border rounded-lg space-y-2">
                       <div className="grid sm:grid-cols-2 gap-2">
-                        <Input value={exp.role} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, role: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Role" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                        <Input value={exp.company} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, company: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Company / School" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                        <Input value={exp.period} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, period: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Period" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                        <Input value={exp.location} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, location: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Location" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
+                        <Input value={exp.role} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, role: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Role" className="input-surface text-sm" />
+                        <Input value={exp.company} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, company: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Company / School" className="input-surface text-sm" />
+                        <Input value={exp.period} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, period: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Period" className="input-surface text-sm" />
+                        <Input value={exp.location} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, location: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Location" className="input-surface text-sm" />
                       </div>
-                      <Textarea value={exp.description} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, description: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Description" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                      <Input value={exp.technologies?.join(", ")} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, technologies: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) }; setHistory({ ...history, experience: ex }) }} placeholder="Technologies (comma separated)" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
+                      <Textarea value={exp.description} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, description: e.target.value }; setHistory({ ...history, experience: ex }) }} placeholder="Description" className="input-surface text-sm" />
+                      <Input value={exp.technologies?.join(", ")} onChange={(e) => { const ex = [...history.experience]; ex[idx] = { ...exp, technologies: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) }; setHistory({ ...history, experience: ex }) }} placeholder="Technologies (comma separated)" className="input-surface text-sm" />
                       <Button size="sm" variant="outline" className="border-red-400/30 text-red-400 text-xs" onClick={() => setHistory({ ...history, experience: history.experience.filter((_: any, i: number) => i !== idx) })}>Remove</Button>
                     </div>
                   ))}
-                  <Button size="sm" variant="outline" className="border-green-400/30 text-green-400" onClick={() => setHistory({ ...history, experience: [...(history.experience || []), { id: Date.now(), role: "", company: "", location: "", period: "", description: "", technologies: [] }] })}>
+                  <Button size="sm" variant="outline" className="border-border text-primary" onClick={() => setHistory({ ...history, experience: [...(history.experience || []), { id: Date.now(), role: "", company: "", location: "", period: "", description: "", technologies: [] }] })}>
                     <Plus className="h-3 w-3 mr-1" /> Add experience
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card className="bg-black/40 border-green-400/20">
-                <CardHeader><CardTitle className="text-sm text-green-400">Certifications & learning</CardTitle></CardHeader>
+              <Card className="surface-card-muted">
+                <CardHeader><CardTitle className="text-sm text-primary">Certifications & learning</CardTitle></CardHeader>
                 <CardContent className="space-y-3">
                   {history.certifications?.map((cert: any, idx: number) => (
-                    <div key={cert.id ?? idx} className="p-3 border border-green-400/10 rounded-lg space-y-2">
+                    <div key={cert.id ?? idx} className="p-3 border border-border rounded-lg space-y-2">
                       <div className="grid sm:grid-cols-2 gap-2">
-                        <Input value={cert.name} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, name: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Name" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                        <Input value={cert.issuer} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, issuer: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Issuer" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
-                        <Input value={cert.year} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, year: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Year" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
+                        <Input value={cert.name} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, name: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Name" className="input-surface text-sm" />
+                        <Input value={cert.issuer} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, issuer: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Issuer" className="input-surface text-sm" />
+                        <Input value={cert.year} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, year: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Year" className="input-surface text-sm" />
                       </div>
-                      <Textarea value={cert.description} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, description: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Description" className="bg-black/60 border-green-400/30 text-green-400 text-sm" />
+                      <Textarea value={cert.description} onChange={(e) => { const c = [...history.certifications]; c[idx] = { ...cert, description: e.target.value }; setHistory({ ...history, certifications: c }) }} placeholder="Description" className="input-surface text-sm" />
                       <Button size="sm" variant="outline" className="border-red-400/30 text-red-400 text-xs" onClick={() => setHistory({ ...history, certifications: history.certifications.filter((_: any, i: number) => i !== idx) })}>Remove</Button>
                     </div>
                   ))}
-                  <Button size="sm" variant="outline" className="border-green-400/30 text-green-400" onClick={() => setHistory({ ...history, certifications: [...(history.certifications || []), { id: Date.now(), name: "", issuer: "", year: "", description: "" }] })}>
+                  <Button size="sm" variant="outline" className="border-border text-primary" onClick={() => setHistory({ ...history, certifications: [...(history.certifications || []), { id: Date.now(), name: "", issuer: "", year: "", description: "" }] })}>
                     <Plus className="h-3 w-3 mr-1" /> Add certification
                   </Button>
                 </CardContent>
@@ -624,29 +624,29 @@ export default function AdminDashboard() {
           {tab === "blog" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">{blogPosts.length} posts</p>
-                <Button size="sm" className="bg-green-600 text-black" onClick={openCreate}>
+                <p className="text-sm text-muted-foreground">{blogPosts.length} posts</p>
+                <Button size="sm" className="bg-primary text-primary-foreground" onClick={openCreate}>
                   <Plus className="h-4 w-4 mr-1" /> Add Post
                 </Button>
               </div>
               {formOpen && tab === "blog" && (
-                <Card className="bg-black/60 border-green-400/30">
+                <Card className="surface-card">
                   <CardContent className="p-6">
                     <form onSubmit={saveBlog} className="space-y-3">
-                      <Input name="title" defaultValue={editing?.title} placeholder="Title" className="bg-black/60 border-green-400/30 text-green-400" required />
-                      <Input name="slug" defaultValue={editing?.slug} placeholder="url-slug" className="bg-black/60 border-green-400/30 text-green-400" required />
-                      <Input name="category" defaultValue={editing?.category} placeholder="Category" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Textarea name="excerpt" defaultValue={editing?.excerpt} placeholder="Excerpt" className="bg-black/60 border-green-400/30 text-green-400" required />
-                      <Textarea name="content" defaultValue={editing?.content} placeholder="Full content" rows={8} className="bg-black/60 border-green-400/30 text-green-400" required />
+                      <Input name="title" defaultValue={editing?.title} placeholder="Title" className="input-surface" required />
+                      <Input name="slug" defaultValue={editing?.slug} placeholder="url-slug" className="input-surface" required />
+                      <Input name="category" defaultValue={editing?.category} placeholder="Category" className="input-surface" />
+                      <Textarea name="excerpt" defaultValue={editing?.excerpt} placeholder="Excerpt" className="input-surface" required />
+                      <Textarea name="content" defaultValue={editing?.content} placeholder="Full content" rows={8} className="input-surface" required />
                       <div className="grid sm:grid-cols-2 gap-3">
-                        <Input name="date" defaultValue={editing?.date} placeholder="Date YYYY-MM-DD" className="bg-black/60 border-green-400/30 text-green-400" />
-                        <Input name="readTime" defaultValue={editing?.readTime} placeholder="5 min read" className="bg-black/60 border-green-400/30 text-green-400" />
+                        <Input name="date" defaultValue={editing?.date} placeholder="Date YYYY-MM-DD" className="input-surface" />
+                        <Input name="readTime" defaultValue={editing?.readTime} placeholder="5 min read" className="input-surface" />
                       </div>
-                      <Input name="tags" defaultValue={editing?.tags?.join(", ")} placeholder="Tags (comma separated)" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <label className="flex items-center gap-2 text-sm text-gray-400">
+                      <Input name="tags" defaultValue={editing?.tags?.join(", ")} placeholder="Tags (comma separated)" className="input-surface" />
+                      <label className="flex items-center gap-2 text-sm text-muted-foreground">
                         <input type="checkbox" name="featured" defaultChecked={editing?.featured} /> Featured post
                       </label>
-                      <Button type="submit" className="bg-green-600 text-black"><Save className="h-4 w-4 mr-1" /> Save Post</Button>
+                      <Button type="submit" className="bg-primary text-primary-foreground"><Save className="h-4 w-4 mr-1" /> Save Post</Button>
                     </form>
                   </CardContent>
                 </Card>
@@ -658,25 +658,25 @@ export default function AdminDashboard() {
           {tab === "testimonials" && (
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">{testimonialsList.length} testimonials</p>
-                <Button size="sm" className="bg-green-600 text-black" onClick={openCreate}>
+                <p className="text-sm text-muted-foreground">{testimonialsList.length} testimonials</p>
+                <Button size="sm" className="bg-primary text-primary-foreground" onClick={openCreate}>
                   <Plus className="h-4 w-4 mr-1" /> Add Testimonial
                 </Button>
               </div>
               {formOpen && tab === "testimonials" && (
-                <Card className="bg-black/60 border-green-400/30">
+                <Card className="surface-card">
                   <CardContent className="p-6">
                     <form onSubmit={saveTestimonial} className="space-y-3">
-                      <Input name="name" defaultValue={editing?.name} placeholder="Name" className="bg-black/60 border-green-400/30 text-green-400" required />
-                      <Input name="role" defaultValue={editing?.role} placeholder="Role" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Input name="company" defaultValue={editing?.company} placeholder="Company" className="bg-black/60 border-green-400/30 text-green-400" />
-                      <Textarea name="content" defaultValue={editing?.content} placeholder="Quote" className="bg-black/60 border-green-400/30 text-green-400" required />
-                      <Input name="project" defaultValue={editing?.project} placeholder="Related project" className="bg-black/60 border-green-400/30 text-green-400" />
+                      <Input name="name" defaultValue={editing?.name} placeholder="Name" className="input-surface" required />
+                      <Input name="role" defaultValue={editing?.role} placeholder="Role" className="input-surface" />
+                      <Input name="company" defaultValue={editing?.company} placeholder="Company" className="input-surface" />
+                      <Textarea name="content" defaultValue={editing?.content} placeholder="Quote" className="input-surface" required />
+                      <Input name="project" defaultValue={editing?.project} placeholder="Related project" className="input-surface" />
                       <div className="grid sm:grid-cols-2 gap-3">
-                        <Input name="date" defaultValue={editing?.date} placeholder="Date" className="bg-black/60 border-green-400/30 text-green-400" />
-                        <Input name="rating" type="number" min={1} max={5} defaultValue={editing?.rating || 5} placeholder="Rating 1-5" className="bg-black/60 border-green-400/30 text-green-400" />
+                        <Input name="date" defaultValue={editing?.date} placeholder="Date" className="input-surface" />
+                        <Input name="rating" type="number" min={1} max={5} defaultValue={editing?.rating || 5} placeholder="Rating 1-5" className="input-surface" />
                       </div>
-                      <Button type="submit" className="bg-green-600 text-black"><Save className="h-4 w-4 mr-1" /> Save Testimonial</Button>
+                      <Button type="submit" className="bg-primary text-primary-foreground"><Save className="h-4 w-4 mr-1" /> Save Testimonial</Button>
                     </form>
                   </CardContent>
                 </Card>
@@ -687,25 +687,25 @@ export default function AdminDashboard() {
 
           {tab === "messages" && (
             <section className="space-y-4">
-              <p className="text-sm text-gray-500 font-mono">{messages.length} total · {unread} unread</p>
-              {messages.length === 0 && <p className="text-gray-500 font-mono text-sm py-8 text-center">No messages yet</p>}
+              <p className="text-sm text-muted-foreground font-mono">{messages.length} total · {unread} unread</p>
+              {messages.length === 0 && <p className="text-muted-foreground font-mono text-sm py-8 text-center">No messages yet</p>}
               {messages.map((msg) => (
-                <Card key={msg.id} className={cn("bg-black/50 border-green-400/20", msg.read && "opacity-60")}>
+                <Card key={msg.id} className={cn("surface-card-muted", msg.read && "opacity-60")}>
                   <CardHeader className="pb-2">
                     <div className="flex justify-between items-start gap-2">
                       <div>
-                        <CardTitle className="text-sm font-mono text-green-400">{msg.name}</CardTitle>
+                        <CardTitle className="text-sm font-mono text-primary">{msg.name}</CardTitle>
                         <CardDescription className="text-xs">{msg.email} · {new Date(msg.createdAt).toLocaleString()}</CardDescription>
                       </div>
-                      {!msg.read && <Badge className="bg-green-600 text-black text-xs shrink-0">NEW</Badge>}
+                      {!msg.read && <Badge className="bg-primary text-primary-foreground text-xs shrink-0">NEW</Badge>}
                     </div>
-                    <p className="text-xs font-mono text-gray-400 mt-1">RE: {msg.subject}</p>
+                    <p className="text-xs font-mono text-muted-foreground mt-1">RE: {msg.subject}</p>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-300 text-sm mb-4 leading-relaxed">{msg.message}</p>
+                    <p className="text-card-foreground text-sm mb-4 leading-relaxed">{msg.message}</p>
                     <div className="flex gap-2">
                       {!msg.read && (
-                        <Button size="sm" variant="outline" className="border-green-400/30 text-xs font-mono" onClick={() => markRead(msg.id)}>
+                        <Button size="sm" variant="outline" className="border-border text-xs font-mono" onClick={() => markRead(msg.id)}>
                           Mark Read
                         </Button>
                       )}

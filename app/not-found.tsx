@@ -8,42 +8,37 @@ import { motion } from "framer-motion"
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-black text-green-400 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-        <Card className="bg-black/40 border-green-400/20 max-w-lg w-full">
+        <Card className="surface-card max-w-lg w-full">
           <CardHeader className="text-center">
-            <div className="mx-auto mb-4 w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center">
-              <AlertTriangle className="h-8 w-8 text-yellow-400" />
+            <div className="mx-auto mb-4 w-16 h-16 bg-amber-100 dark:bg-yellow-500/20 rounded-full flex items-center justify-center">
+              <AlertTriangle className="h-8 w-8 text-amber-500" />
             </div>
-            <CardTitle className="font-mono text-yellow-400 text-4xl">404</CardTitle>
-            <CardDescription className="text-gray-300 text-lg">MISSION LOCATION NOT FOUND</CardDescription>
+            <CardTitle className="font-display text-amber-600 dark:text-amber-400 text-4xl">404</CardTitle>
+            <CardDescription className="text-muted-foreground text-lg">Page not found</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
-              <p className="text-sm font-mono text-yellow-300 text-center">
-                The requested coordinates do not exist in our database.
-                <br />
-                The target may have been moved or destroyed.
+          <CardContent className="space-y-6 text-card-foreground">
+            <div className="bg-amber-50 dark:bg-yellow-500/10 border border-amber-200 dark:border-yellow-500/20 rounded p-4">
+              <p className="text-sm text-center text-card-foreground">
+                The page you&apos;re looking for doesn&apos;t exist or may have been moved.
               </p>
             </div>
             <div className="space-y-3">
-              <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-black font-mono">
+              <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="/">
                   <Home className="mr-2 h-4 w-4" />
-                  RETURN TO BASE
+                  Back to home
                 </Link>
               </Button>
               <Button
                 variant="outline"
-                className="w-full border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-mono"
+                className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 onClick={() => window.history.back()}
               >
                 <Search className="mr-2 h-4 w-4" />
-                PREVIOUS LOCATION
+                Go back
               </Button>
-            </div>
-            <div className="text-center">
-              <p className="text-xs text-gray-500 font-mono">ERROR CODE: 404_LOCATION_NOT_FOUND</p>
             </div>
           </CardContent>
         </Card>
