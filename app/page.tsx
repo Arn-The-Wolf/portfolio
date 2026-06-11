@@ -10,13 +10,15 @@ import { motion } from "framer-motion"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import GitHubStats from "@/components/github-stats"
-import { ThreeScene } from "./components/ThreeScene"
+import HeroBackground from "@/components/hero-background"
+import { useTheme } from "@/hooks/use-theme"
 import CountUp from "@/components/count-up"
 import { getAge } from "@/lib/age"
 import { getYearsExperience } from "@/lib/experience"
 import { PROFILE_IMAGE } from "@/lib/site-images"
 
 export default function Portfolio() {
+  const { isDark } = useTheme()
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const age = getAge()
   const yearsExp = getYearsExperience()
@@ -30,8 +32,12 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <ThreeScene />
+      <section
+        className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
+          isDark ? "bg-[#0a0f0c]" : "bg-[#f4f9f6]"
+        }`}
+      >
+        <HeroBackground />
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-20 pb-12">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             <motion.div

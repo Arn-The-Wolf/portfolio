@@ -12,33 +12,49 @@ const DynamicCanvas = dynamic(
 
 const DynamicStarsScene = dynamic(() => import("./stars-scene"), { ssr: false })
 
-export default function StarsBackground() {
+const LIGHT_CANVAS_BG = "#f4f9f6"
+const DARK_CANVAS_BG = "#0a0f0c"
+
+interface StarsBackgroundProps {
+  /** fixed = full viewport (secondary pages), absolute = hero section only */
+  variant?: "fixed" | "absolute"
+}
+
+export default function StarsBackground({ variant = "fixed" }: StarsBackgroundProps) {
   const { isDark } = useTheme()
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden>
-      <div className={cn("absolute inset-0 bg-background")} />
+    <div
+      className={cn(
+        "inset-0 z-0 pointer-events-none",
+        variant === "fixed" ? "fixed" : "absolute"
+      )}
+      aria-hidden
+    >
+      <div
+        className={cn(
+          "absolute inset-0",
+          isDark ? "bg-[#0a0f0c]" : "bg-[#f4f9f6]"
+        )}
+      />
       <div className="absolute inset-0">
         <DynamicCanvas
           key={isDark ? "dark-stars" : "light-stars"}
           camera={{ position: [0, 0, 1] }}
           gl={{ alpha: false, antialias: true, powerPreference: "low-power" }}
           dpr={[1, 1.5]}
-          style={{ background: isDark ? "#0a0f0c" : "#eef2ef" }}
+          style={{ background: isDark ? DARK_CANVAS_BG : LIGHT_CANVAS_BG }}
         >
           <Suspense fallback={null}>
             <DynamicStarsScene />
           </Suspense>
         </DynamicCanvas>
       </div>
-      <div
-        className={cn(
-          "absolute inset-0",
-          isDark
-            ? "bg-gradient-to-b from-background/10 via-background/55 to-background/95"
-            : "bg-gradient-to-b from-background/5 via-background/25 to-background/75"
-        )}
-      />
+      {isDark ? (
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/55 to-background/95" />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f4f9f6]/60" />
+      )}
     </div>
   )
 }

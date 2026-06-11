@@ -13,6 +13,13 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
+function readTheme(): Theme {
+  if (typeof window === "undefined") return "dark"
+  if (localStorage.getItem("theme") === "light") return "light"
+  if (document.documentElement.getAttribute("data-theme") === "light") return "light"
+  return "dark"
+}
+
 function applyTheme(theme: Theme) {
   const root = document.documentElement
   const isDark = theme !== "light"
@@ -22,19 +29,15 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark")
-  const [mounted, setMounted] = useState(false)
+  const [theme, setThemeState] = useState<Theme>(() => readTheme())
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme")
-    // Default is always dark unless the user explicitly chose light.
-    const initial: Theme = saved === "light" ? "light" : "dark"
-    if (saved !== "light" && saved !== "dark") {
+    const initial = readTheme()
+    if (localStorage.getItem("theme") !== "light" && localStorage.getItem("theme") !== "dark") {
       localStorage.setItem("theme", "dark")
     }
     setThemeState(initial)
     applyTheme(initial)
-    setMounted(true)
   }, [])
 
   const setTheme = (next: Theme) => {
@@ -45,26 +48,20 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark")
 
-  if (!mounted) {
-    return <>{children}</>
+  const value: ThemeContextValue = {
+    theme,
+    isDark: theme === "dark",
+    toggleTheme,
+    setTheme,
   }
 
-  return (
-    <ThemeContext.Provider value={{ theme, isDark: theme === "dark", toggleTheme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
 export function useTheme() {
   const ctx = useContext(ThemeContext)
   if (!ctx) {
-    return {
-      theme: "dark" as Theme,
-      isDark: true,
-      toggleTheme: () => {},
-      setTheme: () => {},
-    }
+    throw new Error("useTheme must be used within ThemeProvider")
   }
   return ctx
 }

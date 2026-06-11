@@ -3,8 +3,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useTheme } from '@/hooks/use-theme';
-import { cn } from '@/lib/utils';
 
 const DynamicCanvas = dynamic(
   () => import('@react-three/fiber').then((mod) => mod.Canvas),
@@ -29,28 +27,24 @@ function ErrorFallback({ error }: { error: Error }) {
 
 export function ThreeScene() {
   const [mounted, setMounted] = useState(false);
-  const { isDark } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return <div className="absolute inset-0 z-0 bg-background" aria-hidden />;
+    return <div className="absolute inset-0 z-0 bg-[#0a0f0c]" aria-hidden />;
   }
-
-  const canvasBg = isDark ? '#0a0f0c' : '#eef2ef';
 
   return (
     <div className="absolute inset-0 z-0" aria-hidden>
-      <div className={cn('absolute inset-0', isDark ? 'bg-[#0a0f0c]' : 'bg-[#eef2ef]')} />
+      <div className="absolute inset-0 bg-[#0a0f0c]" />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <DynamicCanvas
-          key={isDark ? 'dark-hero' : 'light-hero'}
           camera={{ position: [0, 0, 5], fov: 60 }}
           gl={{ antialias: true, alpha: false }}
           dpr={[1, 1.5]}
-          style={{ background: canvasBg }}
+          style={{ background: '#0a0f0c' }}
           className="!absolute inset-0"
         >
           <Suspense fallback={null}>
@@ -58,14 +52,7 @@ export function ThreeScene() {
           </Suspense>
         </DynamicCanvas>
       </ErrorBoundary>
-      <div
-        className={cn(
-          'absolute inset-0 pointer-events-none',
-          isDark
-            ? 'bg-gradient-to-b from-transparent via-background/20 to-background/80'
-            : 'bg-gradient-to-b from-transparent via-transparent to-background/40'
-        )}
-      />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-background/20 to-background/80" />
     </div>
   );
 }
