@@ -1,0 +1,28 @@
+{
+  "frontend": [
+    { "id": 1, "name": "React", "level": 95, "years": 5, "projects": 30 },
+    { "id": 2, "name": "Next.js", "level": 92, "years": 3, "projects": 20 },
+    { "id": 3, "name": "TypeScript", "level": 90, "years": 4, "projects": 25 },
+    { "id": 4, "name": "Astro", "level": 85, "years": 2, "projects": 8 },
+    { "id": 5, "name": "Tailwind CSS", "level": 93, "years": 3, "projects": 22 }
+  ],
+  "backend": [
+    { "id": 6, "name": "Node.js", "level": 92, "years": 5, "projects": 35 },
+    { "id": 7, "name": "Python", "level": 90, "years": 4, "projects": 20 },
+    { "id": 8, "name": "Java", "level": 88, "years": 4, "projects": 15 },
+    { "id": 9, "name": "PostgreSQL", "level": 85, "years": 4, "projects": 18 },
+    { "id": 10, "name": "MongoDB", "level": 82, "years": 3, "projects": 12 }
+  ],
+  "security": [
+    { "id": 11, "name": "Cybersecurity", "level": 88, "years": 3, "projects": 10 },
+    { "id": 12, "name": "Penetration Testing", "level": 80, "years": 2, "projects": 6 },
+    { "id": 13, "name": "Network Security", "level": 78, "years": 2, "projects": 5 },
+    { "id": 14, "name": "OWASP", "level": 85, "years": 3, "projects": 8 }
+  ],
+  "devops": [
+    { "id": 15, "name": "Docker", "level": 88, "years": 3, "projects": 20 },
+    { "id": 16, "name": "AWS", "level": 80, "years": 2, "projects": 10 },
+    { "id": 17, "name": "GitHub Actions", "level": 90, "years": 3, "projects": 25 },
+    { "id": 18, "name": "MQTT / IoT", "level": 82, "years": 2, "projects": 4 }
+  ]
+}

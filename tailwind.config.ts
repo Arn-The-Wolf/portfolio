@@ -20,8 +20,9 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)"],
-        mono: ["var(--font-mono)"],
+        display: ["var(--font-display)", "Orbitron", "sans-serif"],
+        body: ["var(--font-body)", "Rajdhani", "sans-serif"],
+        mono: ["ui-monospace", "Consolas", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

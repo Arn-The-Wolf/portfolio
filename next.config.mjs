@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['placeholder.svg', 'images.unsplash.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'placeholder.svg' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+    ],
     formats: ['image/webp', 'image/avif'],
     unoptimized: true,
   },

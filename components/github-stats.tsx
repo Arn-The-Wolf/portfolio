@@ -4,210 +4,169 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Star, GitFork, Eye, ExternalLink } from "lucide-react"
+import { Github, Star, GitFork, Eye, ExternalLink, Users } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 
 interface GitHubRepo {
   id: number
   name: string
-  full_name: string
-  description: string
+  description: string | null
   html_url: string
   stargazers_count: number
   forks_count: number
   watchers_count: number
-  language: string
+  language: string | null
   topics: string[]
   updated_at: string
 }
 
-interface GitHubStats {
-  public_repos: number
-  followers: number
-  following: number
-  total_stars: number
-  total_commits: number
+interface GitHubData {
+  user: {
+    login: string
+    name: string | null
+    bio: string | null
+    avatar_url: string
+    html_url: string
+    public_repos: number
+    followers: number
+    following: number
+  }
+  stats: {
+    public_repos: number
+    followers: number
+    following: number
+    total_stars: number
+  }
+  featured: GitHubRepo[]
+  recent: GitHubRepo[]
 }
 
 export default function GitHubStats() {
-  const [repos, setRepos] = useState<GitHubRepo[]>([])
-  const [stats, setStats] = useState<GitHubStats | null>(null)
+  const [data, setData] = useState<GitHubData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchGitHubData()
-  }, [])
-
-  const fetchGitHubData = async () => {
+  const fetchData = async () => {
     try {
       setLoading(true)
-
-      // Replace 'yourusername' with actual GitHub username
-      const username = "yourusername"
-
-      // Fetch user stats
-      const userResponse = await fetch(`https://api.github.com/users/${username}`)
-      const userData = await userResponse.json()
-
-      // Fetch repositories
-      const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
-      const reposData = await reposResponse.json()
-
-      // Calculate total stars
-      const totalStars = reposData.reduce((sum: number, repo: GitHubRepo) => sum + repo.stargazers_count, 0)
-
-      setStats({
-        public_repos: userData.public_repos,
-        followers: userData.followers,
-        following: userData.following,
-        total_stars: totalStars,
-        total_commits: 1250, // This would need GitHub GraphQL API for accurate count
-      })
-
-      setRepos(reposData.slice(0, 6))
-    } catch (err) {
-      setError("Failed to fetch GitHub data")
-      console.error("GitHub API Error:", err)
+      setError(null)
+      const res = await fetch("/api/github")
+      if (!res.ok) throw new Error("Failed to fetch")
+      setData(await res.json())
+    } catch {
+      setError("Failed to establish GitHub uplink")
     } finally {
       setLoading(false)
     }
   }
 
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   if (loading) {
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[...Array(6)].map((_, i) => (
-          <Card key={i} className="bg-black/40 border-green-400/20 animate-pulse">
-            <CardContent className="p-6">
-              <div className="h-4 bg-green-400/20 rounded mb-2"></div>
-              <div className="h-3 bg-green-400/10 rounded mb-4"></div>
-              <div className="flex space-x-4">
-                <div className="h-3 bg-green-400/10 rounded w-16"></div>
-                <div className="h-3 bg-green-400/10 rounded w-16"></div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="space-y-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-20 bg-green-400/5 border border-green-400/10 rounded-lg animate-pulse" />
+          ))}
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-48 bg-green-400/5 border border-green-400/10 rounded-lg animate-pulse" />
+          ))}
+        </div>
       </div>
     )
   }
 
-  if (error) {
+  if (error || !data) {
     return (
       <Card className="bg-black/40 border-red-400/20">
         <CardContent className="p-6 text-center">
-          <p className="text-red-400 font-mono">ERROR: {error}</p>
-          <Button onClick={fetchGitHubData} className="mt-4 bg-green-600 hover:bg-green-700 text-black font-mono">
-            RETRY CONNECTION
+          <p className="text-red-400 font-mono mb-4">{error}</p>
+          <Button onClick={fetchData} className="bg-green-600 hover:bg-green-700 text-black font-mono">
+            RETRY UPLINK
           </Button>
         </CardContent>
       </Card>
     )
   }
 
+  const allRepos = [...data.featured, ...data.recent].slice(0, 6)
+
   return (
     <div className="space-y-8">
-      {/* GitHub Stats Overview */}
-      {stats && (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <Card className="bg-black/40 border-green-400/20 text-center">
-            <CardContent className="p-4">
-              <div className="text-2xl font-bold text-green-400 font-mono">{stats.public_repos}</div>
-              <div className="text-xs text-gray-400">REPOSITORIES</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black/40 border-green-400/20 text-center">
-            <CardContent className="p-4">
-              <div className="text-2xl font-bold text-green-400 font-mono">{stats.total_stars}</div>
-              <div className="text-xs text-gray-400">TOTAL STARS</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black/40 border-green-400/20 text-center">
-            <CardContent className="p-4">
-              <div className="text-2xl font-bold text-green-400 font-mono">{stats.followers}</div>
-              <div className="text-xs text-gray-400">FOLLOWERS</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black/40 border-green-400/20 text-center">
-            <CardContent className="p-4">
-              <div className="text-2xl font-bold text-green-400 font-mono">{stats.total_commits}</div>
-              <div className="text-xs text-gray-400">COMMITS</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black/40 border-green-400/20 text-center">
-            <CardContent className="p-4">
-              <div className="text-2xl font-bold text-green-400 font-mono">{stats.following}</div>
-              <div className="text-xs text-gray-400">FOLLOWING</div>
-            </CardContent>
-          </Card>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex flex-col sm:flex-row items-center gap-6 p-6 bg-black/40 border border-green-400/20 rounded-xl backdrop-blur-sm"
+      >
+        <Image
+          src={data.user.avatar_url}
+          alt={data.user.login}
+          width={80}
+          height={80}
+          className="rounded-full border-2 border-green-400/50"
+          unoptimized
+        />
+        <div className="text-center sm:text-left flex-1">
+          <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+            <Github className="h-5 w-5 text-green-400" />
+            <Link href={data.user.html_url} target="_blank" className="font-display text-xl text-green-400 hover:underline">
+              @{data.user.login}
+            </Link>
+          </div>
+          {data.user.bio && <p className="text-gray-400 text-sm">{data.user.bio}</p>}
         </div>
-      )}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { label: "REPOS", value: data.stats.public_repos },
+            { label: "STARS", value: data.stats.total_stars },
+            { label: "FOLLOWERS", value: data.stats.followers, icon: Users },
+            { label: "FOLLOWING", value: data.stats.following },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center px-3">
+              <div className="text-xl font-display font-bold text-green-400">{stat.value}</div>
+              <div className="text-[10px] text-gray-500 font-mono">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
 
-      {/* Recent Repositories */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {repos.map((repo, index) => (
+        {allRepos.map((repo, index) => (
           <motion.div
             key={repo.id}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.08 }}
           >
-            <Card className="bg-black/40 border-green-400/20 h-full flex flex-col hover:border-green-400/40 transition-all duration-300">
-              <CardHeader>
+            <Card className="bg-black/40 border-green-400/20 h-full hover:border-green-400/50 transition-all duration-300 group">
+              <CardHeader className="pb-2">
                 <CardTitle className="flex items-center justify-between">
-                  <span className="font-mono text-green-400 text-lg">{repo.name}</span>
-                  <Github className="h-5 w-5 text-green-400" />
+                  <span className="font-mono text-green-400 text-base truncate">{repo.name}</span>
+                  <Github className="h-4 w-4 text-green-400/50 group-hover:text-green-400 transition-colors" />
                 </CardTitle>
-                <p className="text-gray-300 text-sm">{repo.description || "No description available"}</p>
+                <p className="text-gray-400 text-sm line-clamp-2">{repo.description || "No description"}</p>
               </CardHeader>
-              <CardContent className="flex-grow">
-                <div className="flex items-center space-x-4 text-sm text-gray-400 mb-4">
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 mr-1" />
-                    {repo.stargazers_count}
-                  </div>
-                  <div className="flex items-center">
-                    <GitFork className="h-4 w-4 mr-1" />
-                    {repo.forks_count}
-                  </div>
-                  <div className="flex items-center">
-                    <Eye className="h-4 w-4 mr-1" />
-                    {repo.watchers_count}
-                  </div>
+              <CardContent>
+                <div className="flex items-center gap-4 text-xs text-gray-500 mb-3 font-mono">
+                  <span className="flex items-center gap-1"><Star className="h-3 w-3" />{repo.stargazers_count}</span>
+                  <span className="flex items-center gap-1"><GitFork className="h-3 w-3" />{repo.forks_count}</span>
+                  {repo.language && <Badge variant="secondary" className="text-[10px] bg-white/5">{repo.language}</Badge>}
                 </div>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {repo.language && (
-                    <Badge variant="secondary" className="text-xs">
-                      {repo.language}
-                    </Badge>
-                  )}
-                  {repo.topics.slice(0, 3).map((topic) => (
-                    <Badge key={topic} variant="outline" className="text-xs border-green-400/30 text-green-400">
-                      {topic}
-                    </Badge>
-                  ))}
-                </div>
-
-                <div className="text-xs text-gray-500 mb-4">
-                  Updated: {new Date(repo.updated_at).toLocaleDateString()}
-                </div>
-              </CardContent>
-              <div className="p-6 pt-0">
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="w-full border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-mono"
-                >
+                <Button asChild variant="outline" size="sm" className="w-full border-green-400/30 text-green-400 hover:bg-green-400/10 font-mono text-xs">
                   <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    VIEW CODE
+                    <ExternalLink className="mr-1 h-3 w-3" /> VIEW REPO
                   </Link>
                 </Button>
-              </div>
+              </CardContent>
             </Card>
           </motion.div>
         ))}

@@ -1,0 +1,38 @@
+{
+  "experience": [
+    {
+      "id": 1,
+      "role": "Full Stack Developer",
+      "company": "Freelance / Open Source",
+      "location": "Remote",
+      "period": "2020 - Present",
+      "description": "Building full-stack applications with Java, Python, Astro, and modern web frameworks. Focus on cybersecurity, AI/ML projects, and IoT systems including MQTT weather monitoring.",
+      "technologies": ["Java", "Python", "React", "Next.js", "Astro", "Cybersecurity"]
+    },
+    {
+      "id": 2,
+      "role": "Software Developer",
+      "company": "Personal Projects & Collaborations",
+      "location": "Remote",
+      "period": "2018 - 2020",
+      "description": "Developed e-commerce platforms, library management systems, web scraping tools, and handwriting recognition AI models using CNNs.",
+      "technologies": ["Java", "Python", "BeautifulSoup", "Flask", "Machine Learning"]
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "name": "Cybersecurity Fundamentals",
+      "issuer": "Self-Directed",
+      "year": "2024",
+      "description": "Penetration testing, network security, and secure coding practices"
+    },
+    {
+      "id": 2,
+      "name": "Full Stack Development",
+      "issuer": "Project-Based",
+      "year": "2023",
+      "description": "Java, Astro, AI, and modern web development"
+    }
+  ]
+}

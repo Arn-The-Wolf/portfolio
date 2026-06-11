@@ -1,86 +1,39 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import { TrendingUp, Users, Clock, Shield, Zap, Target, CheckCircle, ArrowRight, BarChart3, Globe } from "lucide-react"
 
-const caseStudies = [
-  {
-    id: 1,
-    title: "E-Commerce Platform Transformation",
-    client: "TechCorp Solutions",
-    industry: "E-Commerce",
-    duration: "6 months",
-    team: "5 engineers",
-    challenge:
-      "Legacy monolithic architecture causing performance bottlenecks and limiting scalability for a growing e-commerce platform serving 100K+ daily users.",
-    solution:
-      "Migrated to microservices architecture using Next.js, Node.js, and Kubernetes, implementing advanced caching strategies and real-time inventory management.",
-    results: [
-      { metric: "Page Load Time", before: "4.2s", after: "0.8s", improvement: "81%" },
-      { metric: "Server Response", before: "2.1s", after: "0.3s", improvement: "86%" },
-      { metric: "Uptime", before: "97.2%", after: "99.9%", improvement: "2.7%" },
-      { metric: "Conversion Rate", before: "2.1%", after: "4.8%", improvement: "128%" },
-    ],
-    technologies: ["Next.js", "Node.js", "PostgreSQL", "Redis", "Kubernetes", "Docker"],
-    image: "/placeholder.svg?height=400&width=800",
-    testimonial: "Arnold transformed our entire platform. The performance improvements exceeded all expectations.",
-    testimonialAuthor: "Sarah Johnson, CTO",
-  },
-  {
-    id: 2,
-    title: "Real-Time Analytics Dashboard",
-    client: "DataSecure Inc.",
-    industry: "FinTech",
-    duration: "4 months",
-    team: "3 engineers",
-    challenge:
-      "Financial services company needed real-time fraud detection and analytics dashboard to process millions of transactions daily with sub-second response times.",
-    solution:
-      "Built high-performance real-time analytics system using React, WebSockets, and event-driven architecture with machine learning integration for fraud detection.",
-    results: [
-      { metric: "Processing Speed", before: "5.2s", after: "0.4s", improvement: "92%" },
-      { metric: "Fraud Detection", before: "78%", after: "96%", improvement: "23%" },
-      { metric: "False Positives", before: "12%", after: "2%", improvement: "83%" },
-      { metric: "System Reliability", before: "94%", after: "99.8%", improvement: "6%" },
-    ],
-    technologies: ["React", "Python", "TensorFlow", "WebSockets", "Apache Kafka", "MongoDB"],
-    image: "/placeholder.svg?height=400&width=800",
-    testimonial: "The fraud detection system Arnold built saved us millions in potential losses.",
-    testimonialAuthor: "David Chen, Lead Engineer",
-  },
-  {
-    id: 3,
-    title: "Mobile-First Healthcare Platform",
-    client: "MedTech Innovations",
-    industry: "Healthcare",
-    duration: "8 months",
-    team: "7 engineers",
-    challenge:
-      "Healthcare provider needed HIPAA-compliant mobile platform for patient management, telemedicine, and secure data sharing across multiple devices and platforms.",
-    solution:
-      "Developed cross-platform mobile application using React Native with end-to-end encryption, offline capabilities, and seamless integration with existing healthcare systems.",
-    results: [
-      { metric: "Patient Engagement", before: "34%", after: "87%", improvement: "156%" },
-      { metric: "Appointment Efficiency", before: "68%", after: "94%", improvement: "38%" },
-      { metric: "Data Security Score", before: "82%", after: "98%", improvement: "20%" },
-      { metric: "User Satisfaction", before: "3.2/5", after: "4.8/5", improvement: "50%" },
-    ],
-    technologies: ["React Native", "Node.js", "PostgreSQL", "AWS", "Socket.io", "Firebase"],
-    image: "/placeholder.svg?height=400&width=800",
-    testimonial: "Arnold delivered a platform that revolutionized how we serve our patients.",
-    testimonialAuthor: "Dr. Emily Rodriguez, Chief Medical Officer",
-  },
-]
-
 export default function CaseStudies() {
-  const [selectedStudy, setSelectedStudy] = useState(caseStudies[0])
+  const [caseStudies, setCaseStudies] = useState<any[]>([])
+  const [selectedStudy, setSelectedStudy] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/cases')
+      .then(res => res.json())
+      .then(data => {
+        setCaseStudies(data)
+        if (data.length > 0) {
+          setSelectedStudy(data[0])
+        }
+        setIsLoading(false)
+      })
+      .catch(err => {
+        console.error("Failed to load cases", err)
+        setIsLoading(false)
+      })
+  }, [])
+
+  if (isLoading || !selectedStudy) {
+    return <div className="py-20 text-center text-green-400 font-mono">LOADING CASES...</div>
+  }
 
   return (
-    <section className="py-20 px-4">
+    <section id="cases" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -204,7 +157,7 @@ export default function CaseStudies() {
                         MISSION RESULTS
                       </h4>
                       <div className="grid md:grid-cols-2 gap-4">
-                        {selectedStudy.results.map((result, index) => (
+                        {selectedStudy.results?.map((result: any, index: number) => (
                           <Card key={index} className="bg-black/60 border-green-400/20">
                             <CardContent className="p-4">
                               <div className="flex items-center justify-between mb-2">
@@ -228,7 +181,7 @@ export default function CaseStudies() {
                         TECHNOLOGY ARSENAL
                       </h4>
                       <div className="flex flex-wrap gap-3">
-                        {selectedStudy.technologies.map((tech) => (
+                        {selectedStudy.technologies?.map((tech: string) => (
                           <Badge key={tech} variant="outline" className="border-green-400/50 text-green-400 px-3 py-1">
                             {tech}
                           </Badge>

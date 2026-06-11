@@ -1,45 +1,50 @@
-"use server";
+"use server"
 
-import { Resend } from "resend";
+import { Resend } from "resend"
+import { readJson, writeJson, nextId } from "@/lib/data-store"
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function sendContactEmail(formData: FormData) {
   try {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const subject = formData.get("subject") as string;
-    const message = formData.get("message") as string;
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const subject = formData.get("subject") as string
+    const message = formData.get("message") as string
 
-    // Validate inputs
     if (!name || !email || !subject || !message) {
-      return { success: false, message: "All fields are required" };
+      return { success: false, message: "All fields are required" }
     }
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <contact@operative.dev>",
-      to: "arnwolfie5@gmail.com", 
-      subject: `Portfolio Contact: ${subject}`,
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Subject: ${subject}
-        
-        Message:
-        ${message}
-      `,
-      replyTo: email,
-    });
+    const messages = readJson<any[]>("messages.json")
+    messages.push({
+      id: nextId(messages),
+      name,
+      email,
+      subject,
+      message,
+      createdAt: new Date().toISOString(),
+      read: false,
+    })
+    writeJson("messages.json", messages)
 
-    if (error) {
-      console.error("Email error:", error);
-      return { success: false, message: "Failed to send message" };
+    if (resend) {
+      const { error } = await resend.emails.send({
+        from: "Portfolio Contact <onboarding@resend.dev>",
+        to: "arnwolfie5@gmail.com",
+        subject: `Portfolio Contact: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
+        replyTo: email,
+      })
+      if (error) {
+        console.error("Email error:", error)
+        return { success: true, message: "Message saved. Email delivery pending configuration." }
+      }
     }
 
-    return { success: true, message: "Message sent successfully" };
+    return { success: true, message: "Message transmitted successfully" }
   } catch (error) {
-    console.error("Contact form error:", error);
-    return { success: false, message: "An unexpected error occurred" };
+    console.error("Contact form error:", error)
+    return { success: false, message: "An unexpected error occurred" }
   }
 }
