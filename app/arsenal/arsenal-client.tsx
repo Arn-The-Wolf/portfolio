@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import CountUp from "@/components/count-up"
 import { useInView } from "react-intersection-observer"
 import StarsBackground from "@/components/stars-background"
+import PageHeader from "@/components/page-header"
 import { Shield, Globe, Server, Lock, Cloud } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface Skill {
   id: number
@@ -37,13 +39,12 @@ export default function ArsenalClient({ initialSkills }: { initialSkills: Record
 
       <div className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1 border border-border rounded-full mb-4 bg-card/80">
-              <Shield className="h-4 w-4 text-primary" />
-              <span className="text-xs text-muted-foreground">Technical skills</span>
-            </div>
-            <h1 className="page-heading">Skills</h1>
-          </motion.div>
+          <PageHeader
+            icon={Shield}
+            eyebrow="Technical skills"
+            title="Skills"
+            subtitle="Languages, frameworks, and tools I use across projects."
+          />
 
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {categories.map((cat) => {
@@ -53,11 +54,12 @@ export default function ArsenalClient({ initialSkills }: { initialSkills: Record
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-mono text-sm border transition-all duration-300 ${
+                  className={cn(
+                    "flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm border transition-all duration-300",
                     activeCategory === cat
-                      ? "bg-primary/15 border-primary text-primary shadow-sm"
-                      : "border-border text-card-foreground bg-card/90 hover:border-primary/40"
-                  }`}
+                      ? "bg-primary/15 border-primary text-primary shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+                      : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground bg-card/50"
+                  )}
                 >
                   <Icon className="h-4 w-4" />
                   {m.label}
@@ -82,14 +84,14 @@ export default function ArsenalClient({ initialSkills }: { initialSkills: Record
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.08 }}
-                  className="group relative p-5 rounded-xl surface-card hover:border-primary/40 transition-all overflow-hidden"
+                  className="group relative glass-card-hover p-5 overflow-hidden"
                 >
                   <div
                     className="absolute top-0 left-0 w-1 h-full rounded-l-xl transition-all group-hover:w-1.5"
                     style={{ backgroundColor: meta.color }}
                   />
                   <div className="flex justify-between items-center mb-3 pl-3">
-                    <span className="font-display text-lg text-card-foreground">{skill.name}</span>
+                    <span className="font-display text-lg text-foreground">{skill.name}</span>
                     <span className="font-mono text-primary text-sm">
                       {inView ? <CountUp end={skill.level} duration={1.5} suffix="%" /> : "0%"}
                     </span>

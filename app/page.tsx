@@ -40,11 +40,11 @@ export default function Portfolio() {
               transition={{ duration: 0.8 }}
               className="relative shrink-0"
             >
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-green-400/60 via-green-500/20 to-green-400/60 blur-sm" />
-              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-primary/50 shadow-[0_0_40px_hsl(var(--primary)/0.25)]">
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/50 via-primary/20 to-primary/50 blur-sm" />
+              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_40px_hsl(var(--primary)/0.2)]">
                 <Image src={PROFILE_IMAGE} alt="RUYANGE Arnold" fill priority className="object-cover object-top" sizes="(max-width: 768px) 192px, 224px" />
               </div>
-              <Badge className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-green-600 text-black text-xs whitespace-nowrap">
+              <Badge className="absolute -bottom-2 left-1/2 -translate-x-1/2 btn-primary text-xs whitespace-nowrap">
                 {age} years old
               </Badge>
             </motion.div>
@@ -62,7 +62,7 @@ export default function Portfolio() {
                 Full-stack developer with {yearsExp}+ years of hands-on experience in Java, Python, AI, and cybersecurity. I build practical software and ship it on GitHub.
               </p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
-                <Button asChild className="bg-green-600 hover:bg-green-500 text-black">
+                <Button asChild className="btn-primary">
                   <Link href="/contact">Contact Me</Link>
                 </Button>
                 <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
@@ -104,8 +104,8 @@ export default function Portfolio() {
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 {statsInView &&
                   statsData.map((stat, index) => (
-                    <div key={index} className="surface-card p-4 rounded-lg">
-                      <div className="text-2xl font-display font-bold text-card-foreground">
+                    <div key={index} className="border border-border p-4 rounded-lg bg-card/60 backdrop-blur-sm">
+                      <div className="text-2xl font-display font-bold text-primary">
                         <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
                       </div>
                       <div className="text-xs text-muted-foreground">{stat.label}</div>

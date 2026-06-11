@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Calendar, Clock, Search } from "lucide-react"
 import StarsBackground from "@/components/stars-background"
+import PageHeader from "@/components/page-header"
 
 export interface BlogPost {
   id: number
@@ -38,10 +39,10 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
       <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-12">
-            <h1 className="page-heading mb-3">Blog</h1>
-            <p className="text-muted-foreground text-sm">Technical notes from my projects</p>
-          </header>
+          <PageHeader
+            title="Blog"
+            subtitle="Technical notes from my projects"
+          />
 
           <div className="relative mb-10">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -49,37 +50,37 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
               placeholder="Search posts..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 input-surface"
+              className="pl-10 bg-background/80 border-input text-foreground"
             />
           </div>
 
           {selected ? (
-            <article className="surface-card rounded-xl p-8">
+            <article className="glass-card p-8">
               <button onClick={() => setSelected(null)} className="text-sm text-primary mb-6 hover:underline">
                 ← Back to all posts
               </button>
-              <h2 className="text-2xl font-display text-foreground mb-4">{selected.title}</h2>
+              <h2 className="text-2xl font-display text-primary mb-4">{selected.title}</h2>
               <div className="flex gap-4 text-xs text-muted-foreground mb-6">
                 <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{selected.date}</span>
                 <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{selected.readTime}</span>
               </div>
-              <div className="text-card-foreground leading-relaxed whitespace-pre-line">{selected.content}</div>
+              <div className="text-foreground/90 leading-relaxed whitespace-pre-line">{selected.content}</div>
             </article>
           ) : (
             <div className="space-y-6">
               {filtered.map((post, index) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }}>
                   <Card
-                    className="surface-card cursor-pointer hover:border-primary/40 transition-colors"
+                    className="glass-card-hover cursor-pointer"
                     onClick={() => setSelected(post)}
                   >
                     <CardHeader>
                       <div className="flex flex-wrap gap-2 mb-2">
                         <Badge variant="outline" className="border-primary/40 text-primary">{post.category}</Badge>
-                        {post.featured && <Badge className="bg-primary text-primary-foreground">Featured</Badge>}
+                        {post.featured && <Badge className="btn-primary">Featured</Badge>}
                       </div>
-                      <CardTitle className="text-foreground">{post.title}</CardTitle>
-                      <CardDescription className="text-muted-foreground">{post.excerpt}</CardDescription>
+                      <CardTitle className="text-primary font-display">{post.title}</CardTitle>
+                      <CardDescription>{post.excerpt}</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2 mb-3">

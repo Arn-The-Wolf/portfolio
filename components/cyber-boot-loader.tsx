@@ -85,9 +85,9 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.6 }}
-            className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+            className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(34,197,94,0.08)_0%,_transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--primary)/0.08)_0%,_transparent_70%)]" />
             <div className="absolute inset-0 opacity-20"
               style={{
                 backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34,197,94,0.03) 2px, rgba(34,197,94,0.03) 4px)",
@@ -95,14 +95,14 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
             />
             <div className="relative max-w-lg w-full mx-4 font-display">
               <div className="flex items-center gap-3 mb-8">
-                <Shield className="h-10 w-10 text-green-400 animate-pulse" />
+                <Shield className="h-10 w-10 text-primary animate-pulse" />
                 <div>
-                  <h1 className="text-2xl font-bold text-green-400 tracking-widest">ARNOLD.DEV</h1>
-                  <p className="text-xs text-green-400/60 font-mono">SECURE BOOT SEQUENCE v2.4.1</p>
+                  <h1 className="text-2xl font-bold text-primary tracking-widest">ARNOLD.DEV</h1>
+                  <p className="text-xs text-primary/60 font-mono">SECURE BOOT SEQUENCE v2.4.1</p>
                 </div>
               </div>
-              <div className="border border-green-400/30 rounded-lg p-6 bg-black/80 backdrop-blur-sm">
-                <div className="flex gap-4 mb-6 text-green-400/70">
+              <div className="glass-card p-6">
+                <div className="flex gap-4 mb-6 text-primary/70">
                   <Lock className="h-4 w-4" />
                   <Wifi className="h-4 w-4" />
                   <Cpu className="h-4 w-4" />
@@ -113,22 +113,22 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
                       key={i}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className={i === lineIndex ? "text-green-400" : "text-green-400/50"}
+                      className={i === lineIndex ? "text-primary" : "text-primary/50"}
                     >
-                      <span className="text-green-500 mr-2">{">"}</span>
+                      <span className="text-primary mr-2">{">"}</span>
                       {line}
                       {i === lineIndex && <span className="animate-blink ml-1">_</span>}
                     </motion.p>
                   ))}
                 </div>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-mono text-green-400/60">
+                  <div className="flex justify-between text-xs font-mono text-primary/60">
                     <span>SYSTEM LOAD</span>
                     <span>{progress}%</span>
                   </div>
-                  <div className="h-1.5 bg-green-400/10 rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-primary/10 rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full"
+                      className="h-full bg-gradient-to-r from-primary/80 to-primary rounded-full"
                       style={{ width: `${progress}%` }}
                       transition={{ duration: 0.1 }}
                     />

@@ -8,15 +8,16 @@ Personal portfolio and project showcase for **RUYANGE Arnold**, a full-stack dev
 
 - Project portfolio with GitHub links and tech stacks
 - Skills, experience timeline, and downloadable CVs
-- Contact form with admin dashboard for content management
-- Cyber-themed UI with 3D hero on the home page
+- Blog, testimonials, and contact form
+- Admin dashboard for full content management
+- Dark & light theme with starfield backgrounds
 
 ## Tech stack
 
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS + shadcn/ui
-- React Three Fiber (home page hero only)
+- React Three Fiber (hero + star backgrounds)
 - JSON file storage for CMS data
 
 ## Quick start
@@ -30,7 +31,7 @@ npm run dev                  # http://localhost:3000
 ## Admin
 
 - Login: `/admin/login`
-- Manage projects, documents (CVs/resumes), skills, history, and messages
+- Manage projects, documents, case studies, skills, history, blog, testimonials, and messages
 
 ## Author
 

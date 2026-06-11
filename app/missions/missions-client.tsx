@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { Github, ExternalLink, ChevronRight, FolderGit2, Star } from "lucide-react"
 import Link from "next/link"
 import StarsBackground from "@/components/stars-background"
+import PageHeader from "@/components/page-header"
+import { cn } from "@/lib/utils"
 import {
   getProjectCategories,
   matchesProjectFilter,
@@ -75,13 +77,11 @@ export default function MissionsClient({
       <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-            <p className="text-sm text-muted-foreground mb-2">Portfolio & GitHub repositories</p>
-            <h1 className="page-heading">Projects</h1>
-            <p className="text-muted-foreground text-sm mt-3 max-w-xl mx-auto">
-              {allProjects.length} repositories — filter by stack. Projects can appear in multiple categories.
-            </p>
-          </motion.div>
+          <PageHeader
+            eyebrow="Portfolio & GitHub repositories"
+            title="Projects"
+            subtitle={`${allProjects.length} repositories — filter by stack. Projects can appear in multiple categories.`}
+          />
 
           <div className="flex flex-wrap justify-center gap-2 mb-10">
             {PROJECT_FILTERS.map((f) => (
@@ -89,11 +89,9 @@ export default function MissionsClient({
                 key={f}
                 variant={selectedFilter === f ? "default" : "outline"}
                 onClick={() => setSelectedFilter(f)}
-                className={
-                  selectedFilter === f
-                    ? "bg-primary hover:bg-primary/90 text-primary-foreground text-xs capitalize"
-                    : "border-border text-card-foreground hover:bg-accent text-xs capitalize bg-card/90"
-                }
+                className={cn(
+                  selectedFilter === f ? "filter-chip-active" : "filter-chip"
+                )}
               >
                 {f === "all" ? "All" : f}
               </Button>
@@ -113,8 +111,8 @@ export default function MissionsClient({
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: index * 0.04 }}
                 >
-                  <Card className="surface-card h-full flex flex-col group hover:border-primary/40 transition-all overflow-hidden">
-                    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-accent flex items-center justify-center">
+                  <Card className="glass-card-hover h-full flex flex-col overflow-hidden group">
+                    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
                       {isGithub ? (
                         <FolderGit2 className="h-12 w-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
                       ) : (
@@ -124,7 +122,7 @@ export default function MissionsClient({
                       )}
                       <div className="absolute top-3 right-3 flex gap-1">
                         {project.featured && (
-                          <Badge className="bg-primary text-primary-foreground text-[10px]">Featured</Badge>
+                          <Badge className="btn-primary text-[10px]">Featured</Badge>
                         )}
                         {isGithub && (
                           <Badge variant="outline" className="border-primary/40 text-primary text-[10px]">
@@ -133,8 +131,8 @@ export default function MissionsClient({
                         )}
                       </div>
                     </div>
-                    <CardContent className="p-5 flex-grow flex flex-col text-card-foreground">
-                      <h3 className="font-display text-lg text-foreground mb-1">{project.title}</h3>
+                    <CardContent className="p-5 flex-grow flex flex-col">
+                      <h3 className="font-display text-lg text-primary mb-1">{project.title}</h3>
                       <p className="text-xs text-muted-foreground mb-2">{project.subtitle}</p>
                       <p className="text-muted-foreground text-sm mb-3 flex-grow line-clamp-2">{project.description}</p>
                       <div className="flex flex-wrap gap-1 mb-3">

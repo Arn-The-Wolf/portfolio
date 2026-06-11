@@ -11,14 +11,14 @@ export default function PrivacyPolicy() {
           <h1 className="text-4xl font-bold mb-6 font-mono">
             <span className="text-primary">{">"}</span> PRIVACY PROTOCOL
           </h1>
-          <p className="text-xl text-card-foreground">
+          <p className="text-xl text-muted-foreground">
             Your data security is our mission priority. This document outlines our data protection protocols.
           </p>
           <p className="text-sm text-muted-foreground mt-4">Last updated: December 6, 2024</p>
         </div>
 
         <div className="space-y-8">
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Eye className="mr-2 h-5 w-5" />
@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
             <CardContent className="space-y-4">
               <div>
                 <h3 className="font-mono text-primary mb-2">Personal Information</h3>
-                <ul className="list-disc list-inside text-card-foreground space-y-1">
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>Name and contact information when you reach out via contact forms</li>
                   <li>Email address for newsletter subscriptions</li>
                   <li>Professional information shared in communications</li>
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
               </div>
               <div>
                 <h3 className="font-mono text-primary mb-2">Technical Information</h3>
-                <ul className="list-disc list-inside text-card-foreground space-y-1">
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>IP address and browser information</li>
                   <li>Pages visited and time spent on site</li>
                   <li>Device and operating system information</li>
@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Database className="mr-2 h-5 w-5" />
@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <ul className="list-disc list-inside text-card-foreground space-y-2">
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>Respond to your inquiries and provide requested information</li>
                 <li>Send newsletters and updates (with your explicit consent)</li>
                 <li>Analyze website usage to improve user experience</li>
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Lock className="mr-2 h-5 w-5" />
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
             <CardContent className="space-y-4">
               <div>
                 <h3 className="font-mono text-primary mb-2">Security Protocols</h3>
-                <ul className="list-disc list-inside text-card-foreground space-y-1">
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>SSL/TLS encryption for all data transmission</li>
                   <li>Secure hosting infrastructure with regular security updates</li>
                   <li>Access controls and authentication for data access</li>
@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
               </div>
               <div>
                 <h3 className="font-mono text-primary mb-2">Data Retention</h3>
-                <ul className="list-disc list-inside text-card-foreground space-y-1">
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>Contact form data: Retained for 2 years or until deletion requested</li>
                   <li>Analytics data: Anonymized and retained for 26 months</li>
                   <li>Newsletter subscriptions: Until unsubscribed</li>
@@ -92,7 +92,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Users className="mr-2 h-5 w-5" />
@@ -100,8 +100,8 @@ export default function PrivacyPolicy() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-card-foreground mb-4">Under GDPR and CCPA, you have the following rights:</p>
-              <ul className="list-disc list-inside text-card-foreground space-y-2">
+              <p className="text-muted-foreground mb-4">Under GDPR and CCPA, you have the following rights:</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2">
                 <li>
                   <strong>Access:</strong> Request a copy of your personal data
                 </li>
@@ -124,7 +124,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Shield className="mr-2 h-5 w-5" />
@@ -134,21 +134,21 @@ export default function PrivacyPolicy() {
             <CardContent className="space-y-4">
               <div>
                 <h3 className="font-mono text-primary mb-2">Analytics</h3>
-                <p className="text-card-foreground">
+                <p className="text-muted-foreground">
                   We use Google Analytics and Vercel Analytics to understand website usage. These services may collect
                   anonymized data about your visit.
                 </p>
               </div>
               <div>
                 <h3 className="font-mono text-primary mb-2">Email Services</h3>
-                <p className="text-card-foreground">
+                <p className="text-muted-foreground">
                   Contact form submissions are processed through Resend. Your email and message content are transmitted
                   securely.
                 </p>
               </div>
               <div>
                 <h3 className="font-mono text-primary mb-2">Hosting</h3>
-                <p className="text-card-foreground">
+                <p className="text-muted-foreground">
                   This website is hosted on Vercel, which may collect technical information for service provision and
                   security.
                 </p>
@@ -156,7 +156,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="flex items-center font-mono text-primary">
                 <Mail className="mr-2 h-5 w-5" />
@@ -164,10 +164,10 @@ export default function PrivacyPolicy() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-card-foreground mb-4">
+              <p className="text-muted-foreground mb-4">
                 For any privacy-related questions or to exercise your rights, contact our Data Protection Officer:
               </p>
-              <div className="bg-muted p-4 rounded border border-border text-card-foreground">
+              <div className="bg-black/60 p-4 rounded border border-green-400/20">
                 <p className="text-primary font-mono">Email: ruyangearnold@gmail.com</p>
                 <p className="text-primary font-mono">Address: 123 Tech Street, San Francisco, CA 94105</p>
                 <p className="text-primary font-mono">Response Time: Within 30 days</p>
@@ -175,12 +175,12 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="surface-card">
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle className="font-mono text-primary">POLICY UPDATES</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-card-foreground">
+              <p className="text-muted-foreground">
                 This privacy policy may be updated periodically to reflect changes in our practices or legal
                 requirements. We will notify users of significant changes via email or website notice. Continued use of
                 our services after updates constitutes acceptance of the revised policy.

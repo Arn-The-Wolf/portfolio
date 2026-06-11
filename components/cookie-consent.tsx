@@ -35,29 +35,19 @@ export default function CookieConsent() {
           exit={{ y: 100, opacity: 0 }}
           className="fixed bottom-4 left-4 right-4 z-50 md:left-auto md:right-4 md:max-w-md"
         >
-          <Card className="surface-card shadow-lg">
+          <Card className="glass-card shadow-lg">
             <CardContent className="p-4">
               <div className="flex items-start space-x-3">
                 <Cookie className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
-                  <p className="text-sm text-card-foreground mb-3">
-                    This site uses cookies to enhance your experience and analyze site usage. By continuing, you agree
-                    to our cookie policy.
+                  <p className="text-sm text-muted-foreground mb-3">
+                    This site uses cookies to enhance your experience and analyze site usage.
                   </p>
                   <div className="flex space-x-2">
-                    <Button
-                      size="sm"
-                      onClick={acceptCookies}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground text-xs"
-                    >
+                    <Button size="sm" onClick={acceptCookies} className="btn-primary text-xs">
                       Accept
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={declineCookies}
-                      className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
-                    >
+                    <Button size="sm" variant="outline" onClick={declineCookies} className="btn-outline-primary text-xs">
                       Decline
                     </Button>
                   </div>
