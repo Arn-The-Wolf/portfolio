@@ -1,15 +1,8 @@
 "use client"
 
-import { useTheme } from "@/hooks/use-theme"
-import StarsBackground from "@/components/stars-background"
 import { ThreeScene } from "@/app/components/ThreeScene"
 
+/** Same 3D hero in both themes — SpaceScene inverts colors per theme. */
 export default function HeroBackground() {
-  const { isDark } = useTheme()
-
-  if (isDark) {
-    return <ThreeScene />
-  }
-
-  return <StarsBackground variant="absolute" />
+  return <ThreeScene />
 }

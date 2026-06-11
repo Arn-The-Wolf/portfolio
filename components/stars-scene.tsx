@@ -1,37 +1,47 @@
 "use client"
 
+import { useRef } from "react"
 import { Stars } from "@react-three/drei"
+import { useFrame } from "@react-three/fiber"
+import * as THREE from "three"
 import { useTheme } from "@/hooks/use-theme"
-
-const LIGHT_BG = "#f4f9f6"
-const DARK_BG = "#0a0f0c"
+import { STARFIELD, STAR_LAYERS } from "@/lib/theme-colors"
 
 export default function StarsScene() {
+  const groupRef = useRef<THREE.Group>(null)
   const { isDark } = useTheme()
+  const palette = isDark ? STARFIELD.dark : STARFIELD.light
+  const [layerA, layerB] = STAR_LAYERS
+
+  useFrame((_, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.1
+    }
+  })
 
   return (
-    <>
-      <color attach="background" args={[isDark ? DARK_BG : LIGHT_BG]} />
+    <group ref={groupRef}>
+      <color attach="background" args={[palette.background]} />
       <Stars
-        radius={90}
-        depth={50}
-        count={isDark ? 2800 : 3500}
-        factor={isDark ? 3.2 : 7.5}
+        radius={layerA.radius}
+        depth={layerA.depth}
+        count={layerA.count}
+        factor={layerA.factor}
         saturation={0}
         fade
-        speed={0.4}
-        color={isDark ? "#4ade80" : "#000000"}
+        speed={layerA.speed}
+        color={palette.starPrimary}
       />
       <Stars
-        radius={50}
-        depth={30}
-        count={isDark ? 800 : 1200}
-        factor={isDark ? 2 : 4}
+        radius={layerB.radius}
+        depth={layerB.depth}
+        count={layerB.count}
+        factor={layerB.factor}
         saturation={0}
         fade
-        speed={0.2}
-        color={isDark ? "#86efac" : "#1a1a1a"}
+        speed={layerB.speed}
+        color={palette.starSecondary}
       />
-    </>
+    </group>
   )
 }

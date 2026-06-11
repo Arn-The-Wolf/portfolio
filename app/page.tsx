@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import GitHubStats from "@/components/github-stats"
 import HeroBackground from "@/components/hero-background"
+import { STARFIELD } from "@/lib/theme-colors"
 import { useTheme } from "@/hooks/use-theme"
 import CountUp from "@/components/count-up"
 import { getAge } from "@/lib/age"
@@ -33,9 +34,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <section
-        className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
-          isDark ? "bg-[#0a0f0c]" : "bg-[#f4f9f6]"
-        }`}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        style={{ background: isDark ? STARFIELD.dark.background : STARFIELD.light.background }}
       >
         <HeroBackground />
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-20 pb-12">
