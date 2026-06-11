@@ -1,46 +1,39 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const dataFilePath = path.join(process.cwd(), 'data/cases.json');
+import { NextResponse } from "next/server"
+import { readJson, writeJson } from "@/lib/data-store"
+import { requireAdmin } from "@/lib/api-auth"
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
+  const authError = requireAdmin()
+  if (authError) return authError
   try {
-    const id = parseInt(params.id);
-    const body = await request.json();
-    
-    const fileContents = fs.readFileSync(dataFilePath, 'utf8');
-    let cases = JSON.parse(fileContents);
-    
-    const caseIndex = cases.findIndex((c: any) => c.id === id);
-    if (caseIndex === -1) {
-      return NextResponse.json({ error: 'Case not found' }, { status: 404 });
+    const id = parseInt(params.id, 10)
+    const body = await request.json()
+    const cases = readJson<any[]>("cases.json")
+    const index = cases.findIndex((c) => c.id === id)
+    if (index === -1) {
+      return NextResponse.json({ error: "Case not found" }, { status: 404 })
     }
-    
-    cases[caseIndex] = { ...cases[caseIndex], ...body, id };
-    fs.writeFileSync(dataFilePath, JSON.stringify(cases, null, 2));
-    
-    return NextResponse.json(cases[caseIndex]);
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to update case' }, { status: 500 });
+    cases[index] = { ...cases[index], ...body, id }
+    writeJson("cases.json", cases)
+    return NextResponse.json(cases[index])
+  } catch {
+    return NextResponse.json({ error: "Failed to update case" }, { status: 500 })
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
+  const authError = requireAdmin()
+  if (authError) return authError
   try {
-    const id = parseInt(params.id);
-    const fileContents = fs.readFileSync(dataFilePath, 'utf8');
-    let cases = JSON.parse(fileContents);
-    
-    const newCases = cases.filter((c: any) => c.id !== id);
-    if (newCases.length === cases.length) {
-       return NextResponse.json({ error: 'Case not found' }, { status: 404 });
+    const id = parseInt(params.id, 10)
+    const cases = readJson<any[]>("cases.json")
+    const filtered = cases.filter((c) => c.id !== id)
+    if (filtered.length === cases.length) {
+      return NextResponse.json({ error: "Case not found" }, { status: 404 })
     }
-    
-    fs.writeFileSync(dataFilePath, JSON.stringify(newCases, null, 2));
-    
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to delete case' }, { status: 500 });
+    writeJson("cases.json", filtered)
+    return NextResponse.json({ success: true })
+  } catch {
+    return NextResponse.json({ error: "Failed to delete case" }, { status: 500 })
   }
 }

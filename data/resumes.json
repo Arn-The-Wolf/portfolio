@@ -4,11 +4,12 @@
     "title": "Full Stack Developer CV",
     "subtitle": "Software Engineering & Cybersecurity",
     "description": "Comprehensive CV covering full-stack development, Java, Python, Astro, AI, and cybersecurity experience.",
+    "documentType": "CV",
     "format": "PDF",
     "fileUrl": "/api/resume",
-    "version": "2024",
+    "version": "2026",
     "language": "English",
-    "updatedAt": "2024-06-01",
+    "updatedAt": "2026-06-01",
     "tags": ["Full Stack", "Java", "Python", "Cybersecurity"]
   },
   {
@@ -16,11 +17,12 @@
     "title": "Technical Resume",
     "subtitle": "Projects & Open Source",
     "description": "Project-focused resume highlighting arnshop, mqtt-weather-app, Handwriting Recognition AI, and web scraping work.",
+    "documentType": "Resume",
     "format": "PDF",
     "fileUrl": "/api/resume",
-    "version": "2024",
+    "version": "2026",
     "language": "English",
-    "updatedAt": "2024-05-15",
+    "updatedAt": "2026-05-15",
     "tags": ["Python", "Java", "AI", "IoT"]
   }
 ]

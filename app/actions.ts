@@ -31,7 +31,7 @@ export async function sendContactEmail(formData: FormData) {
     if (resend) {
       const { error } = await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>",
-        to: "arnwolfie5@gmail.com",
+        to: "ruyangearnold@gmail.com",
         subject: `Portfolio Contact: ${subject}`,
         text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
         replyTo: email,

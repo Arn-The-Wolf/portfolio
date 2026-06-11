@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "slug": "handwriting-recognition-cnn",
+    "title": "Building a Handwriting Recognition CNN with TensorFlow",
+    "excerpt": "How I trained a convolutional neural network to classify handwritten digits — from dataset prep to a working inference pipeline.",
+    "content": "The goal was to move from theory to a working classifier. I started with labeled handwriting data, normalized image sizes, and built a CNN in TensorFlow with convolution, pooling, and dense layers.\n\nKey steps: grayscale conversion, train/validation split, tracking accuracy and loss per epoch, and saving the model for inference on new images.\n\nThe hardest part was balancing model depth vs. overfitting on a limited dataset. Data augmentation and early stopping helped stabilize results.\n\nThis project maps directly to document-understanding workflows: preprocessing messy inputs, structuring features, and measuring accuracy on real samples.",
+    "author": "RUYANGE Arnold",
+    "date": "2025-11-12",
+    "readTime": "6 min read",
+    "tags": ["Python", "TensorFlow", "CNN", "Machine Learning"],
+    "category": "AI",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "slug": "mqtt-weather-iot-pipeline",
+    "title": "Real-Time IoT Data with MQTT and Flask",
+    "excerpt": "Designing an MQTT pub/sub pipeline that ingests sensor data and serves it through a Flask API and live dashboard.",
+    "content": "Weather sensors publish readings to MQTT topics. A Flask backend subscribes, parses payloads, and stores recent values for the dashboard.\n\nI containerized the stack with Docker so broker, backend, and dashboard start consistently. The main engineering challenges were reliable reconnect logic, message schema consistency, and handling out-of-order events.\n\nThis mirrors production data pipelines: ingest → normalize → serve — the same pattern used in analytics and monitoring systems.",
+    "author": "RUYANGE Arnold",
+    "date": "2025-09-20",
+    "readTime": "5 min read",
+    "tags": ["Python", "Flask", "MQTT", "IoT", "Docker"],
+    "category": "Backend",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "slug": "web-scraping-structured-data",
+    "title": "From Messy HTML to Structured Data with BeautifulSoup",
+    "excerpt": "A practical walkthrough of multi-page web scraping, parsing, and exporting clean datasets for analysis.",
+    "content": "Many real-world datasets start as unstructured HTML. I used Python and BeautifulSoup to crawl paginated listings, extract fields with defensive selectors, and normalize records into JSON/CSV.\n\nEdge cases matter: missing fields, duplicate entries, rate limits, and encoding issues. I added retries, delays, and validation before export.\n\nFor data/AI roles, this is foundational — ingestion and normalization are always the first step before any model or search index can work reliably.",
+    "author": "RUYANGE Arnold",
+    "date": "2025-08-05",
+    "readTime": "4 min read",
+    "tags": ["Python", "BeautifulSoup", "Data Extraction"],
+    "category": "Backend",
+    "featured": false
+  }
+]

@@ -1,61 +1,47 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"
+import { siteConfig as brand } from "@/lib/site-config"
 
 export const siteConfig = {
-  name: "RUYANGE Arnold - Elite Fullstack Engineer",
-  description:
-    "Professional portfolio of RUYANGE Arnold, elite fullstack engineer specializing in mission-critical applications, secure systems, and high-performance web development.",
-  url: "https://operative.dev",
-  ogImage: "https://operative.dev/og-image.png",
+  name: `${brand.name} | ${brand.brand}`,
+  description: brand.description,
+  url: brand.url,
+  ogImage: brand.ogImage,
   links: {
-    github: "https://github.com/Arn-The-Wolf",
-    linkedin: "https://linkedin.com",
-    email: "arnwolfie5@gmail.com",
+    github: brand.github,
+    linkedin: brand.linkedin,
+    email: brand.email,
     twitter: "https://x.com/arnwolfie",
     instagram: "https://www.instagram.com/arnwolfie/",
   },
-};
+}
 
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s | ${brand.brand}`,
   },
   description: siteConfig.description,
   keywords: [
-    "fullstack engineer",
-    "web developer",
-    "react developer",
-    "node.js developer",
-    "typescript",
-    "next.js",
+    "RUYANGE Arnold",
+    "full-stack developer",
+    "Java developer",
+    "Python developer",
+    "cybersecurity",
+    "machine learning",
     "portfolio",
-    "software engineer",
-    "frontend developer",
-    "backend developer",
-    "devops engineer",
+    "Next.js",
+    "TypeScript",
   ],
-  authors: [
-    {
-      name: "RUYANGE Arnold",
-      url: "https://operative.dev",
-    },
-  ],
-  creator: "RUYANGE Arnold",
+  authors: [{ name: brand.name, url: brand.url }],
+  creator: brand.name,
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
+    siteName: brand.brand,
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: brand.name }],
   },
   twitter: {
     card: "summary_large_image",
@@ -81,8 +67,4 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-  },
-};
+}

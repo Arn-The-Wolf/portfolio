@@ -8,10 +8,10 @@ const BOOT_LINES = [
   "INITIALIZING SECURE KERNEL...",
   "LOADING ENCRYPTION MODULES [AES-256]...",
   "SCANNING NETWORK PERIMETER...",
-  "AUTHENTICATING OPERATIVE CREDENTIALS...",
-  "ESTABLISHING ENCRYPTED CHANNEL...",
-  "DEPLOYING TACTICAL INTERFACE...",
-  "SYSTEM READY — WELCOME, OPERATIVE",
+  "AUTHENTICATING DEVELOPER CREDENTIALS...",
+  "ESTABLISHING SECURE CHANNEL...",
+  "DEPLOYING PORTFOLIO INTERFACE...",
+  "SYSTEM READY — WELCOME TO ARNOLD.DEV",
 ]
 
 function playCyberSounds() {
@@ -47,12 +47,12 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
   const finishBoot = useCallback(() => {
     setBooting(false)
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("operative_booted", "1")
+      sessionStorage.setItem("arnold_booted", "1")
     }
   }, [])
 
   useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem("operative_booted")) {
+    if (typeof window !== "undefined" && (sessionStorage.getItem("arnold_booted") || sessionStorage.getItem("operative_booted"))) {
       setBooting(false)
       return
     }
@@ -66,10 +66,10 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
         }
         return prev + 1
       })
-    }, 350)
+    }, 180)
     const progTimer = setInterval(() => {
-      setProgress((p) => Math.min(p + 2, 100))
-    }, 50)
+      setProgress((p) => Math.min(p + 4, 100))
+    }, 35)
     return () => {
       clearInterval(lineTimer)
       clearInterval(progTimer)
@@ -97,7 +97,7 @@ export default function CyberBootLoader({ children }: { children: React.ReactNod
               <div className="flex items-center gap-3 mb-8">
                 <Shield className="h-10 w-10 text-green-400 animate-pulse" />
                 <div>
-                  <h1 className="text-2xl font-bold text-green-400 tracking-widest">OPERATIVE.DEV</h1>
+                  <h1 className="text-2xl font-bold text-green-400 tracking-widest">ARNOLD.DEV</h1>
                   <p className="text-xs text-green-400/60 font-mono">SECURE BOOT SEQUENCE v2.4.1</p>
                 </div>
               </div>

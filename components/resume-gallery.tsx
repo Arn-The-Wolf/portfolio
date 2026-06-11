@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +11,7 @@ interface Resume {
   title: string
   subtitle?: string
   description?: string
+  documentType?: string
   format: string
   fileUrl: string
   version?: string
@@ -20,30 +20,8 @@ interface Resume {
   tags?: string[]
 }
 
-export default function ResumeGallery() {
-  const [resumes, setResumes] = useState<Resume[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch("/api/resumes")
-      .then((res) => res.json())
-      .then((data) => {
-        setResumes(data)
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="py-20 flex justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 border-2 border-green-400/20 border-t-green-400 rounded-full animate-spin" />
-          <p className="font-mono text-green-400 text-sm animate-pulse">DECRYPTING DOSSIERS...</p>
-        </div>
-      </div>
-    )
-  }
+export default function ResumeGallery({ initialResumes }: { initialResumes: Resume[] }) {
+  const resumes = initialResumes
 
   return (
     <section className="py-20 px-4">
@@ -53,15 +31,15 @@ export default function ResumeGallery() {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl font-display font-bold mb-4 text-center text-green-400"
         >
-          <span className="text-green-500">{">"}</span> CLASSIFIED DOSSIERS
+          Resumes & CVs
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-center text-gray-400 mb-12 font-mono text-sm"
+          className="text-center text-gray-400 mb-12 text-sm"
         >
-          RESUMES & CV DOCUMENTS — AUTHORIZED DOWNLOAD ONLY
+          Downloadable resumes and documents
         </motion.p>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -88,6 +66,9 @@ export default function ResumeGallery() {
                         <p className="text-gray-300 text-sm mb-4 leading-relaxed">{resume.description}</p>
                       )}
                       <div className="flex flex-wrap gap-2 mb-4">
+                        {resume.documentType && (
+                          <Badge className="bg-green-600 text-black text-xs">{resume.documentType}</Badge>
+                        )}
                         <Badge variant="outline" className="border-green-400/40 text-green-400 text-xs">
                           {resume.format}
                         </Badge>
@@ -118,7 +99,7 @@ export default function ResumeGallery() {
                       >
                         <a href={resume.fileUrl} download target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
-                          DOWNLOAD DOSSIER
+                          Download
                         </a>
                       </Button>
                     </div>

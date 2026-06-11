@@ -27,7 +27,7 @@ export default function TermsOfService() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-300 leading-relaxed">
-                By accessing and using this website (operative.dev), you accept and agree to be bound by the terms and
+                By accessing and using this website (arnold.dev), you accept and agree to be bound by the terms and
                 provision of this agreement. If you do not agree to abide by the above, please do not use this service.
                 These terms constitute a legally binding agreement between you and RUYANGE Arnold (the "Service
                 Provider").
@@ -192,7 +192,7 @@ export default function TermsOfService() {
             <CardContent>
               <p className="text-gray-300 mb-4">For questions about these terms of service, please contact:</p>
               <div className="bg-black/60 p-4 rounded border border-green-400/20">
-                <p className="text-green-400 font-mono">Email: legal@operative.dev</p>
+                <p className="text-green-400 font-mono">Email: ruyangearnold@gmail.com</p>
                 <p className="text-green-400 font-mono">Address: 123 Tech Street, San Francisco, CA 94105</p>
                 <p className="text-green-400 font-mono">Response Time: Within 5 business days</p>
               </div>

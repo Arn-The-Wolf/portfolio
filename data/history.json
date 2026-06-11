@@ -2,37 +2,37 @@
   "experience": [
     {
       "id": 1,
-      "role": "Full Stack Developer",
-      "company": "Freelance / Open Source",
+      "role": "Computer Science Student",
+      "company": "University / Self-Directed Learning",
       "location": "Remote",
-      "period": "2020 - Present",
-      "description": "Building full-stack applications with Java, Python, Astro, and modern web frameworks. Focus on cybersecurity, AI/ML projects, and IoT systems including MQTT weather monitoring.",
-      "technologies": ["Java", "Python", "React", "Next.js", "Astro", "Cybersecurity"]
+      "period": "2023 - Present",
+      "description": "Studying computer science fundamentals while building personal projects in Java, Python, AI/ML, and web development. Focus on practical software engineering through open-source work on GitHub.",
+      "technologies": ["Java", "Python", "Next.js", "TensorFlow", "SQL"]
     },
     {
       "id": 2,
-      "role": "Software Developer",
-      "company": "Personal Projects & Collaborations",
+      "role": "Independent Developer",
+      "company": "Personal Projects & Open Source",
       "location": "Remote",
-      "period": "2018 - 2020",
-      "description": "Developed e-commerce platforms, library management systems, web scraping tools, and handwriting recognition AI models using CNNs.",
-      "technologies": ["Java", "Python", "BeautifulSoup", "Flask", "Machine Learning"]
+      "period": "2023 - Present",
+      "description": "Designed and shipped projects including an e-commerce platform (arnshop), handwriting recognition CNN, MQTT IoT weather system, web scraping pipelines, and this portfolio site.",
+      "technologies": ["Java", "Python", "Flask", "Docker", "Machine Learning"]
     }
   ],
   "certifications": [
     {
       "id": 1,
       "name": "Cybersecurity Fundamentals",
-      "issuer": "Self-Directed",
+      "issuer": "Self-Directed Study",
       "year": "2024",
-      "description": "Penetration testing, network security, and secure coding practices"
+      "description": "Secure coding, network basics, and penetration testing practice"
     },
     {
       "id": 2,
-      "name": "Full Stack Development",
-      "issuer": "Project-Based",
-      "year": "2023",
-      "description": "Java, Astro, AI, and modern web development"
+      "name": "Full-Stack & AI Project Portfolio",
+      "issuer": "Project-Based Learning",
+      "year": "2025",
+      "description": "Demonstrated through shipped repos: CNN model, IoT pipeline, Java applications, and Next.js portfolio"
     }
   ]
 }

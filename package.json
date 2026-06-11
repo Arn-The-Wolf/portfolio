@@ -1,7 +1,8 @@
 {
-  "name": "my-v0-project",
+  "name": "arnold-dev-portfolio",
   "version": "0.1.0",
   "private": true,
+  "description": "Personal portfolio of RUYANGE Arnold — full-stack developer (Java, Python, AI, cybersecurity). Built with Next.js 14, TypeScript, and Tailwind CSS.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

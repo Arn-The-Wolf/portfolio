@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://operative.dev/sitemap.xml",
+    sitemap: "https://arnold.dev/sitemap.xml",
   }
 }

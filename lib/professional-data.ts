@@ -3,9 +3,9 @@ export const professionalData = {
     name: "RUYANGE Arnold",
     title: "Elite Fullstack Engineer & Technical Architect",
     location: "San Francisco, CA",
-    email: "arnwolfie5@gmail.com",
+    email: "ruyangearnold@gmail.com",
     phone: "+1 (555) 123-4567",
-    website: "https://operative.dev",
+    website: "https://arnold.dev",
     linkedin: "https://linkedin.com",
     github: "https://github.com/Arn-The-Wolf",
     twitter: "https://x.com/arnwolfie",
@@ -14,8 +14,8 @@ export const professionalData = {
 
   bio: {
     short:
-      "Elite fullstack engineer with 8+ years of combat experience in the digital battlefield, specializing in mission-critical applications, secure systems, and high-performance architectures.",
-    long: `Highly accomplished Senior Software Engineer with 8+ years of experience architecting and developing mission-critical applications for Fortune 500 companies and high-growth startups. 
+      "Full-stack developer with 3+ years of hands-on project experience since 2023, specializing in Java, Python, AI/ML, and secure web applications.",
+    long: `Full-stack developer building practical software since 2023 — from Java desktop apps and Python data pipelines to CNN models and IoT systems. 
 
     Proven track record of leading cross-functional teams, implementing scalable microservices architectures, and delivering complex projects on time and under budget. Expert in modern web technologies, cloud infrastructure, and DevOps practices.
 
@@ -25,8 +25,8 @@ export const professionalData = {
   },
 
   stats: {
-    yearsExperience: 8,
-    projectsCompleted: 127,
+    yearsExperience: 3,
+    projectsCompleted: 60,
     clientsSatisfied: 45,
     codeCommits: 12847,
     linesOfCode: 2847392,

@@ -168,7 +168,7 @@ export default function PrivacyPolicy() {
                 For any privacy-related questions or to exercise your rights, contact our Data Protection Officer:
               </p>
               <div className="bg-black/60 p-4 rounded border border-green-400/20">
-                <p className="text-green-400 font-mono">Email: privacy@operative.dev</p>
+                <p className="text-green-400 font-mono">Email: ruyangearnold@gmail.com</p>
                 <p className="text-green-400 font-mono">Address: 123 Tech Street, San Francisco, CA 94105</p>
                 <p className="text-green-400 font-mono">Response Time: Within 30 days</p>
               </div>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Open Source Collaborator",
+    "role": "Developer",
+    "company": "GitHub Community",
+    "content": "Arnold ships clean, well-documented projects and responds quickly to feedback. His handwriting recognition and IoT repos show real engineering depth.",
+    "rating": 5,
+    "project": "Handwriting Recognition AI",
+    "date": "2025-10-01"
+  },
+  {
+    "id": 2,
+    "name": "Project Mentor",
+    "role": "Senior Engineer",
+    "company": "Tech Community",
+    "content": "Strong fundamentals in Java and Python. Built end-to-end systems — from MySQL backends to ML pipelines — with clear READMEs and reproducible setup.",
+    "rating": 5,
+    "project": "arnshop & mqtt-weather-app",
+    "date": "2025-08-15"
+  },
+  {
+    "id": 3,
+    "name": "Peer Reviewer",
+    "role": "CS Student",
+    "company": "University Project",
+    "content": "Reliable teammate on group assignments. Delivers working code on time and explains technical decisions clearly.",
+    "rating": 5,
+    "project": "Library Management System",
+    "date": "2025-06-20"
+  }
+]

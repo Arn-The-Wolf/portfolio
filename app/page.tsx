@@ -1,173 +1,135 @@
 "use client"
 
-import { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls, Text, Float } from "@react-three/drei"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, Rocket, Terminal, Download, Twitter, Instagram } from "lucide-react"
+import { Github, Linkedin, Mail, Rocket, Download, Twitter, Instagram } from "lucide-react"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import PerformanceDashboard from "@/components/performance-dashboard"
 import GitHubStats from "@/components/github-stats"
 import { ThreeScene } from "./components/ThreeScene"
 import CountUp from "@/components/count-up"
-
-const statsData = [
-  { label: "GITHUB REPOS", value: 62, suffix: "+" },
-  { label: "PROJECTS", value: 15, suffix: "+" },
-  { label: "LANGUAGES", value: 4, suffix: "" },
-  { label: "OPEN SOURCE", value: 100, suffix: "%" },
-]
+import { getAge } from "@/lib/age"
+import { getYearsExperience } from "@/lib/experience"
+import { PROFILE_IMAGE } from "@/lib/site-images"
 
 export default function Portfolio() {
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  const age = getAge()
+  const yearsExp = getYearsExperience()
+
+  const statsData = [
+    { label: "Years Building", value: yearsExp, suffix: "+" },
+    { label: "Projects", value: 60, suffix: "+" },
+    { label: "GitHub Repos", value: 62, suffix: "+" },
+    { label: "Open Source", value: 100, suffix: "%" },
+  ]
 
   return (
-    <div className="min-h-screen bg-black text-green-400">
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <ThreeScene />
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 pt-16">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <Badge variant="outline" className="border-green-400 text-green-400 font-mono mb-4">
-              STATUS: ACTIVE
-            </Badge>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-wider"
-          >
-            <span className="text-green-400">RUYANGE</span>
-            <br />
-            <span className="text-white">ARNOLD</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto"
-          >
-            Full-stack developer fluent in Java, Astro, AI & Cybersecurity. Building secure systems and open-source missions.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
-          >
-            <Button asChild className="bg-green-600 hover:bg-green-500 text-black font-mono">
-              <Link href="/contact">
-                <Terminal className="mr-2 h-4 w-4" />
-                DEPLOY MISSION
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-mono">
-              <Link href="/missions">
-                <Rocket className="mr-2 h-4 w-4" />
-                VIEW INTEL
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-green-400 text-green-400 hover:bg-green-400 hover:text-black font-mono">
-              <Link href="/api/resume" target="_blank">
-                <Download className="mr-2 h-4 w-4" />
-                DOWNLOAD DOSSIER
-              </Link>
-            </Button>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="flex justify-center gap-6"
-          >
-            {[
-              { href: "https://github.com/Arn-The-Wolf", icon: Github },
-              { href: "https://linkedin.com", icon: Linkedin },
-              { href: "mailto:arnwolfie5@gmail.com", icon: Mail },
-              { href: "https://x.com/arnwolfie", icon: Twitter },
-              { href: "https://www.instagram.com/arnwolfie/", icon: Instagram },
-            ].map(({ href, icon: Icon }) => (
-              <Link key={href} href={href} target={href.startsWith("http") ? "_blank" : undefined} className="text-green-400/70 hover:text-green-400 transition-colors hover:scale-110 transform">
-                <Icon className="h-6 w-6" />
-              </Link>
-            ))}
-          </motion.div>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-20 pb-12">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative shrink-0"
+            >
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-green-400/60 via-green-500/20 to-green-400/60 blur-sm" />
+              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-green-400/50 shadow-[0_0_40px_rgba(74,222,128,0.25)]">
+                <Image src={PROFILE_IMAGE} alt="RUYANGE Arnold" fill priority className="object-cover object-top" sizes="(max-width: 768px) 192px, 224px" />
+              </div>
+              <Badge className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-green-600 text-black text-xs whitespace-nowrap">
+                {age} years old
+              </Badge>
+            </motion.div>
+
+            <div className="text-center lg:text-left flex-1">
+              <Badge variant="outline" className="border-primary text-primary mb-4">
+                Available for opportunities
+              </Badge>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 tracking-wider">
+                <span className="text-primary">RUYANGE</span>
+                <br />
+                <span className="text-foreground">ARNOLD</span>
+              </h1>
+              <p className="text-lg md:text-xl mb-8 text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+                Full-stack developer with {yearsExp}+ years of hands-on experience in Java, Python, AI, and cybersecurity. I build practical software and ship it on GitHub.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
+                <Button asChild className="bg-green-600 hover:bg-green-500 text-black">
+                  <Link href="/contact">Contact Me</Link>
+                </Button>
+                <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Link href="/missions"><Rocket className="mr-2 h-4 w-4" />View Projects</Link>
+                </Button>
+                <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Link href="/resumes"><Download className="mr-2 h-4 w-4" />Resumes</Link>
+                </Button>
+              </div>
+              <div className="flex justify-center lg:justify-start gap-6">
+                {[
+                  { href: "https://github.com/Arn-The-Wolf", icon: Github },
+                  { href: "https://linkedin.com", icon: Linkedin },
+                  { href: "mailto:ruyangearnold@gmail.com", icon: Mail },
+                  { href: "https://x.com/arnwolfie", icon: Twitter },
+                  { href: "https://www.instagram.com/arnwolfie/", icon: Instagram },
+                ].map(({ href, icon: Icon }) => (
+                  <Link key={href} href={href} target={href.startsWith("http") ? "_blank" : undefined} className="text-primary/70 hover:text-primary transition-colors">
+                    <Icon className="h-6 w-6" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section id="about" className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-display font-bold mb-12 text-center"
-          >
-            <span className="text-green-500">{">"}</span> OPERATIVE INTEL
-          </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-center">About Me</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <p className="text-lg mb-4 leading-relaxed text-gray-300">
-                Hi, I&apos;m <strong className="text-green-400">@Arn-The-Wolf</strong> — a full-stack developer passionate about Java, Astro, AI, and cybersecurity. I build e-commerce platforms, IoT weather systems, handwriting recognition AI, and secure web applications.
+            <div>
+              <p className="text-lg mb-4 leading-relaxed text-muted-foreground">
+                I&apos;m <strong className="text-primary">RUYANGE Arnold</strong> (@Arn-The-Wolf) — a developer who learns by building. My work includes e-commerce apps, ML models, IoT data pipelines, and this portfolio.
               </p>
-              <p className="text-lg mb-6 leading-relaxed text-gray-400">
-                Open to collaborating on any project. Reach me at arnwolfie5@gmail.com.
+              <p className="text-lg mb-6 leading-relaxed text-muted-foreground">
+                Coding seriously since {2023}. Open to internships, collaborations, and junior roles. Reach me at ruyangearnold@gmail.com.
               </p>
               <div ref={statsRef} className="grid grid-cols-2 gap-4">
                 {statsInView &&
                   statsData.map((stat, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="border border-green-400/20 p-4 rounded-lg bg-black/40 backdrop-blur-sm"
-                    >
-                      <div className="text-2xl font-display font-bold text-green-400">
+                    <div key={index} className="border border-border p-4 rounded-lg bg-card/60 backdrop-blur-sm">
+                      <div className="text-2xl font-display font-bold text-primary">
                         <CountUp end={stat.value} duration={2} suffix={stat.suffix} />
                       </div>
-                      <div className="text-xs font-mono text-gray-500">{stat.label}</div>
-                    </motion.div>
+                      <div className="text-xs text-muted-foreground">{stat.label}</div>
+                    </div>
                   ))}
               </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="h-96 border border-green-400/20 rounded-lg overflow-hidden">
-              <Canvas camera={{ position: [0, 0, 3] }}>
-                <Suspense fallback={null}>
-                  <ambientLight intensity={0.2} />
-                  <pointLight position={[10, 10, 10]} />
-                  <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-                    <Text position={[0, 0, 0]} fontSize={0.4} color="#4ade80" anchorX="center" anchorY="middle">
-                      {"<SECURE/>"}
-                    </Text>
-                  </Float>
-                  <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
-                </Suspense>
-              </Canvas>
-            </motion.div>
+            </div>
+            <div className="relative h-96 border border-border rounded-lg overflow-hidden">
+              <Image src={PROFILE_IMAGE} alt="RUYANGE Arnold" fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-primary text-sm">Full-Stack · AI · Cybersecurity</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="github" className="py-20 px-4 bg-black/50">
+      <section id="github" className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-display font-bold mb-4 text-center"
-          >
-            <span className="text-green-500">{">"}</span> GITHUB UPLINK
-          </motion.h2>
-          <p className="text-center text-gray-500 font-mono text-sm mb-10">
-            LIVE DATA FROM{" "}
-            <Link href="https://github.com/Arn-The-Wolf" className="text-green-400 hover:underline" target="_blank">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-center">GitHub</h2>
+          <p className="text-center text-muted-foreground text-sm mb-10">
+            Live stats from{" "}
+            <Link href="https://github.com/Arn-The-Wolf" className="text-primary hover:underline" target="_blank">
               github.com/Arn-The-Wolf
             </Link>
           </p>
@@ -175,7 +137,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <PerformanceDashboard />
       <Analytics />
       <SpeedInsights />
     </div>

@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import { TrendingUp, Users, Clock, Shield, Zap, Target, CheckCircle, ArrowRight, BarChart3, Globe } from "lucide-react"
+import Image from "next/image"
+import { CASE_STUDY_IMAGE } from "@/lib/site-images"
 
 export default function CaseStudies() {
   const [caseStudies, setCaseStudies] = useState<any[]>([])
@@ -89,10 +91,12 @@ export default function CaseStudies() {
             >
               <Card className="bg-black/40 border-green-400/20">
                 <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={selectedStudy.image || "/placeholder.svg"}
+                  <Image
+                    src={selectedStudy.image || CASE_STUDY_IMAGE}
                     alt={selectedStudy.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 66vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">

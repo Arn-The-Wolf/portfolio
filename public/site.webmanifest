@@ -1,7 +1,7 @@
 {
-  "name": "RUYANGE Arnold - Elite Fullstack Engineer",
-  "short_name": "Arnold.dev",
-  "description": "Professional portfolio of RUYANGE Arnold, elite fullstack engineer",
+  "name": "ARNOLD.DEV — RUYANGE Arnold",
+  "short_name": "ARNOLD.DEV",
+  "description": "Full-stack developer portfolio — Java, Python, AI & cybersecurity by RUYANGE Arnold",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

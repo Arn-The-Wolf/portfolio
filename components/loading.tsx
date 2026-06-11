@@ -18,7 +18,7 @@ export default function Loading() {
         />
         <div className="flex items-center justify-center gap-2 mb-2">
           <Shield className="h-5 w-5 text-green-400 animate-pulse" />
-          <span className="font-display text-green-400 tracking-widest">OPERATIVE.DEV</span>
+          <span className="font-display text-green-400 tracking-widest">ARNOLD.DEV</span>
         </div>
         <p className="font-mono text-xs text-green-400/50 animate-pulse">LOADING SECURE MODULES...</p>
       </motion.div>

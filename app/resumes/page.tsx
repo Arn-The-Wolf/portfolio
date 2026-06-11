@@ -1,14 +1,14 @@
-"use client"
-
-import { SpaceHud3D } from "@/components/space-hud-3d"
+import { readJson } from "@/lib/data-store"
+import StarsBackground from "@/components/stars-background"
 import ResumeGallery from "@/components/resume-gallery"
 
 export default function ResumesPage() {
+  const resumes = readJson("resumes.json")
   return (
     <div className="relative min-h-screen">
-      <SpaceHud3D variant="default" />
+      <StarsBackground />
       <div className="relative z-10">
-        <ResumeGallery />
+        <ResumeGallery initialResumes={resumes as Parameters<typeof ResumeGallery>[0]["initialResumes"]} />
       </div>
     </div>
   )
