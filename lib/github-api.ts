@@ -14,9 +14,7 @@ function githubHeaders(): Record<string, string> {
   return headers
 }
 
-async function fetchGithub(url: string): Promise<Response> {
-  let lastError: unknown
-
+async function fetchGithub(url: string): Promise<Response | null> {
   for (let attempt = 0; attempt <= GITHUB_MAX_RETRIES; attempt++) {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), GITHUB_FETCH_TIMEOUT_MS)
@@ -29,16 +27,15 @@ async function fetchGithub(url: string): Promise<Response> {
       })
       clearTimeout(timeout)
       return response
-    } catch (error) {
+    } catch {
       clearTimeout(timeout)
-      lastError = error
       if (attempt < GITHUB_MAX_RETRIES) {
         await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)))
       }
     }
   }
 
-  throw lastError
+  return null
 }
 
 export interface GithubRepoSummary {
@@ -129,12 +126,12 @@ export async function fetchGithubProfile(): Promise<GithubProfilePayload> {
       fetchGithub(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100&type=owner`),
     ])
 
-    if (!userRes.ok) {
+    if (!userRes?.ok) {
       return buildFallbackGithubPayload()
     }
 
     const user = await userRes.json()
-    const repos: GithubRepoSummary[] = reposRes.ok ? await reposRes.json() : []
+    const repos: GithubRepoSummary[] = reposRes?.ok ? await reposRes.json() : []
 
     const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0)
     const featured = repos
@@ -169,12 +166,12 @@ export async function fetchGithubProfile(): Promise<GithubProfilePayload> {
 }
 
 export async function fetchGithubReposList(): Promise<GithubRepoSummary[]> {
+  const res = await fetchGithub(
+    `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated&type=owner`,
+  )
+  if (!res?.ok) return []
   try {
-    const res = await fetchGithub(
-      `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated&type=owner`,
-    )
-    if (!res.ok) return []
-    return res.json()
+    return await res.json()
   } catch {
     return []
   }
