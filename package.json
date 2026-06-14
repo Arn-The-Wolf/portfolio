@@ -7,7 +7,8 @@
     "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "node scripts/start.mjs",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:portfolio": "node scripts/generate-portfolio-docx.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -86,6 +87,7 @@
     "@types/node": "^22.15.31",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18",
+    "docx": "^9.7.1",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
