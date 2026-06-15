@@ -43,7 +43,7 @@ const SITE = {
   titleUpper: "FULL-STACK DEVELOPER",
   email: "ruyangearnold@gmail.com",
   github: "https://github.com/Arn-The-Wolf",
-  website: "https://arnold.dev",
+  website: "https://arnold-rho.vercel.app",
   phonePlaceholder: "[Your phone]",
   locationPlaceholder: "[Your city, country]",
 };
@@ -52,14 +52,14 @@ const AI_ML_SKILLS = ["TensorFlow", "CNN", "Machine Learning", "Python", "Data P
 const MOBILE_SKILLS = ["React Native", "Expo", "Cross-platform UI", "Mobile APIs"];
 
 const PORTFOLIO_PROJECT = {
-  title: "arnold.dev Portfolio",
+  title: "ARNOLD.DEV Portfolio",
   subtitle: "Personal Developer Portfolio",
   problem:
     "Needed a professional online presence to showcase projects, skills, and case studies with fast performance and a distinctive modern UX.",
   built:
     "Full-stack portfolio with Next.js 14, TypeScript, Tailwind CSS, Three.js visuals, JSON-backed CMS APIs, and Vercel deployment.",
   outcome:
-    "Live portfolio at arnold.dev with project showcase, skills arsenal, blog, case studies, and contact flow.",
+    "Live portfolio at arnold-rho.vercel.app with project showcase, skills arsenal, blog, case studies, and contact flow.",
   technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Three.js", "Vercel"],
   github: "https://github.com/Arn-The-Wolf",
   results: ["Live production site", "CMS-driven content", "Performance-optimized UX"],

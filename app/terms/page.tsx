@@ -27,7 +27,7 @@ export default function TermsOfService() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                By accessing and using this website (arnold.dev), you accept and agree to be bound by the terms and
+                By accessing and using this website (arnold-rho.vercel.app), you accept and agree to be bound by the terms and
                 provision of this agreement. If you do not agree to abide by the above, please do not use this service.
                 These terms constitute a legally binding agreement between you and RUYANGE Arnold (the "Service
                 Provider").

@@ -2,7 +2,7 @@
 
 Personal portfolio and project showcase for **RUYANGE Arnold**, a full-stack developer working with **Java, Python, AI/ML, and cybersecurity**. Built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
 
-**Live site:** [arnold.dev](https://arnold.dev)
+**Live site:** [arnold-rho.vercel.app](https://arnold-rho.vercel.app)
 
 ## What's inside
 
@@ -25,8 +25,19 @@ Personal portfolio and project showcase for **RUYANGE Arnold**, a full-stack dev
 ```bash
 npm install --legacy-peer-deps
 cp .env.example .env.local   # set ADMIN_PASSWORD, optional RESEND_API_KEY
-npm run dev                  # kills port 3000 first, then http://localhost:3000
+npm run dev                  # http://localhost:3000
 ```
+
+## Deploy (Vercel Hobby)
+
+1. Push `main` to GitHub — Vercel auto-deploys when the repo is linked.
+2. Set environment variables in the Vercel project dashboard:
+   - `ADMIN_PASSWORD`, `ADMIN_SECRET` (required for admin)
+   - `NEXT_PUBLIC_BASE_URL` → `https://arnold-rho.vercel.app`
+   - `RESEND_API_KEY` (optional, for contact form email)
+3. Production URL: **https://arnold-rho.vercel.app**
+
+Build uses `npm install --legacy-peer-deps` (see `vercel.json` and `.npmrc`).
 
 ## Admin
 

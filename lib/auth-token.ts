@@ -2,7 +2,12 @@ const COOKIE_NAME = "operative_admin"
 const MAX_AGE = 60 * 60 * 24 * 7
 
 function getSecret(): string {
-  return process.env.ADMIN_SECRET || "change-me-in-production"
+  const secret = process.env.ADMIN_SECRET
+  if (secret) return secret
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("ADMIN_SECRET is required in production")
+  }
+  return "dev-only-admin-secret"
 }
 
 function toHex(buffer: ArrayBuffer): string {
@@ -81,7 +86,10 @@ export function verifyToken(token: string): boolean {
 }
 
 export function checkPassword(password: string): boolean {
-  return password === (process.env.ADMIN_PASSWORD || "operative2024")
+  const expected = process.env.ADMIN_PASSWORD
+  if (expected) return password === expected
+  if (process.env.NODE_ENV === "production") return false
+  return password === "operative2024"
 }
 
 export { COOKIE_NAME, MAX_AGE }

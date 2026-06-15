@@ -18,6 +18,7 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -31,3 +32,6 @@ data/*.pdf
 data/*.docx
 data/~$*
 data/resume-assets/
+
+# local deploy notes (never commit)
+ADMIN_CREDENTIALS.local.txt
