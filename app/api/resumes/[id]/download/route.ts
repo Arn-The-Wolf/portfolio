@@ -1,23 +1,13 @@
 import { NextResponse } from "next/server"
-import { readJson } from "@/lib/data-store"
 import { getMimeType, readResumeFile } from "@/lib/resume-storage"
-
-interface ResumeRecord {
-  id: number
-  fileUrl: string
-  storageKey?: string
-  fileName?: string
-  mimeType?: string
-  format?: string
-  title?: string
-}
+import { getResumes } from "@/lib/resumes-store"
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const id = parseInt(params.id, 10)
     const { searchParams } = new URL(request.url)
     const asDownload = searchParams.get("download") === "1"
-    const resumes = readJson<ResumeRecord[]>("resumes.json")
+    const resumes = await getResumes()
     const resume = resumes.find((r) => r.id === id)
 
     if (!resume) {

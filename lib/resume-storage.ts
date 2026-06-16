@@ -56,6 +56,7 @@ export async function saveResumeFile(
       access: "public",
       contentType: mimeType,
       addRandomSuffix: false,
+      allowOverwrite: true,
     })
     return {
       fileUrl: blob.url,

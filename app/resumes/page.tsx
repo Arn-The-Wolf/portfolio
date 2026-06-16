@@ -1,14 +1,16 @@
-import { readJson } from "@/lib/data-store"
+import { getResumes } from "@/lib/resumes-store"
 import StarsBackground from "@/components/stars-background"
 import ResumeGallery from "@/components/resume-gallery"
 
-export default function ResumesPage() {
-  const resumes = readJson("resumes.json")
+export const dynamic = "force-dynamic"
+
+export default async function ResumesPage() {
+  const resumes = await getResumes()
   return (
     <div className="relative min-h-screen">
       <StarsBackground />
       <div className="relative z-10">
-        <ResumeGallery initialResumes={resumes as Parameters<typeof ResumeGallery>[0]["initialResumes"]} />
+        <ResumeGallery initialResumes={resumes} />
       </div>
     </div>
   )

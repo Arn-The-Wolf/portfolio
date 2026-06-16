@@ -1,30 +1,13 @@
 import { NextResponse } from "next/server"
-import { readJson, writeJson, nextId } from "@/lib/data-store"
 import { requireAdmin } from "@/lib/api-auth"
 import { getMimeType, saveResumeFile } from "@/lib/resume-storage"
-
-interface Resume {
-  id: number
-  title: string
-  subtitle?: string
-  description?: string
-  documentType?: string
-  format: string
-  fileUrl: string
-  storageKey?: string
-  fileName?: string
-  mimeType?: string
-  version?: string
-  language?: string
-  updatedAt?: string
-  tags?: string[]
-}
+import { getResumes, saveResumes, nextId, type Resume } from "@/lib/resumes-store"
 
 const ALLOWED_EXTENSIONS = new Set(["pdf", "doc", "docx", "md"])
 
 export async function GET() {
   try {
-    const resumes = readJson<Resume[]>("resumes.json")
+    const resumes = await getResumes()
     return NextResponse.json(resumes)
   } catch {
     return NextResponse.json({ error: "Failed to read resumes" }, { status: 500 })
@@ -40,7 +23,7 @@ export async function POST(request: Request) {
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData()
       const file = formData.get("file")
-      const resumes = readJson<Resume[]>("resumes.json")
+      const resumes = await getResumes()
       const id = nextId(resumes)
 
       const tagsRaw = (formData.get("tags") as string) || ""
@@ -80,19 +63,19 @@ export async function POST(request: Request) {
       }
 
       resumes.push(body)
-      writeJson("resumes.json", resumes)
+      await saveResumes(resumes)
       return NextResponse.json(body, { status: 201 })
     }
 
     const body = await request.json()
-    const resumes = readJson<Resume[]>("resumes.json")
+    const resumes = await getResumes()
     const newResume: Resume = {
       id: nextId(resumes),
       fileUrl: body.fileUrl || "/api/resume",
       ...body,
     }
     resumes.push(newResume)
-    writeJson("resumes.json", resumes)
+    await saveResumes(resumes)
     return NextResponse.json(newResume, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to create resume"
