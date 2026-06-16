@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Download, FileText, Calendar, Globe } from "lucide-react"
+import { Download, Eye, FileText, Calendar, Globe } from "lucide-react"
 import PageHeader from "@/components/page-header"
 
 interface Resume {
@@ -15,10 +15,24 @@ interface Resume {
   documentType?: string
   format: string
   fileUrl: string
+  fileName?: string
   version?: string
   language?: string
   updatedAt?: string
   tags?: string[]
+}
+
+function resolveViewUrl(resume: Resume): string {
+  if (resume.fileUrl.startsWith("http")) return resume.fileUrl
+  if (resume.fileUrl.startsWith("/api/resumes/")) return resume.fileUrl
+  if (resume.fileName) return `/api/resumes/${resume.id}/download`
+  return resume.fileUrl
+}
+
+function resolveDownloadUrl(resume: Resume): string {
+  const base = resolveViewUrl(resume)
+  if (base.startsWith("http")) return base
+  return `${base}${base.includes("?") ? "&" : "?"}download=1`
 }
 
 export default function ResumeGallery({ initialResumes }: { initialResumes: Resume[] }) {
@@ -83,12 +97,20 @@ export default function ResumeGallery({ initialResumes }: { initialResumes: Resu
                           ))}
                         </div>
                       )}
-                      <Button asChild className="w-full btn-primary">
-                        <a href={resume.fileUrl} download target="_blank" rel="noopener noreferrer">
-                          <Download className="mr-2 h-4 w-4" />
-                          Download
-                        </a>
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button asChild variant="outline" className="flex-1 border-primary/40 text-primary">
+                          <a href={resolveViewUrl(resume)} target="_blank" rel="noopener noreferrer">
+                            <Eye className="mr-2 h-4 w-4" />
+                            View
+                          </a>
+                        </Button>
+                        <Button asChild className="flex-1 btn-primary">
+                          <a href={resolveDownloadUrl(resume)} download={resume.fileName || undefined}>
+                            <Download className="mr-2 h-4 w-4" />
+                            Download
+                          </a>
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

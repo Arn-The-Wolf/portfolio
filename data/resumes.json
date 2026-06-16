@@ -10,7 +10,12 @@
     "version": "2026",
     "language": "English",
     "updatedAt": "2026-06-01",
-    "tags": ["Full Stack", "Java", "Python", "Cybersecurity"]
+    "tags": [
+      "Full Stack",
+      "Java",
+      "Python",
+      "Cybersecurity"
+    ]
   },
   {
     "id": 2,
@@ -23,6 +28,11 @@
     "version": "2026",
     "language": "English",
     "updatedAt": "2026-05-15",
-    "tags": ["Python", "Java", "AI", "IoT"]
+    "tags": [
+      "Python",
+      "Java",
+      "AI",
+      "IoT"
+    ]
   }
 ]

@@ -65,6 +65,8 @@ export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [docType, setDocType] = useState<string>("Resume")
   const [docFormat, setDocFormat] = useState<string>("PDF")
+  const [docFile, setDocFile] = useState<File | null>(null)
+  const [docUploading, setDocUploading] = useState(false)
 
   const loadAll = useCallback(async () => {
     const [p, r, c, s, h, m, b, t] = await Promise.all([
@@ -97,12 +99,14 @@ export default function AdminDashboard() {
   const closeForm = () => {
     setFormOpen(false)
     setEditing(null)
+    setDocFile(null)
   }
 
   const openCreate = () => {
     setEditing(null)
     setDocType("Resume")
     setDocFormat("PDF")
+    setDocFile(null)
     setFormOpen(true)
   }
 
@@ -153,23 +157,61 @@ export default function AdminDashboard() {
 
   const saveDocument = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    const body = {
-      title: fd.get("title"),
-      subtitle: fd.get("subtitle"),
-      description: fd.get("description"),
-      documentType: docType,
-      format: docFormat,
-      fileUrl: fd.get("fileUrl") || "/api/resume",
-      version: fd.get("version"),
-      language: fd.get("language"),
-      updatedAt: new Date().toISOString().slice(0, 10),
-      tags: (fd.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean),
+    setDocUploading(true)
+    try {
+      const fd = new FormData(e.currentTarget)
+      fd.set("documentType", docType)
+      fd.set("format", docFormat)
+      if (docFile) {
+        fd.set("file", docFile)
+      }
+
+      if (editing) {
+        if (docFile) {
+          const uploadFd = new FormData()
+          uploadFd.set("file", docFile)
+          const uploadRes = await fetch(`/api/resumes/${editing.id}/upload`, {
+            method: "POST",
+            body: uploadFd,
+          })
+          if (!uploadRes.ok) {
+            const err = await uploadRes.json()
+            alert(err.error || "File upload failed")
+            return
+          }
+        }
+
+        const body = {
+          title: fd.get("title"),
+          subtitle: fd.get("subtitle"),
+          description: fd.get("description"),
+          documentType: docType,
+          format: docFormat,
+          fileUrl: fd.get("fileUrl") || editing.fileUrl || `/api/resumes/${editing.id}/download`,
+          version: fd.get("version"),
+          language: fd.get("language"),
+          updatedAt: new Date().toISOString().slice(0, 10),
+          tags: (fd.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean),
+        }
+        await fetch(`/api/resumes/${editing.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+      } else {
+        const res = await fetch("/api/resumes", { method: "POST", body: fd })
+        if (!res.ok) {
+          const err = await res.json()
+          alert(err.error || "Failed to save document")
+          return
+        }
+      }
+
+      closeForm()
+      loadAll()
+    } finally {
+      setDocUploading(false)
     }
-    const url = editing ? `/api/resumes/${editing.id}` : "/api/resumes"
-    await fetch(url, { method: editing ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-    closeForm()
-    loadAll()
   }
 
   const saveCase = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -491,20 +533,49 @@ export default function AdminDashboard() {
                           </SelectContent>
                         </Select>
                       </div>
-                      <Input name="fileUrl" defaultValue={editing?.fileUrl || "/api/resume"} placeholder="File URL or /api/resume" className="bg-card/80 border-border text-primary sm:col-span-2" />
+                      <div className="sm:col-span-2">
+                        <label className="text-xs font-mono text-muted-foreground mb-1 block">Upload file (PDF, DOCX, DOC, MD)</label>
+                        <Input
+                          type="file"
+                          accept=".pdf,.doc,.docx,.md,application/pdf"
+                          className="bg-card/80 border-border text-primary"
+                          onChange={(ev) => setDocFile(ev.target.files?.[0] || null)}
+                        />
+                        {editing?.fileName && (
+                          <p className="text-xs text-muted-foreground mt-1 font-mono">
+                            Current file: {editing.fileName}
+                          </p>
+                        )}
+                      </div>
+                      <Input
+                        name="fileUrl"
+                        defaultValue={editing?.fileUrl || ""}
+                        placeholder="External URL (optional if uploading a file)"
+                        className="bg-card/80 border-border text-primary sm:col-span-2"
+                      />
                       <Input name="version" defaultValue={editing?.version} placeholder="Version (e.g. 2026)" className="bg-card/80 border-border text-primary" />
                       <Input name="language" defaultValue={editing?.language || "English"} placeholder="Language" className="bg-card/80 border-border text-primary" />
                       <Textarea name="description" defaultValue={editing?.description} placeholder="Description" className="bg-card/80 border-border text-primary sm:col-span-2" />
                       <Input name="tags" defaultValue={editing?.tags?.join(", ")} placeholder="Tags (comma separated)" className="bg-card/80 border-border text-primary sm:col-span-2" />
                       <div className="sm:col-span-2">
-                        <Button type="submit" className="btn-primary"><Save className="h-4 w-4 mr-1" /> Save Document</Button>
+                        <Button type="submit" className="btn-primary" disabled={docUploading}>
+                          <Save className="h-4 w-4 mr-1" /> {docUploading ? "Saving…" : "Save Document"}
+                        </Button>
                       </div>
                     </form>
                   </CardContent>
                 </Card>
               )}
               <div className="space-y-2">
-                {resumes.map((r) => renderListItem(r, "resumes", r.title, `${r.documentType || r.format} · ${r.fileUrl}`, () => openEdit(r, r.documentType || "Resume", r.format || "PDF")))}
+                {resumes.map((r) =>
+                  renderListItem(
+                    r,
+                    "resumes",
+                    r.title,
+                    `${r.documentType || r.format} · ${r.fileName || r.fileUrl}`,
+                    () => openEdit(r, r.documentType || "Resume", r.format || "PDF"),
+                  ),
+                )}
               </div>
             </section>
           )}

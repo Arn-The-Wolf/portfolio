@@ -4,6 +4,16 @@ export const PROJECT_FILTERS = ["all", "frontend", "backend", "fullstack", "mobi
 
 export type ProjectFilter = (typeof PROJECT_FILTERS)[number]
 
+export const FILTER_LABELS: Record<ProjectFilter, string> = {
+  all: "All",
+  frontend: "Frontend",
+  backend: "Backend",
+  fullstack: "Full Stack",
+  mobile: "Mobile",
+  devops: "DevOps",
+  ai: "AI/ML",
+}
+
 export interface CategorizableProject {
   title?: string
   description?: string
@@ -34,7 +44,11 @@ export function getProjectCategories(item: CategorizableProject): ProjectCategor
   if (/python|java|node|flask|express|spring|backend|api|mysql|postgresql|scraping|beautifulsoup|algorithm/.test(text)) {
     cats.add("backend")
   }
-  if (/ai|ml|cnn|tensorflow|pytorch|machine learning|neural|handwriting|recognition/.test(text)) {
+  if (
+    /ai|ml|cnn|tensorflow|pytorch|machine learning|neural|handwriting|recognition|llm|rag|pgvector|claude|embedding|vector|anthropic|transformer/.test(
+      text,
+    )
+  ) {
     cats.add("ai")
   }
   if (/docker|kubernetes|mqtt|iot|devops|ci\/cd|terraform|aws|azure|weather/.test(text)) {

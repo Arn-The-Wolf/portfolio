@@ -35,3 +35,7 @@ data/resume-assets/
 
 # local deploy notes (never commit)
 ADMIN_CREDENTIALS.local.txt
+
+# admin-uploaded resume files (metadata stays in data/resumes.json)
+public/uploads/resumes/*
+!public/uploads/resumes/.gitkeep

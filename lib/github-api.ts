@@ -75,7 +75,7 @@ export interface GithubProfilePayload {
   source: "github" | "fallback"
 }
 
-const PINNED = ["arnshop", "webscraping", "Handwriting-Recognition-Ai", "mqtt-weather-app", "arnlibrary"]
+const PINNED = ["clause-lens", "arnshop", "webscraping", "Handwriting-Recognition-Ai", "mqtt-weather-app", "arnlibrary"]
 
 function buildFallbackRepos(): GithubRepoSummary[] {
   return PINNED.map((name, index) => ({

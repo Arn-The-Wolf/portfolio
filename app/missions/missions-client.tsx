@@ -12,9 +12,11 @@ import StarsBackground from "@/components/stars-background"
 import PageHeader from "@/components/page-header"
 import { cn } from "@/lib/utils"
 import {
+  FILTER_LABELS,
   getProjectCategories,
   matchesProjectFilter,
   PROJECT_FILTERS,
+  type ProjectCategory,
   type ProjectFilter,
 } from "@/lib/project-categories"
 import { normalizeGithubUrl, type GithubRepoProject } from "@/lib/github-projects"
@@ -28,6 +30,8 @@ type CmsProject = {
   github?: string
   demo?: string
   featured?: boolean
+  priority?: number
+  category?: ProjectCategory
   source?: "cms"
   categories?: ReturnType<typeof getProjectCategories>
 }
@@ -37,10 +41,14 @@ type DisplayProject = (CmsProject | GithubRepoProject) & {
 }
 
 function normalizeCms(project: CmsProject): DisplayProject {
+  const inferred = getProjectCategories(project)
+  const categories = project.category
+    ? Array.from(new Set([project.category, ...inferred]))
+    : inferred
   return {
     ...project,
     source: "cms",
-    categories: getProjectCategories(project),
+    categories,
   }
 }
 
@@ -67,10 +75,16 @@ export default function MissionsClient({
     [initialProjects, githubRepos]
   )
 
-  const filtered = useMemo(
-    () => allProjects.filter((p) => matchesProjectFilter(p.categories, selectedFilter)),
-    [allProjects, selectedFilter]
-  )
+  const filtered = useMemo(() => {
+    return allProjects
+      .filter((p) => matchesProjectFilter(p.categories, selectedFilter))
+      .sort((a, b) => {
+        const priorityA = "priority" in a && typeof a.priority === "number" ? a.priority : 0
+        const priorityB = "priority" in b && typeof b.priority === "number" ? b.priority : 0
+        if (priorityB !== priorityA) return priorityB - priorityA
+        return a.title.localeCompare(b.title)
+      })
+  }, [allProjects, selectedFilter])
 
   return (
     <div className="relative min-h-screen">
@@ -93,7 +107,7 @@ export default function MissionsClient({
                   selectedFilter === f ? "filter-chip-active" : "filter-chip"
                 )}
               >
-                {f === "all" ? "All" : f}
+                {FILTER_LABELS[f]}
               </Button>
             ))}
           </div>
