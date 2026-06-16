@@ -12,14 +12,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import GitHubStats from "@/components/github-stats"
 import HeroBackground from "@/components/hero-background"
 import { STARFIELD } from "@/lib/theme-colors"
-import { useTheme } from "@/hooks/use-theme"
 import CountUp from "@/components/count-up"
 import { getAge } from "@/lib/age"
 import { getYearsExperience } from "@/lib/experience"
 import { PROFILE_IMAGE } from "@/lib/site-images"
 
 export default function Portfolio() {
-  const { isDark } = useTheme()
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const age = getAge()
   const yearsExp = getYearsExperience()
@@ -35,7 +33,7 @@ export default function Portfolio() {
     <div className="min-h-screen bg-background text-foreground">
       <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
-        style={{ background: isDark ? STARFIELD.dark.background : STARFIELD.light.background }}
+        style={{ background: STARFIELD.dark.background }}
       >
         <HeroBackground />
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 pt-20 pb-12">

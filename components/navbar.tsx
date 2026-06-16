@@ -3,10 +3,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useTheme } from "@/hooks/use-theme"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Shield, Sun, Moon, Menu } from "lucide-react"
+import { Shield, Menu } from "lucide-react"
 import { motion } from "framer-motion"
 
 const links = [
@@ -21,7 +20,6 @@ const links = [
 ]
 
 export default function Navbar() {
-  const { isDark, toggleTheme } = useTheme()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
@@ -49,15 +47,9 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-primary ml-2">
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
           </div>
 
           <div className="flex lg:hidden items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-primary">
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-primary">

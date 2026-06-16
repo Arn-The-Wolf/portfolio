@@ -2,7 +2,7 @@
 
 import { ThreeScene } from "@/app/components/ThreeScene"
 
-/** Same 3D hero in both themes — SpaceScene inverts colors per theme. */
+/** 3D hero background with starfield scene. */
 export default function HeroBackground() {
   return <ThreeScene />
 }

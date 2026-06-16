@@ -4,15 +4,13 @@ import { useRef } from 'react';
 import { Stars, Float, OrbitControls } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useTheme } from '@/hooks/use-theme';
 import { STARFIELD, STAR_LAYERS } from '@/lib/theme-colors';
+
+const palette = STARFIELD.dark;
+const [layerA, layerB] = STAR_LAYERS.dark;
 
 export function SpaceScene() {
   const groupRef = useRef<THREE.Group>(null);
-  const { isDark } = useTheme();
-  const palette = isDark ? STARFIELD.dark : STARFIELD.light;
-  const layers = isDark ? STAR_LAYERS.dark : STAR_LAYERS.light;
-  const [layerA, layerB] = layers;
 
   useFrame((_, delta) => {
     if (groupRef.current) {
@@ -24,7 +22,6 @@ export function SpaceScene() {
     <group ref={groupRef}>
       <color attach="background" args={[palette.background]} />
       <Stars
-        key={`stars-a-${isDark ? 'dark' : 'light'}`}
         radius={layerA.radius}
         depth={layerA.depth}
         count={layerA.count}
@@ -35,7 +32,6 @@ export function SpaceScene() {
         color={palette.starPrimary}
       />
       <Stars
-        key={`stars-b-${isDark ? 'dark' : 'light'}`}
         radius={layerB.radius}
         depth={layerB.depth}
         count={layerB.count}
@@ -53,21 +49,17 @@ export function SpaceScene() {
           <meshStandardMaterial
             color={palette.meshSphere}
             emissive={palette.meshSphereEmissive}
-            emissiveIntensity={isDark ? 0.2 : 0.15}
-            transparent={!isDark}
-            opacity={isDark ? 1 : 0.85}
+            emissiveIntensity={0.2}
           />
         </mesh>
       </Float>
       <Float speed={2} rotationIntensity={2} floatIntensity={1}>
         <mesh position={[-2, 1, -1]} rotation={[0, 0, Math.PI / 4]}>
-          <boxGeometry args={[0.8, 0.8, 0.8]} />
+          <boxGeometry args={[0.45, 0.45, 0.45]} />
           <meshStandardMaterial
             color={palette.meshBox}
             emissive={palette.meshBoxEmissive}
-            emissiveIntensity={isDark ? 0.1 : 0.12}
-            transparent={!isDark}
-            opacity={isDark ? 1 : 0.8}
+            emissiveIntensity={0.1}
           />
         </mesh>
       </Float>
