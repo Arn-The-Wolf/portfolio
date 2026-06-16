@@ -10,7 +10,7 @@
     "outcome": "End-to-end RAG-style policy analyzer with retrieval accuracy targets above 80% and field-level extraction scoring on a labeled benchmark set.",
     "technologies": ["TypeScript", "Node.js", "Claude API", "PostgreSQL", "pgvector", "Python", "Express", "Docker", "LLM", "RAG"],
     "github": "https://github.com/Arn-The-Wolf/clause-lens",
-    "demo": "",
+    "demo": "https://clause-lens.up.railway.app",
     "status": "Active",
     "category": "ai",
     "featured": true,

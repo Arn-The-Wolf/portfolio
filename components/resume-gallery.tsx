@@ -23,16 +23,24 @@ interface Resume {
 }
 
 function resolveViewUrl(resume: Resume): string {
-  if (resume.fileUrl.startsWith("http")) return resume.fileUrl
-  if (resume.fileUrl.startsWith("/api/resumes/")) return resume.fileUrl
+  const url = resume.fileUrl
+  if (!url) return `/api/resumes/${resume.id}/download`
+  if (url.startsWith("http")) return url
+  // Static public file — serve directly
+  if (url.startsWith("/") && !url.startsWith("/api/")) return url
+  if (url.startsWith("/api/resumes/")) return url
   if (resume.fileName) return `/api/resumes/${resume.id}/download`
-  return resume.fileUrl
+  return url
 }
 
 function resolveDownloadUrl(resume: Resume): string {
-  const base = resolveViewUrl(resume)
-  if (base.startsWith("http")) return base
-  return `${base}${base.includes("?") ? "&" : "?"}download=1`
+  const view = resolveViewUrl(resume)
+  if (view.startsWith("http")) return view
+  if (view.startsWith("/api/resumes/")) {
+    return `${view}${view.includes("?") ? "&" : "?"}download=1`
+  }
+  // Static /resume.pdf — download attribute handles it in the browser
+  return view
 }
 
 export default function ResumeGallery({ initialResumes }: { initialResumes: Resume[] }) {

@@ -6,33 +6,25 @@
     "description": "Comprehensive CV covering full-stack development, Java, Python, Astro, AI, and cybersecurity experience.",
     "documentType": "CV",
     "format": "PDF",
-    "fileUrl": "/api/resume",
+    "fileUrl": "/resume.pdf",
+    "fileName": "RUYANGE-Arnold-CV.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-06-01",
-    "tags": [
-      "Full Stack",
-      "Java",
-      "Python",
-      "Cybersecurity"
-    ]
+    "updatedAt": "2026-06-16",
+    "tags": ["Full Stack", "Java", "Python", "Cybersecurity"]
   },
   {
     "id": 2,
     "title": "Technical Resume",
     "subtitle": "Projects & Open Source",
-    "description": "Project-focused resume highlighting arnshop, mqtt-weather-app, Handwriting Recognition AI, and web scraping work.",
+    "description": "Project-focused resume highlighting Clause Lens, arnshop, mqtt-weather-app, Handwriting Recognition AI, and web scraping work.",
     "documentType": "Resume",
     "format": "PDF",
-    "fileUrl": "/api/resume",
+    "fileUrl": "/resume.pdf",
+    "fileName": "RUYANGE-Arnold-Resume.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-05-15",
-    "tags": [
-      "Python",
-      "Java",
-      "AI",
-      "IoT"
-    ]
+    "updatedAt": "2026-06-16",
+    "tags": ["Python", "Java", "AI/ML", "IoT", "RAG"]
   }
 ]
