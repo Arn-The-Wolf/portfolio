@@ -1,13 +1,30 @@
 import { NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/api-auth"
 import { getMimeType, saveResumeFile } from "@/lib/resume-storage"
-import { getResumes, saveResumes, nextId, type Resume } from "@/lib/resumes-store"
+import { readJsonAsync, writeJsonAsync, nextId } from "@/lib/data-store"
+
+interface Resume {
+  id: number
+  title: string
+  subtitle?: string
+  description?: string
+  documentType?: string
+  format: string
+  fileUrl: string
+  storageKey?: string
+  fileName?: string
+  mimeType?: string
+  version?: string
+  language?: string
+  updatedAt?: string
+  tags?: string[]
+}
 
 const ALLOWED_EXTENSIONS = new Set(["pdf", "doc", "docx", "md"])
 
 export async function GET() {
   try {
-    const resumes = await getResumes()
+    const resumes = await readJsonAsync<Resume[]>("resumes.json")
     return NextResponse.json(resumes)
   } catch {
     return NextResponse.json({ error: "Failed to read resumes" }, { status: 500 })
@@ -23,7 +40,7 @@ export async function POST(request: Request) {
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData()
       const file = formData.get("file")
-      const resumes = await getResumes()
+      const resumes = await readJsonAsync<Resume[]>("resumes.json")
       const id = nextId(resumes)
 
       const tagsRaw = (formData.get("tags") as string) || ""
@@ -63,19 +80,19 @@ export async function POST(request: Request) {
       }
 
       resumes.push(body)
-      await saveResumes(resumes)
+      await writeJsonAsync("resumes.json", resumes)
       return NextResponse.json(body, { status: 201 })
     }
 
     const body = await request.json()
-    const resumes = await getResumes()
+    const resumes = await readJsonAsync<Resume[]>("resumes.json")
     const newResume: Resume = {
       id: nextId(resumes),
       fileUrl: body.fileUrl || "/api/resume",
       ...body,
     }
     resumes.push(newResume)
-    await saveResumes(resumes)
+    await writeJsonAsync("resumes.json", resumes)
     return NextResponse.json(newResume, { status: 201 })
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to create resume"

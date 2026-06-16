@@ -1,7 +1,7 @@
 "use server"
 
 import { Resend } from "resend"
-import { readJson, writeJson, nextId } from "@/lib/data-store"
+import { readJsonAsync, writeJsonAsync, nextId } from "@/lib/data-store"
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
@@ -16,7 +16,7 @@ export async function sendContactEmail(formData: FormData) {
       return { success: false, message: "All fields are required" }
     }
 
-    const messages = readJson<any[]>("messages.json")
+    const messages = await readJsonAsync<any[]>("messages.json")
     messages.push({
       id: nextId(messages),
       name,
@@ -26,7 +26,7 @@ export async function sendContactEmail(formData: FormData) {
       createdAt: new Date().toISOString(),
       read: false,
     })
-    writeJson("messages.json", messages)
+    await writeJsonAsync("messages.json", messages)
 
     if (resend) {
       const { error } = await resend.emails.send({

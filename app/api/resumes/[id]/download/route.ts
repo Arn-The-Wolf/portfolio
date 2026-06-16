@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server"
 import { getMimeType, readResumeFile } from "@/lib/resume-storage"
-import { getResumes } from "@/lib/resumes-store"
+import { readJsonAsync } from "@/lib/data-store"
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const id = parseInt(params.id, 10)
     const { searchParams } = new URL(request.url)
     const asDownload = searchParams.get("download") === "1"
-    const resumes = await getResumes()
+    const resumes = await readJsonAsync<any[]>("resumes.json")
     const resume = resumes.find((r) => r.id === id)
 
     if (!resume) {

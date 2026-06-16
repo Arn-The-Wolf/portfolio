@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/api-auth"
 import { deleteResumeFile, getMimeType, saveResumeFile } from "@/lib/resume-storage"
-import { getResumes, saveResumes } from "@/lib/resumes-store"
+import { readJsonAsync, writeJsonAsync } from "@/lib/data-store"
 
 const ALLOWED_EXTENSIONS = new Set(["pdf", "doc", "docx", "md"])
 
@@ -11,7 +11,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
 
   try {
     const id = parseInt(params.id, 10)
-    const resumes = await getResumes()
+    const resumes = await readJsonAsync<any[]>("resumes.json")
     const idx = resumes.findIndex((r) => r.id === id)
     if (idx === -1) {
       return NextResponse.json({ error: "Resume not found" }, { status: 404 })
@@ -52,7 +52,7 @@ export async function POST(request: Request, { params }: { params: { id: string 
       updatedAt: new Date().toISOString().slice(0, 10),
     }
 
-    await saveResumes(resumes)
+    await writeJsonAsync("resumes.json", resumes)
     return NextResponse.json(resumes[idx])
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed"
