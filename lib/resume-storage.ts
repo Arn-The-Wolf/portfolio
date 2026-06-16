@@ -47,7 +47,11 @@ export async function saveResumeFile(
   const safeName = sanitizeFileName(originalName)
   const blobKey = `resumes/${resumeId}-${safeName}`
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  const useBlob =
+    process.env.BLOB_READ_WRITE_TOKEN ||
+    (process.env.VERCEL === "1" && process.env.BLOB_STORE_ID)
+
+  if (useBlob) {
     const blob = await put(blobKey, buffer, {
       access: "public",
       contentType: mimeType,
