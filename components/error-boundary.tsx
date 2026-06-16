@@ -17,6 +17,9 @@ class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, ErrorBo
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    if (error.message?.toLowerCase().includes("webgl")) {
+      return { hasError: false }
+    }
     return { hasError: true, error }
   }
 
