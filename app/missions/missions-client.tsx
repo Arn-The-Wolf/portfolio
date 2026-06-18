@@ -1,14 +1,13 @@
 "use client"
 
-import { useMemo, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useMemo, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, ExternalLink, ChevronRight, FolderGit2, Star } from "lucide-react"
+import { Github, ExternalLink, ChevronRight, FolderGit2, Star, Loader2 } from "lucide-react"
 import Link from "next/link"
-import StarsBackground from "@/components/stars-background"
 import PageHeader from "@/components/page-header"
 import { cn } from "@/lib/utils"
 import {
@@ -60,6 +59,23 @@ function mergeProjects(cms: CmsProject[], github: GithubRepoProject[]): DisplayP
   return [...cms.map(normalizeCms), ...githubOnly]
 }
 
+function ProjectCardSkeleton() {
+  return (
+    <Card className="glass-card h-full overflow-hidden animate-pulse">
+      <div className="h-36 bg-primary/5" />
+      <CardContent className="p-5 space-y-3">
+        <div className="h-5 bg-primary/10 rounded w-2/3" />
+        <div className="h-3 bg-muted rounded w-1/2" />
+        <div className="h-12 bg-muted/50 rounded" />
+        <div className="flex gap-2">
+          <div className="h-5 w-14 bg-muted rounded-full" />
+          <div className="h-5 w-14 bg-muted rounded-full" />
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 export default function MissionsClient({
   initialProjects,
   githubRepos,
@@ -68,7 +84,29 @@ export default function MissionsClient({
   githubRepos: GithubRepoProject[]
 }) {
   const [selectedFilter, setSelectedFilter] = useState<ProjectFilter>("all")
+  const [displayFilter, setDisplayFilter] = useState<ProjectFilter>("all")
+  const [loadingFilter, setLoadingFilter] = useState<ProjectFilter | null>(null)
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+
+  const handleFilterClick = (filter: ProjectFilter) => {
+    if (filter === selectedFilter || loadingFilter) return
+    setLoadingFilter(filter)
+    setSelectedFilter(filter)
+  }
+
+  useEffect(() => {
+    if (selectedFilter === displayFilter) {
+      setLoadingFilter(null)
+      return
+    }
+    const timer = window.setTimeout(() => {
+      setDisplayFilter(selectedFilter)
+      setLoadingFilter(null)
+    }, 450)
+    return () => window.clearTimeout(timer)
+  }, [selectedFilter, displayFilter])
+
+  const isFiltering = loadingFilter !== null || selectedFilter !== displayFilter
 
   const allProjects = useMemo(
     () => mergeProjects(initialProjects, githubRepos),
@@ -77,18 +115,17 @@ export default function MissionsClient({
 
   const filtered = useMemo(() => {
     return allProjects
-      .filter((p) => matchesProjectFilter(p.categories, selectedFilter))
+      .filter((p) => matchesProjectFilter(p.categories, displayFilter))
       .sort((a, b) => {
         const priorityA = "priority" in a && typeof a.priority === "number" ? a.priority : 0
         const priorityB = "priority" in b && typeof b.priority === "number" ? b.priority : 0
         if (priorityB !== priorityA) return priorityB - priorityA
         return a.title.localeCompare(b.title)
       })
-  }, [allProjects, selectedFilter])
+  }, [allProjects, displayFilter])
 
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <PageHeader
@@ -97,23 +134,50 @@ export default function MissionsClient({
             subtitle={`${allProjects.length} repositories — filter by stack. Projects can appear in multiple categories.`}
           />
 
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {PROJECT_FILTERS.map((f) => (
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            {PROJECT_FILTERS.map((f) => {
+              const isActive = selectedFilter === f
+              const isLoading = loadingFilter === f
+              return (
               <Button
                 key={f}
-                variant={selectedFilter === f ? "default" : "outline"}
-                onClick={() => setSelectedFilter(f)}
+                variant={isActive ? "default" : "outline"}
+                onClick={() => handleFilterClick(f)}
+                disabled={Boolean(loadingFilter) && !isLoading}
                 className={cn(
-                  selectedFilter === f ? "filter-chip-active" : "filter-chip"
+                  isActive ? "filter-chip-active" : "filter-chip",
+                  loadingFilter && loadingFilter !== f && "opacity-50 pointer-events-none",
                 )}
               >
+                {isLoading ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
                 {FILTER_LABELS[f]}
               </Button>
-            ))}
+            )})}
           </div>
 
-          <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((project, index) => {
+          {isFiltering && loadingFilter && (
+            <p className="text-center text-xs font-mono text-primary/60 mb-6 animate-pulse">
+              Loading {FILTER_LABELS[loadingFilter]} projects…
+            </p>
+          )}
+
+          <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[200px]">
+            <AnimatePresence mode="wait">
+              {isFiltering ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <motion.div
+                    key={`skeleton-${i}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <ProjectCardSkeleton />
+                  </motion.div>
+                ))
+              ) : (
+                filtered.map((project, index) => {
               const isGithub = project.source === "github"
               const href = isGithub ? project.github : `/missions/${project.id}`
               const stars = isGithub ? (project as GithubRepoProject).stars : 0
@@ -191,10 +255,12 @@ export default function MissionsClient({
                   </Card>
                 </motion.div>
               )
-            })}
+                })
+              )}
+            </AnimatePresence>
           </div>
 
-          {filtered.length === 0 && (
+          {!isFiltering && filtered.length === 0 && (
             <p className="text-center text-muted-foreground py-16">No projects match this filter.</p>
           )}
         </div>

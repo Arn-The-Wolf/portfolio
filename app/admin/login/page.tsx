@@ -6,8 +6,6 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Shield, Lock } from "lucide-react"
-import StarsBackground from "@/components/stars-background"
-
 function LoginForm() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -78,7 +76,6 @@ function LoginForm() {
 export default function AdminLoginPage() {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-background px-4">
-      <StarsBackground />
       <Suspense fallback={<div className="relative z-10 h-8 w-8 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />}>
         <div className="relative z-10 w-full flex justify-center">
           <LoginForm />

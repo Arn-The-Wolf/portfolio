@@ -1,11 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Download, Eye, FileText, Calendar, Globe } from "lucide-react"
 import PageHeader from "@/components/page-header"
+import DocumentViewer from "@/components/document-viewer"
 
 interface Resume {
   id: number
@@ -26,7 +28,6 @@ function resolveViewUrl(resume: Resume): string {
   const url = resume.fileUrl
   if (!url) return `/api/resumes/${resume.id}/download`
   if (url.startsWith("http")) return url
-  // Static public file — serve directly
   if (url.startsWith("/") && !url.startsWith("/api/")) return url
   if (url.startsWith("/api/resumes/")) return url
   if (resume.fileName) return `/api/resumes/${resume.id}/download`
@@ -39,12 +40,14 @@ function resolveDownloadUrl(resume: Resume): string {
   if (view.startsWith("/api/resumes/")) {
     return `${view}${view.includes("?") ? "&" : "?"}download=1`
   }
-  // Static /resume.pdf — download attribute handles it in the browser
   return view
 }
 
 export default function ResumeGallery({ initialResumes }: { initialResumes: Resume[] }) {
   const resumes = initialResumes
+  const [viewer, setViewer] = useState<{ resume: Resume; viewUrl: string; downloadUrl: string } | null>(
+    null,
+  )
 
   return (
     <section className="py-20 px-4">
@@ -106,11 +109,20 @@ export default function ResumeGallery({ initialResumes }: { initialResumes: Resu
                         </div>
                       )}
                       <div className="flex gap-2">
-                        <Button asChild variant="outline" className="flex-1 border-primary/40 text-primary">
-                          <a href={resolveViewUrl(resume)} target="_blank" rel="noopener noreferrer">
-                            <Eye className="mr-2 h-4 w-4" />
-                            View
-                          </a>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="flex-1 border-primary/40 text-primary"
+                          onClick={() =>
+                            setViewer({
+                              resume,
+                              viewUrl: resolveViewUrl(resume),
+                              downloadUrl: resolveDownloadUrl(resume),
+                            })
+                          }
+                        >
+                          <Eye className="mr-2 h-4 w-4" />
+                          View
                         </Button>
                         <Button asChild className="flex-1 btn-primary">
                           <a href={resolveDownloadUrl(resume)} download={resume.fileName || undefined}>
@@ -127,6 +139,17 @@ export default function ResumeGallery({ initialResumes }: { initialResumes: Resu
           ))}
         </div>
       </div>
+
+      {viewer && (
+        <DocumentViewer
+          open={Boolean(viewer)}
+          onOpenChange={(open) => !open && setViewer(null)}
+          title={viewer.resume.title}
+          viewUrl={viewer.viewUrl}
+          downloadUrl={viewer.downloadUrl}
+          fileName={viewer.resume.fileName}
+        />
+      )}
     </section>
   )
 }

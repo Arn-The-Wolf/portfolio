@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "node scripts/start.mjs",
     "lint": "next lint",
-    "generate:portfolio": "node scripts/generate-portfolio-docx.mjs"
+    "generate:portfolio": "node scripts/generate-portfolio-docx.mjs",
+    "seed:blob": "node scripts/seed-blob.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

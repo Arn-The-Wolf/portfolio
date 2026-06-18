@@ -5,12 +5,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
-import StarsBackground from "@/components/stars-background"
-
 export default function ProjectDetailClient({ project }: { project: any }) {
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
       <div className="relative z-10 pt-24 pb-16 px-4 max-w-4xl mx-auto">
         <Link href="/missions" className="inline-flex items-center text-primary/70 hover:text-primary text-sm mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Projects

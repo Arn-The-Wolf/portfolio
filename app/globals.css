@@ -191,3 +191,53 @@
 .glitch {
   animation: glitch 1s linear infinite;
 }
+
+/* Google Translate widget — dark theme */
+.google-translate-widget .goog-te-gadget {
+  font-family: var(--font-body), sans-serif !important;
+  font-size: 0 !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.google-translate-widget .goog-te-gadget-simple {
+  background: hsl(var(--background) / 0.6) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.375rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+.google-translate-widget .goog-te-gadget-simple span,
+.google-translate-widget .goog-te-menu-value span {
+  color: hsl(var(--primary)) !important;
+  font-size: 0.75rem !important;
+}
+
+.google-translate-widget .goog-te-gadget-icon {
+  display: none !important;
+}
+
+body > .skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+  background-color: #0a0f0c;
+}
+
+@keyframes star-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(var(--drift-x, 4px), -12px);
+    opacity: 1;
+  }
+}
+
+.star-drift {
+  animation: star-drift ease-in-out infinite;
+}

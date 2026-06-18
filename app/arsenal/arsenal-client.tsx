@@ -4,7 +4,6 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import CountUp from "@/components/count-up"
 import { useInView } from "react-intersection-observer"
-import StarsBackground from "@/components/stars-background"
 import PageHeader from "@/components/page-header"
 import { Shield, Globe, Server, Lock, Cloud } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -35,8 +34,6 @@ export default function ArsenalClient({ initialSkills }: { initialSkills: Record
 
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
-
       <div className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <PageHeader

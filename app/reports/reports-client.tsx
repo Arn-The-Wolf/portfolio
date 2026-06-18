@@ -4,15 +4,12 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Star } from "lucide-react"
-import StarsBackground from "@/components/stars-background"
 import PersonAvatar from "@/components/person-avatar"
 import { siteConfig } from "@/lib/site-config"
 
 export default function ReportsClient({ testimonials }: { testimonials: any[] }) {
   return (
     <div className="relative min-h-[calc(100vh-5rem)]">
-      <StarsBackground />
-
       <div className="relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center px-4 py-24">
         <div className="w-full max-w-6xl mx-auto">
           <motion.header

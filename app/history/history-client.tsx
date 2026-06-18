@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield } from "lucide-react"
-import StarsBackground from "@/components/stars-background"
 import PageHeader from "@/components/page-header"
 
 export default function HistoryClient({ initialHistory }: { initialHistory: { experience: any[]; certifications: any[] } }) {
@@ -12,7 +11,6 @@ export default function HistoryClient({ initialHistory }: { initialHistory: { ex
 
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <PageHeader title="Experience" subtitle="Where I've learned and built." />

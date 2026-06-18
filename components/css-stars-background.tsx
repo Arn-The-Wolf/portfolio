@@ -21,15 +21,16 @@ export default function CssStarsBackground({ variant = "fixed" }: CssStarsBackgr
       {STAR_DOTS.map((star, i) => (
         <span
           key={i}
-          className="absolute rounded-full bg-white animate-pulse"
+          className="absolute rounded-full bg-white star-drift"
           style={{
             left: `${star.left}%`,
             top: `${star.top}%`,
             width: star.size,
             height: star.size,
             opacity: star.opacity,
-            animationDuration: `${star.duration}s`,
+            animationDuration: `${star.duration + 3}s`,
             animationDelay: `${star.delay}s`,
+            ["--drift-x" as string]: `${((i % 5) - 2) * 6}px`,
           }}
         />
       ))}

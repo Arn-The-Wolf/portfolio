@@ -1,9 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, Rocket, Download, Twitter, Instagram } from "lucide-react"
+import { Github, Linkedin, Mail, Rocket, Download, Twitter, Instagram, Eye } from "lucide-react"
 import Link from "next/link"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
@@ -11,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import GitHubStats from "@/components/github-stats"
 import HeroBackground from "@/components/hero-background"
+import DocumentViewer from "@/components/document-viewer"
 import { STARFIELD } from "@/lib/theme-colors"
 import CountUp from "@/components/count-up"
 import { getAge } from "@/lib/age"
@@ -19,6 +21,7 @@ import { PROFILE_IMAGE } from "@/lib/site-images"
 
 export default function Portfolio() {
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  const [showResume, setShowResume] = useState(false)
   const age = getAge()
   const yearsExp = getYearsExperience()
 
@@ -74,6 +77,15 @@ export default function Portfolio() {
                 </Button>
                 <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                   <Link href="/resumes"><Download className="mr-2 h-4 w-4" />Resumes</Link>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  onClick={() => setShowResume(true)}
+                >
+                  <Eye className="mr-2 h-4 w-4" />
+                  View CV
                 </Button>
               </div>
               <div className="flex justify-center lg:justify-start gap-6">
@@ -143,6 +155,15 @@ export default function Portfolio() {
 
       <Analytics />
       <SpeedInsights />
+
+      <DocumentViewer
+        open={showResume}
+        onOpenChange={setShowResume}
+        title="RUYANGE Arnold — CV"
+        viewUrl="/resume.pdf"
+        downloadUrl="/resume.pdf"
+        fileName="RUYANGE-Arnold-CV.pdf"
+      />
     </div>
   )
 }

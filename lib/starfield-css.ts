@@ -14,14 +14,10 @@ export function canUseWebGL(): boolean {
   if (typeof window === "undefined") return false
   try {
     const canvas = document.createElement("canvas")
-    const gl =
+    return Boolean(
       canvas.getContext("webgl2", { failIfMajorPerformanceCaveat: false }) ||
-      canvas.getContext("webgl", { failIfMajorPerformanceCaveat: false }) ||
-      canvas.getContext("experimental-webgl")
-    if (!gl) return false
-    const lose = (gl as WebGLRenderingContext).getExtension("WEBGL_lose_context")
-    lose?.loseContext()
-    return true
+        canvas.getContext("webgl", { failIfMajorPerformanceCaveat: false }),
+    )
   } catch {
     return false
   }

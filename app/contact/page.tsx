@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Mail, Github, Linkedin, Send, CheckCircle2, AlertCircle } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { sendContactEmail } from "@/app/actions"
-import StarsBackground from "@/components/stars-background"
 import PageHeader from "@/components/page-header"
 import { siteConfig } from "@/lib/site-config"
 
@@ -44,7 +43,6 @@ export default function ContactPage() {
 
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <PageHeader

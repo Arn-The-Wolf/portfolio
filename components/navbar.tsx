@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Shield, Menu } from "lucide-react"
 import { motion } from "framer-motion"
+import GoogleTranslate from "@/components/google-translate"
 
 const links = [
   { href: "/", label: "Home" },
@@ -33,6 +34,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center space-x-1">
+            <GoogleTranslate />
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -50,6 +52,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex lg:hidden items-center gap-2">
+            <GoogleTranslate />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-primary">

@@ -5,12 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AlertTriangle, Home, Search } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import StarsBackground from "@/components/stars-background"
-
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen bg-background text-foreground flex items-center justify-center p-4">
-      <StarsBackground />
+    <div className="relative min-h-screen text-foreground flex items-center justify-center p-4">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-10">
         <Card className="glass-card max-w-lg w-full">
           <CardHeader className="text-center">

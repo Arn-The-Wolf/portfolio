@@ -39,3 +39,4 @@ ADMIN_CREDENTIALS.local.txt
 # admin-uploaded resume files (metadata stays in data/resumes.json)
 public/uploads/resumes/*
 !public/uploads/resumes/.gitkeep
+.vercel

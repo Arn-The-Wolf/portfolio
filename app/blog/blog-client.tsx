@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Calendar, Clock, Search } from "lucide-react"
-import StarsBackground from "@/components/stars-background"
+import Link from "next/link"
 import PageHeader from "@/components/page-header"
 
 export interface BlogPost {
@@ -25,7 +25,6 @@ export interface BlogPost {
 
 export default function BlogClient({ posts }: { posts: BlogPost[] }) {
   const [searchTerm, setSearchTerm] = useState("")
-  const [selected, setSelected] = useState<BlogPost | null>(null)
 
   const filtered = posts.filter(
     (post) =>
@@ -36,7 +35,6 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
 
   return (
     <div className="relative min-h-screen">
-      <StarsBackground />
       <section className="relative z-10 pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           <PageHeader
@@ -54,26 +52,11 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
             />
           </div>
 
-          {selected ? (
-            <article className="glass-card p-8">
-              <button onClick={() => setSelected(null)} className="text-sm text-primary mb-6 hover:underline">
-                ← Back to all posts
-              </button>
-              <h2 className="text-2xl font-display text-primary mb-4">{selected.title}</h2>
-              <div className="flex gap-4 text-xs text-muted-foreground mb-6">
-                <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{selected.date}</span>
-                <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{selected.readTime}</span>
-              </div>
-              <div className="text-foreground/90 leading-relaxed whitespace-pre-line">{selected.content}</div>
-            </article>
-          ) : (
-            <div className="space-y-6">
-              {filtered.map((post, index) => (
-                <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }}>
-                  <Card
-                    className="glass-card-hover cursor-pointer"
-                    onClick={() => setSelected(post)}
-                  >
+          <div className="space-y-6">
+            {filtered.map((post, index) => (
+              <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }}>
+                <Link href={`/blog/${post.slug}`}>
+                  <Card className="glass-card-hover cursor-pointer h-full">
                     <CardHeader>
                       <div className="flex flex-wrap gap-2 mb-2">
                         <Badge variant="outline" className="border-primary/40 text-primary">{post.category}</Badge>
@@ -91,10 +74,10 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
                       <p className="text-xs text-muted-foreground">{post.date} · {post.readTime}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
-              ))}
-            </div>
-          )}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
