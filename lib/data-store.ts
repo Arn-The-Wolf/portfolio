@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { head, put } from "@vercel/blob"
+import { hasBlobStorage } from "@/lib/blob-env"
 import blogData from "@/data/blog.json"
 import casesData from "@/data/cases.json"
 import historyData from "@/data/history.json"
@@ -25,7 +26,7 @@ const BUNDLED_DATA: Record<string, unknown> = {
 }
 
 function useBlobStore(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN)
+  return hasBlobStorage()
 }
 
 function isVercelRuntime(): boolean {

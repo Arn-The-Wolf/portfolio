@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { put } from "@vercel/blob"
+import { hasBlobStorage } from "@/lib/blob-env"
 
 const UPLOADS_DIR = path.join(process.cwd(), "public", "uploads", "resumes")
 const MAX_FILE_SIZE = 10 * 1024 * 1024
@@ -47,9 +48,7 @@ export async function saveResumeFile(
   const safeName = sanitizeFileName(originalName)
   const blobKey = `resumes/${resumeId}-${safeName}`
 
-  const useBlob =
-    process.env.BLOB_READ_WRITE_TOKEN ||
-    (process.env.VERCEL === "1" && process.env.BLOB_STORE_ID)
+  const useBlob = hasBlobStorage()
 
   if (useBlob) {
     const blob = await put(blobKey, buffer, {

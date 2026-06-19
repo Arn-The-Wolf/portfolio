@@ -30,6 +30,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
         headers: {
           "Content-Type": mimeType,
           "Content-Disposition": `${asDownload ? "attachment" : "inline"}; filename="${fileName}"`,
+          "X-Frame-Options": "SAMEORIGIN",
+          "Content-Security-Policy": "frame-ancestors 'self'",
           "Cache-Control": "public, max-age=3600",
         },
       })

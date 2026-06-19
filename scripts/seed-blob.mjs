@@ -26,8 +26,8 @@ const FILES = [
   "testimonials.json",
 ]
 
-if (!process.env.BLOB_READ_WRITE_TOKEN) {
-  console.error("Missing BLOB_READ_WRITE_TOKEN. Set it from Vercel → Storage → Blob → .env.local")
+if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN) {
+  console.error("Missing BLOB_READ_WRITE_TOKEN (or BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN).")
   process.exit(1)
 }
 
