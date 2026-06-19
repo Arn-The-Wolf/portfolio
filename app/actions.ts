@@ -3,11 +3,9 @@
 import { Resend } from "resend"
 import { readJsonAsync, writeJsonAsync, nextId } from "@/lib/data-store"
 import { siteConfig } from "@/lib/site-config"
+import { getContactRecipient, getResendFromAddress } from "@/lib/resend-config"
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
-const contactTo = process.env.CONTACT_TO_EMAIL || siteConfig.email
-const contactFrom =
-  process.env.RESEND_FROM_EMAIL || `ARNOLD.DEV Portfolio <onboarding@resend.dev>`
 
 export async function sendContactEmail(formData: FormData) {
   try {
@@ -44,9 +42,12 @@ export async function sendContactEmail(formData: FormData) {
       }
     }
 
+    const from = getResendFromAddress()
+    const to = getContactRecipient(from)
+
     const { error } = await resend.emails.send({
-      from: contactFrom,
-      to: contactTo,
+      from,
+      to,
       subject: `Portfolio Contact: ${subject}`,
       replyTo: email,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
@@ -62,11 +63,15 @@ export async function sendContactEmail(formData: FormData) {
 
     if (error) {
       console.error("Resend error:", error)
+      const sandboxHint =
+        error.message?.includes("only send testing emails") ||
+        error.message?.includes("verify a domain")
       return {
         success: false,
-        message:
-          error.message ||
-          "Failed to send email. Please try again or email me directly at " + siteConfig.email,
+        message: sandboxHint
+          ? "Email could not be sent yet (domain not verified on Resend). Your message was saved — I can still see it in the admin inbox."
+          : error.message ||
+            `Failed to send email. Please try again or email me directly at ${siteConfig.email}.`,
       }
     }
 
