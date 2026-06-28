@@ -369,13 +369,17 @@ function buildResumePage({ skills, history, photoBuffer, yearsExp }) {
   });
 }
 
+function sortByPriority(projects) {
+  return [...projects].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+}
+
 function buildProjectPages(projects, cases) {
-  const fullstack = projects.filter((p) => p.category === "fullstack");
+  const fullstack = sortByPriority(projects.filter((p) => p.category === "fullstack"));
   fullstack.push(PORTFOLIO_PROJECT);
 
-  const backend = projects.filter((p) => p.category === "backend");
-  const ai = projects.filter((p) => p.category === "ai");
-  const devops = projects.filter((p) => p.category === "devops");
+  const backend = sortByPriority(projects.filter((p) => p.category === "backend"));
+  const ai = sortByPriority(projects.filter((p) => p.category === "ai"));
+  const devops = sortByPriority(projects.filter((p) => p.category === "devops"));
 
   const pages = [];
 

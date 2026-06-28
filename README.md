@@ -6,7 +6,7 @@ Personal portfolio and project showcase for **RUYANGE Arnold**, a full-stack dev
 
 ## What's inside
 
-- Project portfolio with GitHub links and tech stacks
+- Project portfolio with GitHub links — **strongest work first** (Clause Lens, Ingoboka, ArcFace, WASAC billing, BestBuy, ANPR, AviaServe)
 - Skills, experience timeline, and downloadable CVs
 - Blog, testimonials, and contact form
 - Admin dashboard for full content management

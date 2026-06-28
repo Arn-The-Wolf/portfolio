@@ -10,21 +10,21 @@
     "fileName": "RUYANGE-Arnold-CV.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-06-16",
-    "tags": ["Full Stack", "Java", "Python", "Cybersecurity"]
+    "updatedAt": "2026-06-19",
+    "tags": ["Full Stack", "AI/ML", "Java", "TypeScript", "Computer Vision"]
   },
   {
     "id": 2,
     "title": "Technical Resume",
     "subtitle": "Projects & Open Source",
-    "description": "Project-focused resume highlighting Clause Lens, arnshop, mqtt-weather-app, Handwriting Recognition AI, and web scraping work.",
+    "description": "Project-focused resume highlighting Clause Lens, Ingoboka, ArcFace face recognition, WASAC billing, BestBuy e-commerce, ANPR, and full-stack work.",
     "documentType": "Resume",
     "format": "PDF",
     "fileUrl": "/resume.pdf",
     "fileName": "RUYANGE-Arnold-Resume.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-06-16",
-    "tags": ["Python", "Java", "AI/ML", "IoT", "RAG"]
+    "updatedAt": "2026-06-19",
+    "tags": ["RAG", "Next.js", "Computer Vision", "Java", "TypeScript", "Full Stack"]
   }
 ]
