@@ -2,9 +2,8 @@
  * Seed all CMS JSON files into Vercel Blob (production admin data).
  *
  * Usage:
- *   BLOB_READ_WRITE_TOKEN=vercel_blob_... node scripts/seed-blob.mjs
- *
- * Run once after connecting Blob to your Vercel project, or to reset prod data from repo.
+ *   npm run seed:blob
+ *   (reads .env.local — set BLOB_READ_WRITE_TOKEN or BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN)
  */
 import fs from "fs"
 import path from "path"
@@ -26,8 +25,36 @@ const FILES = [
   "testimonials.json",
 ]
 
-if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN) {
-  console.error("Missing BLOB_READ_WRITE_TOKEN (or BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN).")
+function loadEnvLocal() {
+  const envPath = path.join(root, ".env.local")
+  if (!fs.existsSync(envPath)) return
+  for (const line of fs.readFileSync(envPath, "utf8").split("\n")) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith("#")) continue
+    const eq = trimmed.indexOf("=")
+    if (eq === -1) continue
+    const key = trimmed.slice(0, eq).trim()
+    let value = trimmed.slice(eq + 1).trim()
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1)
+    }
+    if (!process.env[key]) process.env[key] = value
+  }
+}
+
+loadEnvLocal()
+
+if (!process.env.BLOB_READ_WRITE_TOKEN && process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN) {
+  process.env.BLOB_READ_WRITE_TOKEN = process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN
+}
+
+if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  console.error(
+    "Missing BLOB_READ_WRITE_TOKEN. Add it to .env.local or run: npx vercel env pull .env.local",
+  )
   process.exit(1)
 }
 

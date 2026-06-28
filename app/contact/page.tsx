@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Mail, Github, Linkedin, Send, CheckCircle2, AlertCircle } from "lucide-react"
+import ButtonSpinner from "@/components/button-spinner"
 import { useToast } from "@/components/ui/use-toast"
 import { sendContactEmail } from "@/app/actions"
 import PageHeader from "@/components/page-header"
@@ -122,7 +123,14 @@ export default function ContactPage() {
                       />
                     </div>
                     <Button type="submit" disabled={isPending} className="w-full btn-primary">
-                      {isPending ? "Sending..." : "Send message"}
+                      {isPending ? (
+                        <ButtonSpinner label="Sending secure message…" />
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Send message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </CardContent>

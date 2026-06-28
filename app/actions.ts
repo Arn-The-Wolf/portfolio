@@ -2,7 +2,11 @@
 
 import { Resend } from "resend"
 import { readJsonAsync, writeJsonAsync, nextId } from "@/lib/data-store"
-import { siteConfig } from "@/lib/site-config"
+import {
+  buildContactEmailHtml,
+  buildContactEmailText,
+} from "@/lib/contact-email-template"
+import { siteConfig, siteUrl } from "@/lib/site-config"
 import { getContactRecipient, getResendFromAddress } from "@/lib/resend-config"
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
@@ -43,22 +47,22 @@ export async function sendContactEmail(formData: FormData) {
     }
 
     const from = getResendFromAddress()
-    const to = getContactRecipient(from)
+    const to = getContactRecipient()
+    const emailPayload = {
+      name,
+      email,
+      subject,
+      message,
+      siteUrl: siteUrl(),
+    }
 
     const { error } = await resend.emails.send({
       from,
       to,
       subject: `Portfolio Contact: ${subject}`,
       replyTo: email,
-      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
-      html: `
-        <h2>New portfolio message</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
-      `,
+      text: buildContactEmailText(emailPayload),
+      html: buildContactEmailHtml(emailPayload),
     })
 
     if (error) {
@@ -69,7 +73,7 @@ export async function sendContactEmail(formData: FormData) {
       return {
         success: false,
         message: sandboxHint
-          ? "Email could not be sent yet (domain not verified on Resend). Your message was saved — I can still see it in the admin inbox."
+          ? "Your message was saved. Email delivery needs a verified domain on Resend to reach ruyangearnold@gmail.com — check admin messages in the meantime."
           : error.message ||
             `Failed to send email. Please try again or email me directly at ${siteConfig.email}.`,
       }

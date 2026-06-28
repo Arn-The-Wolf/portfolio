@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Shield, Lock } from "lucide-react"
+import ButtonSpinner from "@/components/button-spinner"
 function LoginForm() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -66,7 +67,7 @@ function LoginForm() {
         </div>
         {error && <p className="text-destructive text-sm">{error}</p>}
         <Button type="submit" disabled={loading} className="w-full btn-primary">
-          {loading ? "Signing in..." : "Sign in"}
+          {loading ? <ButtonSpinner label="Signing in…" /> : "Sign in"}
         </Button>
       </form>
     </motion.div>

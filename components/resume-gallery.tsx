@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Download, Eye, FileText, Calendar, Globe } from "lucide-react"
+import { Download, Eye, FileText, Calendar, Globe, Loader2 } from "lucide-react"
 import PageHeader from "@/components/page-header"
 import DocumentViewer from "@/components/document-viewer"
 
@@ -48,6 +48,7 @@ export default function ResumeGallery({ initialResumes }: { initialResumes: Resu
   const [viewer, setViewer] = useState<{ resume: Resume; viewUrl: string; downloadUrl: string } | null>(
     null,
   )
+  const [openingId, setOpeningId] = useState<number | null>(null)
 
   return (
     <section className="py-20 px-4">
@@ -113,15 +114,22 @@ export default function ResumeGallery({ initialResumes }: { initialResumes: Resu
                           type="button"
                           variant="outline"
                           className="flex-1 border-primary/40 text-primary"
-                          onClick={() =>
+                          disabled={openingId === resume.id}
+                          onClick={() => {
+                            setOpeningId(resume.id)
                             setViewer({
                               resume,
                               viewUrl: resolveViewUrl(resume),
                               downloadUrl: resolveDownloadUrl(resume),
                             })
-                          }
+                            window.setTimeout(() => setOpeningId(null), 400)
+                          }}
                         >
-                          <Eye className="mr-2 h-4 w-4" />
+                          {openingId === resume.id ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          ) : (
+                            <Eye className="mr-2 h-4 w-4" />
+                          )}
                           View
                         </Button>
                         <Button asChild className="flex-1 btn-primary">
