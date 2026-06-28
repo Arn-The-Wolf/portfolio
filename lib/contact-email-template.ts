@@ -13,29 +13,59 @@ export interface ContactEmailPayload {
   subject: string
   message: string
   siteUrl?: string
+  /** Shown when sandbox routing delivers to the Resend account inbox instead. */
+  intendedRecipient?: string
 }
 
 export function buildContactEmailText(payload: ContactEmailPayload): string {
-  const { name, email, subject, message } = payload
-  return [
-    "New portfolio contact message",
-    "─────────────────────────────",
+  const { name, email, subject, message, intendedRecipient } = payload
+  const lines = ["New portfolio contact message", "─────────────────────────────"]
+  if (intendedRecipient) {
+    lines.push(`Intended inbox: ${intendedRecipient}`, "")
+  }
+  lines.push(
     `Name: ${name}`,
     `Email: ${email}`,
     `Subject: ${subject}`,
     "",
     "Message:",
     message,
-  ].join("\n")
+  )
+  return lines.join("\n")
 }
 
 export function buildContactEmailHtml(payload: ContactEmailPayload): string {
-  const { name, email, subject, message, siteUrl = "https://arnold-rho.vercel.app" } = payload
+  const {
+    name,
+    email,
+    subject,
+    message,
+    siteUrl = "https://arnold-rho.vercel.app",
+    intendedRecipient,
+  } = payload
   const safeName = escapeHtml(name)
   const safeEmail = escapeHtml(email)
   const safeSubject = escapeHtml(subject)
   const safeMessage = escapeHtml(message).replace(/\n/g, "<br />")
+  const safeIntended = intendedRecipient ? escapeHtml(intendedRecipient) : ""
   const timestamp = new Date().toUTCString()
+
+  const intendedBanner = intendedRecipient
+    ? `<tr>
+            <td style="padding:16px 32px 0;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="padding:12px 16px;background:#422006;border:1px solid #f59e0b55;border-radius:10px;">
+                    <p style="margin:0;font-size:13px;line-height:1.5;color:#fde68a;">
+                      <strong>Intended inbox:</strong> ${safeIntended}<br />
+                      Delivered via Resend test mode to your account email. Forward or verify your domain on Resend for direct delivery.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>`
+    : ""
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -56,6 +86,7 @@ export function buildContactEmailHtml(payload: ContactEmailPayload): string {
               <p style="margin:10px 0 0;font-size:13px;color:#86efac;">Portfolio inquiry · ${escapeHtml(timestamp)}</p>
             </td>
           </tr>
+          ${intendedBanner}
           <tr>
             <td style="padding:28px 32px;">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:20px;">

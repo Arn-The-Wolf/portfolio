@@ -7,7 +7,13 @@ import {
   buildContactEmailText,
 } from "@/lib/contact-email-template"
 import { siteConfig, siteUrl } from "@/lib/site-config"
-import { getContactRecipient, getResendFromAddress } from "@/lib/resend-config"
+import {
+  getContactDeliveryTarget,
+  getContactRecipient,
+  getResendAccountEmail,
+  getResendFromAddress,
+  isResendSandboxRestrictionError,
+} from "@/lib/resend-config"
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
@@ -47,35 +53,56 @@ export async function sendContactEmail(formData: FormData) {
     }
 
     const from = getResendFromAddress()
-    const to = getContactRecipient()
+    const delivery = getContactDeliveryTarget()
     const emailPayload = {
       name,
       email,
       subject,
       message,
       siteUrl: siteUrl(),
+      intendedRecipient: delivery.intendedRecipient,
     }
 
-    const { error } = await resend.emails.send({
+    const mailSubject = delivery.intendedRecipient
+      ? `[For ${getContactRecipient()}] Portfolio Contact: ${subject}`
+      : `Portfolio Contact: ${subject}`
+
+    let { error } = await resend.emails.send({
       from,
-      to,
-      subject: `Portfolio Contact: ${subject}`,
+      to: delivery.to,
+      subject: mailSubject,
       replyTo: email,
       text: buildContactEmailText(emailPayload),
       html: buildContactEmailHtml(emailPayload),
     })
 
+    // Safety net: if primary still fails sandbox rules, retry account inbox.
+    if (error && isResendSandboxRestrictionError(error.message)) {
+      const account = getResendAccountEmail()
+      if (delivery.to !== account) {
+        const fallbackPayload = {
+          ...emailPayload,
+          intendedRecipient: getContactRecipient(),
+        }
+        const retry = await resend.emails.send({
+          from,
+          to: account,
+          subject: `[For ${getContactRecipient()}] Portfolio Contact: ${subject}`,
+          replyTo: email,
+          text: buildContactEmailText(fallbackPayload),
+          html: buildContactEmailHtml(fallbackPayload),
+        })
+        error = retry.error
+      }
+    }
+
     if (error) {
       console.error("Resend error:", error)
-      const sandboxHint =
-        error.message?.includes("only send testing emails") ||
-        error.message?.includes("verify a domain")
       return {
         success: false,
-        message: sandboxHint
-          ? "Your message was saved. Email delivery needs a verified domain on Resend to reach ruyangearnold@gmail.com — check admin messages in the meantime."
-          : error.message ||
-            `Failed to send email. Please try again or email me directly at ${siteConfig.email}.`,
+        message:
+          error.message ||
+          `Failed to send email. Please try again or email me directly at ${siteConfig.email}.`,
       }
     }
 
