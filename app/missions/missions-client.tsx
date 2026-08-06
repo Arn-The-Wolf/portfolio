@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useInView } from "react-intersection-observer"
+import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -86,7 +85,6 @@ export default function MissionsClient({
   const [selectedFilter, setSelectedFilter] = useState<ProjectFilter>("all")
   const [displayFilter, setDisplayFilter] = useState<ProjectFilter>("all")
   const [loadingFilter, setLoadingFilter] = useState<ProjectFilter | null>(null)
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   const handleFilterClick = (filter: ProjectFilter) => {
     if (filter === selectedFilter || loadingFilter) return
@@ -102,7 +100,7 @@ export default function MissionsClient({
     const timer = window.setTimeout(() => {
       setDisplayFilter(selectedFilter)
       setLoadingFilter(null)
-    }, 450)
+    }, 350)
     return () => window.clearTimeout(timer)
   }, [selectedFilter, displayFilter])
 
@@ -139,22 +137,21 @@ export default function MissionsClient({
               const isActive = selectedFilter === f
               const isLoading = loadingFilter === f
               return (
-              <Button
-                key={f}
-                variant={isActive ? "default" : "outline"}
-                onClick={() => handleFilterClick(f)}
-                disabled={Boolean(loadingFilter) && !isLoading}
-                className={cn(
-                  isActive ? "filter-chip-active" : "filter-chip",
-                  loadingFilter && loadingFilter !== f && "opacity-50 pointer-events-none",
-                )}
-              >
-                {isLoading ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : null}
-                {FILTER_LABELS[f]}
-              </Button>
-            )})}
+                <Button
+                  key={f}
+                  variant={isActive ? "default" : "outline"}
+                  onClick={() => handleFilterClick(f)}
+                  disabled={Boolean(loadingFilter) && !isLoading}
+                  className={cn(
+                    isActive ? "filter-chip-active" : "filter-chip",
+                    loadingFilter && loadingFilter !== f && "opacity-50 pointer-events-none",
+                  )}
+                >
+                  {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                  {FILTER_LABELS[f]}
+                </Button>
+              )
+            })}
           </div>
 
           {isFiltering && loadingFilter && (
@@ -163,101 +160,103 @@ export default function MissionsClient({
             </p>
           )}
 
-          <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[200px]">
-            <AnimatePresence mode="wait">
-              {isFiltering ? (
-                Array.from({ length: 6 }).map((_, i) => (
-                  <motion.div
-                    key={`skeleton-${i}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <ProjectCardSkeleton />
-                  </motion.div>
-                ))
-              ) : (
-                filtered.map((project, index) => {
-              const isGithub = project.source === "github"
-              const href = isGithub ? project.github : `/missions/${project.id}`
-              const stars = isGithub ? (project as GithubRepoProject).stars : 0
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[200px]">
+            {isFiltering
+              ? Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={`skeleton-${i}`} />)
+              : filtered.map((project, index) => {
+                  const isGithub = project.source === "github"
+                  const href = isGithub ? project.github : `/missions/${project.id}`
+                  const stars = isGithub ? (project as GithubRepoProject).stars : 0
+                  const cardKey = isGithub ? String(project.id) : `cms-${project.id}`
 
-              return (
-                <motion.div
-                  key={isGithub ? project.id : `cms-${project.id}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: index * 0.04 }}
-                >
-                  <Card className="glass-card-hover h-full flex flex-col overflow-hidden group">
-                    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                      {isGithub ? (
-                        <FolderGit2 className="h-12 w-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
-                      ) : (
-                        <span className="font-display text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
-                          {project.title?.charAt(0)}
-                        </span>
-                      )}
-                      <div className="absolute top-3 right-3 flex gap-1">
-                        {project.featured && (
-                          <Badge className="btn-primary text-[10px]">Featured</Badge>
-                        )}
-                        {isGithub && (
-                          <Badge variant="outline" className="border-primary/40 text-primary text-[10px]">
-                            GitHub
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    <CardContent className="p-5 flex-grow flex flex-col">
-                      <h3 className="font-display text-lg text-primary mb-1">{project.title}</h3>
-                      <p className="text-xs text-muted-foreground mb-2">{project.subtitle}</p>
-                      <p className="text-muted-foreground text-sm mb-3 flex-grow line-clamp-2">{project.description}</p>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.categories.slice(0, 3).map((cat) => (
-                          <Badge key={cat} variant="secondary" className="text-[10px] capitalize">
-                            {cat}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {(project.technologies || []).slice(0, 4).map((tech) => (
-                          <Badge key={tech} variant="outline" className="border-border text-[10px] text-muted-foreground">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="flex justify-between items-center pt-3 border-t border-border">
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          {stars > 0 && (
-                            <span className="flex items-center gap-1 text-xs">
-                              <Star className="h-3 w-3" /> {stars}
+                  return (
+                    <motion.div
+                      key={`${displayFilter}-${cardKey}`}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: Math.min(index, 12) * 0.03 }}
+                    >
+                      <Card className="glass-card-hover h-full flex flex-col overflow-hidden group">
+                        <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                          {isGithub ? (
+                            <FolderGit2 className="h-12 w-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
+                          ) : (
+                            <span className="font-display text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
+                              {project.title?.charAt(0)}
                             </span>
                           )}
-                          {project.github && (
-                            <Link href={project.github} target="_blank" className="hover:text-primary transition-colors">
-                              <Github className="h-4 w-4" />
-                            </Link>
-                          )}
-                          {project.demo && (
-                            <Link href={project.demo} target="_blank" className="hover:text-primary transition-colors">
-                              <ExternalLink className="h-4 w-4" />
-                            </Link>
-                          )}
+                          <div className="absolute top-3 right-3 flex gap-1">
+                            {project.featured && (
+                              <Badge className="btn-primary text-[10px]">Featured</Badge>
+                            )}
+                            {isGithub && (
+                              <Badge variant="outline" className="border-primary/40 text-primary text-[10px]">
+                                GitHub
+                              </Badge>
+                            )}
+                          </div>
                         </div>
-                        <Button asChild variant="ghost" size="sm" className="text-primary text-xs p-0 h-auto">
-                          <Link href={href} target={isGithub ? "_blank" : undefined}>
-                            {isGithub ? "View repo" : "Details"} <ChevronRight className="ml-1 h-3 w-3" />
-                          </Link>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )
-                })
-              )}
-            </AnimatePresence>
+                        <CardContent className="p-5 flex-grow flex flex-col">
+                          <h3 className="font-display text-lg text-primary mb-1">{project.title}</h3>
+                          <p className="text-xs text-muted-foreground mb-2">{project.subtitle}</p>
+                          <p className="text-muted-foreground text-sm mb-3 flex-grow line-clamp-2">
+                            {project.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {project.categories.slice(0, 3).map((cat) => (
+                              <Badge key={cat} variant="secondary" className="text-[10px] capitalize">
+                                {cat}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 mb-4">
+                            {(project.technologies || []).slice(0, 4).map((tech) => (
+                              <Badge
+                                key={tech}
+                                variant="outline"
+                                className="border-border text-[10px] text-muted-foreground"
+                              >
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="flex justify-between items-center pt-3 border-t border-border">
+                            <div className="flex items-center gap-3 text-muted-foreground">
+                              {stars > 0 && (
+                                <span className="flex items-center gap-1 text-xs">
+                                  <Star className="h-3 w-3" /> {stars}
+                                </span>
+                              )}
+                              {project.github && (
+                                <Link
+                                  href={project.github}
+                                  target="_blank"
+                                  className="hover:text-primary transition-colors"
+                                >
+                                  <Github className="h-4 w-4" />
+                                </Link>
+                              )}
+                              {project.demo && (
+                                <Link
+                                  href={project.demo}
+                                  target="_blank"
+                                  className="hover:text-primary transition-colors"
+                                >
+                                  <ExternalLink className="h-4 w-4" />
+                                </Link>
+                              )}
+                            </div>
+                            <Button asChild variant="ghost" size="sm" className="text-primary text-xs p-0 h-auto">
+                              <Link href={href} target={isGithub ? "_blank" : undefined}>
+                                {isGithub ? "View repo" : "Details"} <ChevronRight className="ml-1 h-3 w-3" />
+                              </Link>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  )
+                })}
           </div>
 
           {!isFiltering && filtered.length === 0 && (
