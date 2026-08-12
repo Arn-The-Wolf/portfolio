@@ -2,21 +2,30 @@
   "experience": [
     {
       "id": 1,
-      "role": "Computer Science Student",
-      "company": "University / Self-Directed Learning",
-      "location": "Remote",
-      "period": "2023 - Present",
-      "description": "Studying computer science fundamentals while building personal projects in Java, Python, AI/ML, and web development. Focus on practical software engineering through open-source work on GitHub.",
-      "technologies": ["Java", "Python", "Next.js", "TensorFlow", "SQL"]
+      "role": "Full-Stack & AI Developer",
+      "company": "Independent / Open Source",
+      "location": "Remote · Rwanda",
+      "period": "2024 — Present",
+      "description": "Design and ship production-style systems end-to-end: Clause Lens (RAG insurance clause extraction with Claude + pgvector), Ingoboka (Next.js 14 microinsurance PWA), WASAC & REG unified Spring Boot billing, BestBuy Electronics (React + Supabase), and ANPR / ArcFace computer-vision pipelines. Own architecture, APIs, data models, and deployment.",
+      "technologies": ["TypeScript", "Next.js", "Java", "Spring Boot", "Python", "PostgreSQL", "Supabase", "Claude API", "Docker"]
     },
     {
       "id": 2,
-      "role": "Independent Developer",
-      "company": "Personal Projects & Open Source",
+      "role": "IoT & Computer Vision Builder",
+      "company": "Personal R&D Projects",
       "location": "Remote",
-      "period": "2023 - Present",
-      "description": "Designed and shipped projects including an e-commerce platform (arnshop), handwriting recognition CNN, MQTT IoT weather system, web scraping pipelines, and this portfolio site.",
-      "technologies": ["Java", "Python", "Flask", "Docker", "Machine Learning"]
+      "period": "2025 — 2026",
+      "description": "Built hardware-aware CV and IoT stacks: face recognition with ArcFace ONNX on CPU, live face-tracker dashboards with ESP32/MQTT, ANPR detection + OCR, and MQTT weather monitoring with Flask. Focused on real-time inference, device integration, and practical edge deployments.",
+      "technologies": ["Python", "OpenCV", "ONNX", "MQTT", "ESP32", "Flask", "OCR", "Computer Vision"]
+    },
+    {
+      "id": 3,
+      "role": "Computer Science Student",
+      "company": "University · Self-Directed Learning",
+      "location": "Remote",
+      "period": "2023 — Present",
+      "description": "Studying CS fundamentals while shipping portfolio-grade software — data structures/algorithms, databases, networking, and secure coding — applied through Java backends, React Native mobile apps, and full-stack web systems published on GitHub.",
+      "technologies": ["Java", "Python", "React Native", "SQL", "Algorithms", "Git"]
     }
   ],
   "certifications": [
@@ -25,14 +34,28 @@
       "name": "Cybersecurity Fundamentals",
       "issuer": "Self-Directed Study",
       "year": "2024",
-      "description": "Secure coding, network basics, and penetration testing practice"
+      "description": "Secure coding, network basics, auth patterns (OAuth2 concepts), and defensive practices applied in APIs and apps"
     },
     {
       "id": 2,
-      "name": "Full-Stack & AI Project Portfolio",
+      "name": "Full-Stack Engineering Portfolio",
       "issuer": "Project-Based Learning",
       "year": "2025",
-      "description": "Demonstrated through shipped repos: CNN model, IoT pipeline, Java applications, and Next.js portfolio"
+      "description": "Shipped Next.js, Spring Boot, Supabase, and React Native projects with public GitHub repositories"
+    },
+    {
+      "id": 3,
+      "name": "AI / ML & Computer Vision Practice",
+      "issuer": "Hands-on Projects",
+      "year": "2026",
+      "description": "CNN handwriting models, ArcFace ONNX recognition, ANPR OCR pipelines, and RAG with LLMs + vector search"
+    },
+    {
+      "id": 4,
+      "name": "Cloud & Deployment",
+      "issuer": "Vercel · Railway · Docker",
+      "year": "2026",
+      "description": "Deployed portfolio and Ingoboka PWA on Vercel; containerized IoT/API services with Docker"
     }
   ]
 }

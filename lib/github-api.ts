@@ -78,6 +78,8 @@ export interface GithubProfilePayload {
 const PINNED = [
   "clause-lens",
   "ingoboka-platform",
+  "dictionary-mobile-app",
+  "portfolio",
   "face-recognition-5pt-arcface-onnx",
   "wasac-reg-unified-billing-system",
   "bestbuyelectronics_frontend",

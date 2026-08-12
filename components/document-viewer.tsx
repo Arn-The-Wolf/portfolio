@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Download, Loader2, X } from "lucide-react"
+import { Download, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -86,15 +86,6 @@ export default function DocumentViewer({
                   <Download className="mr-2 h-4 w-4" />
                   Download
                 </a>
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="text-muted-foreground hover:text-primary"
-                onClick={() => onOpenChange(false)}
-              >
-                <X className="mr-2 h-4 w-4" />
-                Close
               </Button>
             </div>
           </div>

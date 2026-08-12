@@ -295,8 +295,8 @@ function buildSidebarContent({ skills, history, photoBuffer }) {
 
 function buildMainResumeContent({ history, yearsExp }) {
   const profile = [
-    `Full-stack developer with ${yearsExp}+ years of hands-on experience building Java, Python, AI/ML, and web applications. I design and ship end-to-end systems — from desktop GUIs and REST APIs to CNN models and IoT pipelines.`,
-    `Portfolio of RUYANGE Arnold — focused on practical software engineering through open-source work on GitHub, project-based learning, and production-ready user experiences.`,
+    `Full-stack developer with ${yearsExp}+ years of hands-on experience building Java, Python, AI/ML, and web applications. I design and ship end-to-end systems — from Spring Boot billing backends and Next.js PWAs to CNN/ONNX vision pipelines and RAG tools.`,
+    `Recent work includes Clause Lens (LLM + pgvector), Ingoboka microinsurance PWA, WASAC/REG unified billing, BestBuy Electronics, React Native dictionary app, and this portfolio at arnold-rho.vercel.app.`,
   ];
 
   return [
