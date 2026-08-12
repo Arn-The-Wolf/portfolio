@@ -6,7 +6,7 @@ export const professionalData = {
     email: "ruyangearnold@gmail.com",
     phone: "+1 (555) 123-4567",
     website: "https://arnold-rho.vercel.app",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/ruyange-arnold-dev/",
     github: "https://github.com/Arn-The-Wolf",
     twitter: "https://x.com/arnwolfie",
     instagram: "https://www.instagram.com/arnwolfie/",

@@ -18,6 +18,7 @@ import CountUp from "@/components/count-up"
 import { getAge } from "@/lib/age"
 import { getYearsExperience } from "@/lib/experience"
 import { PROFILE_IMAGE } from "@/lib/site-images"
+import { siteConfig } from "@/lib/site-config"
 
 export default function Portfolio() {
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
@@ -91,7 +92,7 @@ export default function Portfolio() {
               <div className="flex justify-center lg:justify-start gap-6">
                 {[
                   { href: "https://github.com/Arn-The-Wolf", icon: Github },
-                  { href: "https://linkedin.com", icon: Linkedin },
+                  { href: siteConfig.linkedin, icon: Linkedin },
                   { href: "mailto:ruyangearnold@gmail.com", icon: Mail },
                   { href: "https://x.com/arnwolfie", icon: Twitter },
                   { href: "https://www.instagram.com/arnwolfie/", icon: Instagram },

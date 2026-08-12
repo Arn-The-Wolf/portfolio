@@ -58,16 +58,26 @@ export default function ContactPage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Mail, title: "Email", value: siteConfig.email },
-                  { icon: Github, title: "GitHub", value: "Arn-The-Wolf" },
-                  { icon: Linkedin, title: "LinkedIn", value: "Coming soon" },
+                  { icon: Mail, title: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
+                  { icon: Github, title: "GitHub", value: "Arn-The-Wolf", href: siteConfig.github },
+                  { icon: Linkedin, title: "LinkedIn", value: "ruyange-arnold-dev", href: siteConfig.linkedin },
                   { icon: Send, title: "Status", value: "Available" },
-                ].map(({ icon: Icon, title, value }) => (
+                ].map(({ icon: Icon, title, value, href }) => (
                   <Card key={title} className="glass-card">
                     <CardContent className="p-4 text-center">
-                      <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
-                      <p className="text-xs text-primary font-medium">{title}</p>
-                      <p className="text-muted-foreground text-xs mt-1 break-all">{value}</p>
+                      {href ? (
+                        <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="block hover:opacity-90">
+                          <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
+                          <p className="text-xs text-primary font-medium">{title}</p>
+                          <p className="text-muted-foreground text-xs mt-1 break-all">{value}</p>
+                        </a>
+                      ) : (
+                        <>
+                          <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
+                          <p className="text-xs text-primary font-medium">{title}</p>
+                          <p className="text-muted-foreground text-xs mt-1 break-all">{value}</p>
+                        </>
+                      )}
                     </CardContent>
                   </Card>
                 ))}

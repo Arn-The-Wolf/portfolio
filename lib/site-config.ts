@@ -5,7 +5,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_BASE_URL ?? "https://arnold-rho.vercel.app",
   email: "ruyangearnold@gmail.com",
   github: "https://github.com/Arn-The-Wolf",
-  linkedin: "https://linkedin.com",
+  linkedin: "https://www.linkedin.com/in/ruyange-arnold-dev/",
   description:
     "Portfolio of RUYANGE Arnold — full-stack developer building Java, Python, AI, and cybersecurity projects.",
   get ogImage() {

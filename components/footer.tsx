@@ -95,7 +95,7 @@ export default function Footer() {
               <Link href="https://github.com/Arn-The-Wolf" target="_blank" rel="noopener noreferrer" className="text-primary/70 hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
               </Link>
-              <Link href="https://linkedin.com" className="text-primary/70 hover:text-primary transition-colors">
+              <Link href="https://www.linkedin.com/in/ruyange-arnold-dev/" target="_blank" rel="noopener noreferrer" className="text-primary/70 hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </Link>
               <Link href="mailto:ruyangearnold@gmail.com" className="text-primary/70 hover:text-primary transition-colors">
