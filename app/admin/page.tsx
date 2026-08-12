@@ -167,6 +167,9 @@ export default function AdminDashboard() {
       }
 
       if (editing) {
+        let uploaded: { fileUrl?: string; storageKey?: string; fileName?: string; mimeType?: string; format?: string } | null =
+          null
+
         if (docFile) {
           const uploadFd = new FormData()
           uploadFd.set("file", docFile)
@@ -179,20 +182,33 @@ export default function AdminDashboard() {
             alert(err.error || "File upload failed")
             return
           }
+          uploaded = await uploadRes.json()
         }
 
-        const body = {
+        const formFileUrl = (fd.get("fileUrl") as string)?.trim()
+        const body: Record<string, unknown> = {
           title: fd.get("title"),
           subtitle: fd.get("subtitle"),
           description: fd.get("description"),
           documentType: docType,
-          format: docFormat,
-          fileUrl: fd.get("fileUrl") || editing.fileUrl || `/api/resumes/${editing.id}/download`,
+          format: uploaded?.format || docFormat,
           version: fd.get("version"),
           language: fd.get("language"),
           updatedAt: new Date().toISOString().slice(0, 10),
           tags: (fd.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean),
         }
+
+        // After a successful upload, keep Blob/local file metadata — do NOT overwrite
+        // with the stale form fileUrl (often still "/resume.pdf").
+        if (uploaded?.fileUrl) {
+          body.fileUrl = uploaded.fileUrl
+          body.storageKey = uploaded.storageKey
+          body.fileName = uploaded.fileName
+          body.mimeType = uploaded.mimeType
+        } else if (formFileUrl) {
+          body.fileUrl = formFileUrl
+        }
+
         await fetch(`/api/resumes/${editing.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

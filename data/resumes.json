@@ -1,16 +1,16 @@
 [
   {
     "id": 1,
-    "title": "Full Stack Developer CV",
-    "subtitle": "Software Engineering & Cybersecurity",
-    "description": "Comprehensive CV covering full-stack development, Java, Python, Astro, AI, and cybersecurity experience.",
+    "title": "Full Stack Developer Resume",
+    "subtitle": "Software Engineering · AI/ML · Full Stack",
+    "description": "Updated full-stack resume highlighting Clause Lens, Ingoboka, ArcFace, WASAC billing, BestBuy e-commerce, ANPR, and production TypeScript/Java work.",
     "documentType": "CV",
     "format": "PDF",
-    "fileUrl": "/resume.pdf",
-    "fileName": "RUYANGE-Arnold-CV.pdf",
+    "fileUrl": "/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf",
+    "fileName": "RUYANGE_Arnold_Full_Stack_Resume.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-06-19",
+    "updatedAt": "2026-08-12",
     "tags": ["Full Stack", "AI/ML", "Java", "TypeScript", "Computer Vision"]
   },
   {
@@ -20,11 +20,11 @@
     "description": "Project-focused resume highlighting Clause Lens, Ingoboka, ArcFace face recognition, WASAC billing, BestBuy e-commerce, ANPR, and full-stack work.",
     "documentType": "Resume",
     "format": "PDF",
-    "fileUrl": "/resume.pdf",
-    "fileName": "RUYANGE-Arnold-Resume.pdf",
+    "fileUrl": "/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf",
+    "fileName": "RUYANGE_Arnold_Full_Stack_Resume.pdf",
     "version": "2026",
     "language": "English",
-    "updatedAt": "2026-06-19",
+    "updatedAt": "2026-08-12",
     "tags": ["RAG", "Next.js", "Computer Vision", "Java", "TypeScript", "Full Stack"]
   }
 ]

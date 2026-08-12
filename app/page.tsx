@@ -160,8 +160,9 @@ export default function Portfolio() {
         open={showResume}
         onOpenChange={setShowResume}
         title="RUYANGE Arnold — CV"
-        viewUrl="/resume.pdf"
-        downloadUrl="/resume.pdf?download=1"
+        viewUrl="/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf"
+        downloadUrl="/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf"
+        fileName="RUYANGE_Arnold_Full_Stack_Resume.pdf"
         fileName="RUYANGE-Arnold-CV.pdf"
       />
     </div>
