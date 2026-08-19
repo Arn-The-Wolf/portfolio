@@ -76,20 +76,26 @@ export interface GithubProfilePayload {
 }
 
 const PINNED = [
-  "clause-lens",
+  "Credora",
   "ingoboka-platform",
-  "dictionary-mobile-app",
+  "clause-lens",
+  "Sentinel",
+  "ArnVita",
+  "aviaserve",
   "portfolio",
   "face-recognition-5pt-arcface-onnx",
+  "benax-speaker-tracking-system",
   "wasac-reg-unified-billing-system",
   "bestbuyelectronics_frontend",
   "ANPR-Detection-Alignment-OCR",
-  "aviaserve",
+  "dictionary-mobile-app",
   "arnshop_fullstack",
+  "gov-rwanda-erp-payroll-system",
   "face-tracker-live-dashboard",
-  "webscraping",
+  "shift-swap",
+  "transactional-management",
   "Handwriting-Recognition-Ai",
-  "mqtt-weather-app",
+  "webscraping",
 ]
 
 function buildFallbackRepos(): GithubRepoSummary[] {
