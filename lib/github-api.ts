@@ -76,9 +76,11 @@ export interface GithubProfilePayload {
 }
 
 const PINNED = [
+  "arnpulse",
   "Credora",
   "ingoboka-platform",
   "clause-lens",
+  "FaceLocking",
   "Sentinel",
   "ArnVita",
   "aviaserve",
@@ -86,12 +88,15 @@ const PINNED = [
   "face-recognition-5pt-arcface-onnx",
   "benax-speaker-tracking-system",
   "wasac-reg-unified-billing-system",
+  "car_connect",
   "bestbuyelectronics_frontend",
   "ANPR-Detection-Alignment-OCR",
   "dictionary-mobile-app",
   "arnshop_fullstack",
   "gov-rwanda-erp-payroll-system",
   "face-tracker-live-dashboard",
+  "BinMart",
+  "Web-based-Light-Scheduler",
   "shift-swap",
   "transactional-management",
   "Handwriting-Recognition-Ai",
