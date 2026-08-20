@@ -8,15 +8,35 @@
     "built": "Full pipeline: PDF ingest, clause chunking & classification, concurrent Claude JSON extraction, embeddings, pgvector cosine search, labeled eval benchmark, and a built-in web UI.",
     "longDescription": "Clause Lens ingests insurance policy PDFs, extracts structured coverage facts using Claude, and serves semantic search over PostgreSQL + pgvector — with upload, search, and evaluation UI.",
     "outcome": "End-to-end policy analyzer with retrieval accuracy targets above 80% and field-level extraction scoring on a labeled benchmark set.",
-    "technologies": ["TypeScript", "Node.js", "Claude API", "PostgreSQL", "pgvector", "Python", "Express", "Docker", "LLM", "RAG"],
+    "technologies": [
+      "TypeScript",
+      "Node.js",
+      "Claude API",
+      "PostgreSQL",
+      "pgvector",
+      "Python",
+      "Express",
+      "Docker",
+      "LLM",
+      "RAG"
+    ],
     "github": "https://github.com/Arn-The-Wolf/clause-lens",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 100,
-    "challenges": ["PDF clause segmentation", "Structured LLM extraction at scale", "Vector retrieval accuracy"],
-    "results": ["PDF → chunk → extract → embed pipeline", "Semantic search with clause-type filters", "Labeled evaluation report"]
+    "challenges": [
+      "PDF clause segmentation",
+      "Structured LLM extraction at scale",
+      "Vector retrieval accuracy"
+    ],
+    "results": [
+      "PDF → chunk → extract → embed pipeline",
+      "Semantic search with clause-type filters",
+      "Labeled evaluation report"
+    ],
+    "image": "/images/projects/project-7.svg"
   },
   {
     "id": 8,
@@ -27,15 +47,30 @@
     "built": "Next.js 14 App Router PWA with TypeScript, responsive layouts, and API-driven insurance workflows designed for real-world deployment.",
     "longDescription": "Ingoboka is the frontend for a digital microinsurance platform — a Next.js 14 PWA built for accessibility, performance, and scalable citizen-facing insurance journeys.",
     "outcome": "Production-grade PWA frontend ready to integrate with insurance backend services.",
-    "technologies": ["Next.js", "TypeScript", "PWA", "React", "Tailwind CSS"],
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "PWA",
+      "React",
+      "Tailwind CSS"
+    ],
     "github": "https://github.com/Arn-The-Wolf/ingoboka-platform",
     "demo": "https://ingoboka-platform.vercel.app",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 95,
-    "challenges": ["PWA offline behavior", "Complex form flows", "Mobile-first UX"],
-    "results": ["Next.js 14 PWA", "Citizen-facing insurance UI", "Live at ingoboka-platform.vercel.app"]
+    "challenges": [
+      "PWA offline behavior",
+      "Complex form flows",
+      "Mobile-first UX"
+    ],
+    "results": [
+      "Next.js 14 PWA",
+      "Citizen-facing insurance UI",
+      "Live at ingoboka-platform.vercel.app"
+    ],
+    "image": "/images/projects/project-8.svg"
   },
   {
     "id": 17,
@@ -46,15 +81,30 @@
     "built": "Expo/React Native client with drawer navigation, Free Dictionary API integration, audio playback for pronunciation, and persistent search history.",
     "longDescription": "A React Native + Expo dictionary mobile app featuring word lookup, definitions, audio pronunciation, and a drawer-based search history — designed for iOS and Android from one codebase.",
     "outcome": "Shipped mobile UX covering search → definition → pronunciation with offline-friendly navigation patterns.",
-    "technologies": ["React Native", "Expo", "JavaScript", "Free Dictionary API", "Mobile"],
+    "technologies": [
+      "React Native",
+      "Expo",
+      "JavaScript",
+      "Free Dictionary API",
+      "Mobile"
+    ],
     "github": "https://github.com/Arn-The-Wolf/dictionary-mobile-app",
     "demo": "",
     "status": "Active",
     "category": "mobile",
     "featured": true,
     "priority": 94,
-    "challenges": ["Cross-platform navigation", "API error handling", "Audio playback UX"],
-    "results": ["Word search & definitions", "Audio pronunciation", "Search history drawer"]
+    "challenges": [
+      "Cross-platform navigation",
+      "API error handling",
+      "Audio playback UX"
+    ],
+    "results": [
+      "Word search & definitions",
+      "Audio pronunciation",
+      "Search history drawer"
+    ],
+    "image": "/images/projects/project-17.svg"
   },
   {
     "id": 18,
@@ -65,15 +115,31 @@
     "built": "Full App Router site: TypeScript, Tailwind, Framer Motion, Three.js hero, JSON/Blob CMS APIs, Resend contact email, and Vercel production hosting.",
     "longDescription": "Live portfolio at arnold-rho.vercel.app — projects, skills, experience, resumes, blog, and contact with an admin dashboard backed by Vercel Blob.",
     "outcome": "Production portfolio used for job applications and open-source showcase.",
-    "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Three.js", "Vercel", "Resend"],
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Three.js",
+      "Vercel",
+      "Resend"
+    ],
     "github": "https://github.com/Arn-The-Wolf/portfolio",
     "demo": "https://arnold-rho.vercel.app",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 93,
-    "challenges": ["WebGL performance", "Blob CMS on serverless", "In-page PDF viewing"],
-    "results": ["Live production site", "Admin CMS + Blob storage", "Resume viewer & contact flow"]
+    "challenges": [
+      "WebGL performance",
+      "Blob CMS on serverless",
+      "In-page PDF viewing"
+    ],
+    "results": [
+      "Live production site",
+      "Admin CMS + Blob storage",
+      "Resume viewer & contact flow"
+    ],
+    "image": "/images/projects/project-18.svg"
   },
   {
     "id": 9,
@@ -84,15 +150,31 @@
     "built": "Python pipeline: face detection, landmark alignment, ONNX ArcFace inference, embedding comparison, and enrollment/verification workflow.",
     "longDescription": "Production-oriented face recognition using ArcFace ONNX on CPU — 5-point alignment, embedding extraction, and identity verification without requiring a GPU.",
     "outcome": "Portable face recognition stack suitable for edge and server deployment.",
-    "technologies": ["Python", "ONNX", "ArcFace", "OpenCV", "Computer Vision", "AI"],
+    "technologies": [
+      "Python",
+      "ONNX",
+      "ArcFace",
+      "OpenCV",
+      "Computer Vision",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/face-recognition-5pt-arcface-onnx",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 92,
-    "challenges": ["CPU inference performance", "Alignment accuracy", "Embedding threshold tuning"],
-    "results": ["ArcFace ONNX pipeline", "5-point alignment", "Enrollment & verification flow"]
+    "challenges": [
+      "CPU inference performance",
+      "Alignment accuracy",
+      "Embedding threshold tuning"
+    ],
+    "results": [
+      "ArcFace ONNX pipeline",
+      "5-point alignment",
+      "Enrollment & verification flow"
+    ],
+    "image": "/images/projects/project-9.svg"
   },
   {
     "id": 10,
@@ -103,15 +185,30 @@
     "built": "Spring Boot services for billing logic, customer accounts, invoice generation, and unified postpaid workflows.",
     "longDescription": "Enterprise billing backend unifying WASAC water and REG electricity postpaid billing with Spring Boot, structured domain models, and automated invoice processing.",
     "outcome": "Unified billing automation replacing manual cross-utility reconciliation.",
-    "technologies": ["Java", "Spring Boot", "REST API", "MySQL", "Enterprise"],
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "REST API",
+      "MySQL",
+      "Enterprise"
+    ],
     "github": "https://github.com/Arn-The-Wolf/wasac-reg-unified-billing-system",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": true,
     "priority": 90,
-    "challenges": ["Multi-utility billing rules", "Invoice accuracy", "Enterprise data modeling"],
-    "results": ["Unified WASAC/REG billing", "Spring Boot backend", "Automated postpaid flows"]
+    "challenges": [
+      "Multi-utility billing rules",
+      "Invoice accuracy",
+      "Enterprise data modeling"
+    ],
+    "results": [
+      "Unified WASAC/REG billing",
+      "Spring Boot backend",
+      "Automated postpaid flows"
+    ],
+    "image": "/images/projects/project-10.svg"
   },
   {
     "id": 11,
@@ -122,15 +219,30 @@
     "built": "Split repos: responsive React storefront with product catalog & checkout; Next.js API backend with Supabase for auth, inventory, and orders.",
     "longDescription": "Modern electronics e-commerce with a TypeScript React frontend and Next.js + Supabase backend — product management, cart, and order flows.",
     "outcome": "End-to-end online store with separated frontend/backend deployment.",
-    "technologies": ["TypeScript", "React", "Next.js", "Supabase", "E-Commerce"],
+    "technologies": [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Supabase",
+      "E-Commerce"
+    ],
     "github": "https://github.com/Arn-The-Wolf/bestbuyelectronics_frontend",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 88,
-    "challenges": ["Supabase schema design", "Cart & checkout flow", "Responsive storefront"],
-    "results": ["React e-commerce UI", "Next.js + Supabase API", "Product & order management"]
+    "challenges": [
+      "Supabase schema design",
+      "Cart & checkout flow",
+      "Responsive storefront"
+    ],
+    "results": [
+      "React e-commerce UI",
+      "Next.js + Supabase API",
+      "Product & order management"
+    ],
+    "image": "/images/projects/project-11.svg"
   },
   {
     "id": 12,
@@ -141,15 +253,31 @@
     "built": "Python CV pipeline combining detection models, alignment, OCR, and structured plate text output (ANPR-Q11).",
     "longDescription": "ANPR-Q11 is a complete automatic number plate recognition project — detect plates, align regions, run OCR, and return structured results.",
     "outcome": "Working ANPR pipeline from raw images to readable plate strings.",
-    "technologies": ["Python", "OpenCV", "OCR", "Computer Vision", "YOLO", "AI"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "OCR",
+      "Computer Vision",
+      "YOLO",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/ANPR-Detection-Alignment-OCR",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 86,
-    "challenges": ["Plate detection accuracy", "OCR on skewed plates", "Real-world lighting"],
-    "results": ["Detection + alignment + OCR", "Structured plate output", "End-to-end ANPR flow"]
+    "challenges": [
+      "Plate detection accuracy",
+      "OCR on skewed plates",
+      "Real-world lighting"
+    ],
+    "results": [
+      "Detection + alignment + OCR",
+      "Structured plate output",
+      "End-to-end ANPR flow"
+    ],
+    "image": "/images/projects/project-12.svg"
   },
   {
     "id": 13,
@@ -160,15 +288,30 @@
     "built": "Full-stack TypeScript application with route search, booking logic, and reservation management.",
     "longDescription": "AviaServe handles airline reservations — search flights between origins and destinations, manage bookings, and persist reservation data.",
     "outcome": "Complete reservation workflow for multi-route airline scenarios.",
-    "technologies": ["TypeScript", "Node.js", "React", "REST API", "PostgreSQL"],
+    "technologies": [
+      "TypeScript",
+      "Node.js",
+      "React",
+      "REST API",
+      "PostgreSQL"
+    ],
     "github": "https://github.com/Arn-The-Wolf/aviaserve",
     "demo": "https://aviaserve.vercel.app",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 84,
-    "challenges": ["Route & schedule modeling", "Booking concurrency", "Search performance"],
-    "results": ["Multi-route reservations", "TypeScript full stack", "Booking management UI"]
+    "challenges": [
+      "Route & schedule modeling",
+      "Booking concurrency",
+      "Search performance"
+    ],
+    "results": [
+      "Multi-route reservations",
+      "TypeScript full stack",
+      "Booking management UI"
+    ],
+    "image": "/images/projects/project-13.svg"
   },
   {
     "id": 1,
@@ -179,15 +322,30 @@
     "built": "React client connected to Java REST services with MySQL persistence, inventory controls, and admin order management.",
     "longDescription": "ArnShop Full Stack combines a React storefront with a Java backend — full shopping cart, product catalog, and order workflows.",
     "outcome": "Production-style e-commerce split across modern frontend and Java API layer.",
-    "technologies": ["Java", "React", "MySQL", "REST API", "E-Commerce"],
+    "technologies": [
+      "Java",
+      "React",
+      "MySQL",
+      "REST API",
+      "E-Commerce"
+    ],
     "github": "https://github.com/Arn-The-Wolf/arnshop_fullstack",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 82,
-    "challenges": ["Frontend/backend integration", "Inventory sync", "Checkout reliability"],
-    "results": ["React + Java full stack", "Product catalog & cart", "Order management"]
+    "challenges": [
+      "Frontend/backend integration",
+      "Inventory sync",
+      "Checkout reliability"
+    ],
+    "results": [
+      "React + Java full stack",
+      "Product catalog & cart",
+      "Order management"
+    ],
+    "image": "/images/projects/project-1.svg"
   },
   {
     "id": 14,
@@ -198,15 +356,31 @@
     "built": "Python recognition stack, MQTT/device integration, and a dashboard for live tracking events.",
     "longDescription": "Combines face recognition on PC with ESP32 hardware and a live dashboard — recognition, tracking, and IoT event streaming.",
     "outcome": "Integrated CV + IoT demo suitable for access control and monitoring prototypes.",
-    "technologies": ["Python", "OpenCV", "MQTT", "ESP32", "Computer Vision", "IoT"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "MQTT",
+      "ESP32",
+      "Computer Vision",
+      "IoT"
+    ],
     "github": "https://github.com/Arn-The-Wolf/face-tracker-live-dashboard",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 80,
-    "challenges": ["Real-time inference", "Hardware integration", "Dashboard latency"],
-    "results": ["Live face tracking", "ESP32 integration", "Monitoring dashboard"]
+    "challenges": [
+      "Real-time inference",
+      "Hardware integration",
+      "Dashboard latency"
+    ],
+    "results": [
+      "Live face tracking",
+      "ESP32 integration",
+      "Monitoring dashboard"
+    ],
+    "image": "/images/projects/project-14.svg"
   },
   {
     "id": 15,
@@ -217,15 +391,30 @@
     "built": "Node.js service with MongoDB session-based transactions, rollback handling, and example transfer workflows.",
     "longDescription": "Reference implementation for MongoDB transaction management — sessions, commit/abort, and multi-collection consistency.",
     "outcome": "Reusable pattern for transactional MongoDB operations in production APIs.",
-    "technologies": ["JavaScript", "Node.js", "MongoDB", "ACID", "Backend"],
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "MongoDB",
+      "ACID",
+      "Backend"
+    ],
     "github": "https://github.com/Arn-The-Wolf/transactional-management",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": false,
     "priority": 78,
-    "challenges": ["Session lifecycle", "Rollback edge cases", "Replica set setup"],
-    "results": ["MongoDB transactions", "Commit/abort flows", "Transfer demo"]
+    "challenges": [
+      "Session lifecycle",
+      "Rollback edge cases",
+      "Replica set setup"
+    ],
+    "results": [
+      "MongoDB transactions",
+      "Commit/abort flows",
+      "Transfer demo"
+    ],
+    "image": "/images/projects/project-15.svg"
   },
   {
     "id": 3,
@@ -236,15 +425,30 @@
     "built": "Python CNN: dataset preprocessing, model training, evaluation metrics, and inference on new samples.",
     "longDescription": "Machine learning project implementing CNN architecture for handwriting recognition with documented accuracy improvements.",
     "outcome": "Working classifier with extensible training pipeline.",
-    "technologies": ["Python", "TensorFlow", "CNN", "Machine Learning", "AI"],
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "CNN",
+      "Machine Learning",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Handwriting-Recognition-Ai",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 76,
-    "challenges": ["Model training optimization", "Dataset preprocessing", "Overfitting control"],
-    "results": ["Working CNN model", "Digit classification", "Extensible training pipeline"]
+    "challenges": [
+      "Model training optimization",
+      "Dataset preprocessing",
+      "Overfitting control"
+    ],
+    "results": [
+      "Working CNN model",
+      "Digit classification",
+      "Extensible training pipeline"
+    ],
+    "image": "/images/projects/project-3.svg"
   },
   {
     "id": 2,
@@ -255,15 +459,29 @@
     "built": "Python pipeline: paginated crawling, HTML parsing, record normalization, and JSON/CSV export.",
     "longDescription": "Web scraping project using BeautifulSoup to extract structured datasets from multi-page sites for downstream analysis.",
     "outcome": "Automated extraction pipeline producing clean structured output.",
-    "technologies": ["Python", "BeautifulSoup", "Web Scraping", "Data Extraction"],
+    "technologies": [
+      "Python",
+      "BeautifulSoup",
+      "Web Scraping",
+      "Data Extraction"
+    ],
     "github": "https://github.com/Arn-The-Wolf/webscraping",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": true,
     "priority": 74,
-    "challenges": ["Multi-page navigation", "Data structuring", "Rate limiting"],
-    "results": ["Automated data pipeline", "Clean structured export", "Defensive parsing"]
+    "challenges": [
+      "Multi-page navigation",
+      "Data structuring",
+      "Rate limiting"
+    ],
+    "results": [
+      "Automated data pipeline",
+      "Clean structured export",
+      "Defensive parsing"
+    ],
+    "image": "/images/projects/project-2.svg"
   },
   {
     "id": 4,
@@ -274,15 +492,30 @@
     "built": "Flask API subscribing to MQTT topics, processing payloads, and exposing a live weather dashboard. Dockerized.",
     "longDescription": "Weather station monitoring via MQTT — Flask backend ingests sensor readings and displays real-time environmental data.",
     "outcome": "Live MQTT pub/sub pipeline with working environmental dashboard.",
-    "technologies": ["Python", "Flask", "MQTT", "IoT", "Docker"],
+    "technologies": [
+      "Python",
+      "Flask",
+      "MQTT",
+      "IoT",
+      "Docker"
+    ],
     "github": "https://github.com/Arn-The-Wolf/mqtt-weather-app",
     "demo": "",
     "status": "Active",
     "category": "devops",
     "featured": false,
     "priority": 72,
-    "challenges": ["MQTT broker integration", "Real-time processing", "Sensor calibration"],
-    "results": ["Live weather dashboard", "MQTT pub/sub pipeline", "Docker deployment"]
+    "challenges": [
+      "MQTT broker integration",
+      "Real-time processing",
+      "Sensor calibration"
+    ],
+    "results": [
+      "Live weather dashboard",
+      "MQTT pub/sub pipeline",
+      "Docker deployment"
+    ],
+    "image": "/images/projects/project-4.svg"
   },
   {
     "id": 16,
@@ -293,15 +526,30 @@
     "built": "Python OCR engine with GUI and web frontends, image preprocessing, and export to text formats.",
     "longDescription": "Comprehensive OCR app — scan documents, run recognition, and export text via desktop or web UI.",
     "outcome": "Dual-interface OCR tool for document digitization workflows.",
-    "technologies": ["Python", "OCR", "Tesseract", "Flask", "Computer Vision"],
+    "technologies": [
+      "Python",
+      "OCR",
+      "Tesseract",
+      "Flask",
+      "Computer Vision"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Print_Text_Scanner",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 70,
-    "challenges": ["Image preprocessing", "OCR accuracy", "Cross-platform UI"],
-    "results": ["Desktop + web OCR", "Text export", "Document scanning flow"]
+    "challenges": [
+      "Image preprocessing",
+      "OCR accuracy",
+      "Cross-platform UI"
+    ],
+    "results": [
+      "Desktop + web OCR",
+      "Text export",
+      "Document scanning flow"
+    ],
+    "image": "/images/projects/project-16.svg"
   },
   {
     "id": 5,
@@ -312,15 +560,28 @@
     "built": "Java Swing GUI with MySQL persistence for books, students, due dates, and admin operations.",
     "longDescription": "Library Management System in Java — inventory, student borrowing, due dates, and admin panel.",
     "outcome": "End-to-end library workflow with CRUD operations.",
-    "technologies": ["Java", "Swing", "MySQL", "GUI"],
+    "technologies": [
+      "Java",
+      "Swing",
+      "MySQL",
+      "GUI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/arnlibrary",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": false,
     "priority": 40,
-    "challenges": ["CRUD operations", "GUI design", "Data persistence"],
-    "results": ["Full library workflow", "Interactive admin panel"]
+    "challenges": [
+      "CRUD operations",
+      "GUI design",
+      "Data persistence"
+    ],
+    "results": [
+      "Full library workflow",
+      "Interactive admin panel"
+    ],
+    "image": "/images/projects/project-5.svg"
   },
   {
     "id": 6,
@@ -331,15 +592,25 @@
     "built": "Java BFS/DFS with adjacency structures, traversal logic, and performance comparison.",
     "longDescription": "Educational graph traversal project implementing BFS and DFS with visualization and analysis.",
     "outcome": "Correct, tested traversal implementations demonstrating algorithm trade-offs.",
-    "technologies": ["Java", "Algorithms", "Data Structures"],
+    "technologies": [
+      "Java",
+      "Algorithms",
+      "Data Structures"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Breadth-First-Searching-Deep-First-Searching-",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": false,
     "priority": 30,
-    "challenges": ["Algorithm optimization", "Graph representation"],
-    "results": ["Working BFS/DFS implementations"]
+    "challenges": [
+      "Algorithm optimization",
+      "Graph representation"
+    ],
+    "results": [
+      "Working BFS/DFS implementations"
+    ],
+    "image": "/images/projects/project-6.svg"
   },
   {
     "id": 19,
@@ -350,15 +621,31 @@
     "built": "Next.js platform with AI scoring engine, mobile money data ingestion, risk profiling, and lender-facing dashboards.",
     "longDescription": "Credora uses mobile money transaction history and digital financial footprints to generate alternative credit scores for SMEs — enabling lenders to assess creditworthiness without traditional banking records.",
     "outcome": "Working credit scoring platform with AI risk models and lender dashboards.",
-    "technologies": ["TypeScript", "Next.js", "AI", "Machine Learning", "Tailwind CSS", "PostgreSQL"],
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "AI",
+      "Machine Learning",
+      "Tailwind CSS",
+      "PostgreSQL"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Credora",
     "demo": "https://credora.vercel.app",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 96,
-    "challenges": ["Alternative data modeling", "ML scoring accuracy", "Data privacy"],
-    "results": ["AI credit scoring engine", "Mobile money data ingestion", "Lender dashboard"]
+    "challenges": [
+      "Alternative data modeling",
+      "ML scoring accuracy",
+      "Data privacy"
+    ],
+    "results": [
+      "AI credit scoring engine",
+      "Mobile money data ingestion",
+      "Lender dashboard"
+    ],
+    "image": "/images/projects/project-19.svg"
   },
   {
     "id": 20,
@@ -369,15 +656,29 @@
     "built": "Ruby on Rails application with schedule views, swap request workflows, and team management features.",
     "longDescription": "Shift Swap lets team members view their weekly schedules, request swaps with coworkers, and manage approvals — eliminating manual shift coordination.",
     "outcome": "Working shift management system with swap request workflows.",
-    "technologies": ["Ruby on Rails", "HTML", "CSS", "PostgreSQL"],
+    "technologies": [
+      "Ruby on Rails",
+      "HTML",
+      "CSS",
+      "PostgreSQL"
+    ],
     "github": "https://github.com/Arn-The-Wolf/shift-swap",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": false,
     "priority": 75,
-    "challenges": ["Swap approval logic", "Schedule conflict detection", "Team coordination UX"],
-    "results": ["Shift scheduling UI", "Swap request workflow", "Team management"]
+    "challenges": [
+      "Swap approval logic",
+      "Schedule conflict detection",
+      "Team coordination UX"
+    ],
+    "results": [
+      "Shift scheduling UI",
+      "Swap request workflow",
+      "Team management"
+    ],
+    "image": "/images/projects/project-20.svg"
   },
   {
     "id": 21,
@@ -388,15 +689,30 @@
     "built": "Spring Boot backend with patient record versioning, appointment booking, and clinic administration features.",
     "longDescription": "Vitaline (ArnVita) manages clinic appointments and versioned patient records — built with Java Spring Boot for small medical practices.",
     "outcome": "Working clinic system with versioned records and appointment scheduling.",
-    "technologies": ["Java", "Spring Boot", "MySQL", "REST API", "Healthcare"],
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "REST API",
+      "Healthcare"
+    ],
     "github": "https://github.com/Arn-The-Wolf/ArnVita",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": true,
     "priority": 85,
-    "challenges": ["Patient data versioning", "Appointment conflicts", "HIPAA-style data handling"],
-    "results": ["Versioned patient records", "Appointment booking", "Clinic admin panel"]
+    "challenges": [
+      "Patient data versioning",
+      "Appointment conflicts",
+      "HIPAA-style data handling"
+    ],
+    "results": [
+      "Versioned patient records",
+      "Appointment booking",
+      "Clinic admin panel"
+    ],
+    "image": "/images/projects/project-21.svg"
   },
   {
     "id": 22,
@@ -407,15 +723,30 @@
     "built": "Python scanner with modular detection plugins, a sandboxed test range with planted vulnerabilities, and scan report generation.",
     "longDescription": "Sentinel is an educational localhost-only security scanner with a built-in test range — planted flaws let students practice scanning, detection, and remediation safely.",
     "outcome": "Safe learning environment for security scanning with planted vulnerabilities.",
-    "technologies": ["Python", "Security", "Flask", "Networking", "AI"],
+    "technologies": [
+      "Python",
+      "Security",
+      "Flask",
+      "Networking",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Sentinel",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 87,
-    "challenges": ["Safe sandboxing", "Detection accuracy", "Plugin architecture"],
-    "results": ["Modular scanner", "Planted-flaw test range", "Scan reports"]
+    "challenges": [
+      "Safe sandboxing",
+      "Detection accuracy",
+      "Plugin architecture"
+    ],
+    "results": [
+      "Modular scanner",
+      "Planted-flaw test range",
+      "Scan reports"
+    ],
+    "image": "/images/projects/project-22.svg"
   },
   {
     "id": 23,
@@ -426,15 +757,30 @@
     "built": "Java Spring Boot services with employee management, payroll computation, deductions, and reporting APIs.",
     "longDescription": "Backend implementation for the Government of Rwanda ERP platform — handles employee records, salary calculations, deductions, and payroll report generation.",
     "outcome": "Enterprise payroll backend with auditable computation and reporting.",
-    "technologies": ["Java", "Spring Boot", "REST API", "MySQL", "Enterprise"],
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "REST API",
+      "MySQL",
+      "Enterprise"
+    ],
     "github": "https://github.com/Arn-The-Wolf/gov-rwanda-erp-payroll-system",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": false,
     "priority": 79,
-    "challenges": ["Payroll calculation rules", "Audit trail", "Enterprise data modeling"],
-    "results": ["Employee payroll API", "Salary computation", "Deduction workflows"]
+    "challenges": [
+      "Payroll calculation rules",
+      "Audit trail",
+      "Enterprise data modeling"
+    ],
+    "results": [
+      "Employee payroll API",
+      "Salary computation",
+      "Deduction workflows"
+    ],
+    "image": "/images/projects/project-23.svg"
   },
   {
     "id": 24,
@@ -445,15 +791,30 @@
     "built": "Modular full-stack app with inspection scheduling, location tracking, expiry alerts, and compliance dashboards.",
     "longDescription": "Highly available fire extinguisher management system for TZW LTD — manages equipment inventory, inspection schedules, and regulatory compliance across facilities.",
     "outcome": "Complete fire safety compliance system with inspection tracking.",
-    "technologies": ["HTML", "CSS", "JavaScript", "Node.js", "MySQL"],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "MySQL"
+    ],
     "github": "https://github.com/Arn-The-Wolf/tzw-fire-safety-management",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": false,
     "priority": 68,
-    "challenges": ["Inspection scheduling", "Compliance rules", "Multi-facility tracking"],
-    "results": ["Equipment tracking", "Inspection workflows", "Compliance dashboard"]
+    "challenges": [
+      "Inspection scheduling",
+      "Compliance rules",
+      "Multi-facility tracking"
+    ],
+    "results": [
+      "Equipment tracking",
+      "Inspection workflows",
+      "Compliance dashboard"
+    ],
+    "image": "/images/projects/project-24.svg"
   },
   {
     "id": 25,
@@ -464,15 +825,29 @@
     "built": "C++ implementation with hash map-based slot lookup, priority queue for availability, and linked list parking logs.",
     "longDescription": "Smart Parking Management System for Kigali City — a C++ console app demonstrating DSA concepts (hash maps, priority queues, linked lists) applied to real-world parking scenarios.",
     "outcome": "Working DSA-driven parking allocator with efficient slot management.",
-    "technologies": ["C++", "Data Structures", "Algorithms", "Console"],
+    "technologies": [
+      "C++",
+      "Data Structures",
+      "Algorithms",
+      "Console"
+    ],
     "github": "https://github.com/Arn-The-Wolf/smart-parking-dsa-cpp",
     "demo": "",
     "status": "Active",
     "category": "backend",
     "featured": false,
     "priority": 50,
-    "challenges": ["Hash map collision handling", "Priority queue optimization", "Real-time allocation"],
-    "results": ["DSA parking system", "Hash map slot lookup", "Priority-based allocation"]
+    "challenges": [
+      "Hash map collision handling",
+      "Priority queue optimization",
+      "Real-time allocation"
+    ],
+    "results": [
+      "DSA parking system",
+      "Hash map slot lookup",
+      "Priority-based allocation"
+    ],
+    "image": "/images/projects/project-25.svg"
   },
   {
     "id": 26,
@@ -483,15 +858,32 @@
     "built": "Python face recognition, MQTT communication, ESP8266 firmware for servo motors, and real-time tracking logic.",
     "longDescription": "Benax Speaker Tracking combines face recognition with ESP8266 servo motors via MQTT — the camera automatically follows the recognized speaker in real time.",
     "outcome": "Automated speaker-following camera system with IoT hardware integration.",
-    "technologies": ["Python", "OpenCV", "MQTT", "ESP8266", "IoT", "AI", "Computer Vision"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "MQTT",
+      "ESP8266",
+      "IoT",
+      "AI",
+      "Computer Vision"
+    ],
     "github": "https://github.com/Arn-The-Wolf/benax-speaker-tracking-system",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 83,
-    "challenges": ["Real-time face tracking", "Servo motor precision", "MQTT latency"],
-    "results": ["Speaker face recognition", "Servo camera tracking", "MQTT IoT integration"]
+    "challenges": [
+      "Real-time face tracking",
+      "Servo motor precision",
+      "MQTT latency"
+    ],
+    "results": [
+      "Speaker face recognition",
+      "Servo camera tracking",
+      "MQTT IoT integration"
+    ],
+    "image": "/images/projects/project-26.svg"
   },
   {
     "id": 27,
@@ -502,15 +894,31 @@
     "built": "Microservices architecture with separate services for slots, bookings, and user management, plus a React frontend.",
     "longDescription": "Full-stack parking management with microservices architecture — Node.js/Express backends, React frontend, and MongoDB for scalable parking operations.",
     "outcome": "Microservices parking platform with separate booking and slot services.",
-    "technologies": ["JavaScript", "Node.js", "Express", "React", "MongoDB", "Microservices"],
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "React",
+      "MongoDB",
+      "Microservices"
+    ],
     "github": "https://github.com/Arn-The-Wolf/parking-management-system",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": false,
     "priority": 65,
-    "challenges": ["Service communication", "Booking concurrency", "Slot availability sync"],
-    "results": ["Microservices architecture", "Parking slot management", "Booking workflows"]
+    "challenges": [
+      "Service communication",
+      "Booking concurrency",
+      "Slot availability sync"
+    ],
+    "results": [
+      "Microservices architecture",
+      "Parking slot management",
+      "Booking workflows"
+    ],
+    "image": "/images/projects/project-27.svg"
   },
   {
     "id": 28,
@@ -521,15 +929,31 @@
     "built": "Agent status tracking, customer locator for nearby active agents, and regional health analytics to surface coverage gaps across East African mobile money markets.",
     "longDescription": "ArnPulse addresses a real financial-inclusion problem: tracking mobile money agent reliability, helping customers find active agents nearby, and surfacing underserved regions through health analytics.",
     "outcome": "Agent network platform with live status, customer locator, and regional analytics.",
-    "technologies": ["TypeScript", "Next.js", "Maps", "Analytics", "FinTech", "Mobile Money"],
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "Maps",
+      "Analytics",
+      "FinTech",
+      "Mobile Money"
+    ],
     "github": "https://github.com/Arn-The-Wolf/arnpulse",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 98,
-    "challenges": ["Real-time agent status", "Geo-locator UX", "Regional health analytics"],
-    "results": ["Agent uptime tracking", "Nearby agent locator", "Underserved-area analytics"]
+    "challenges": [
+      "Real-time agent status",
+      "Geo-locator UX",
+      "Regional health analytics"
+    ],
+    "results": [
+      "Agent uptime tracking",
+      "Nearby agent locator",
+      "Underserved-area analytics"
+    ],
+    "image": "/images/projects/project-28.svg"
   },
   {
     "id": 29,
@@ -540,15 +964,30 @@
     "built": "Python CV pipeline with enrollment, stable identity lock, continuous tracking, action detection after lock, and an action history log.",
     "longDescription": "FaceLocking recognizes an enrolled identity, keeps tracking stable when recognition is uncertain, detects post-lock actions, and logs history for auditability — optimized for CPU-friendly real-time inference.",
     "outcome": "Stable face lock-on with action detection and audit log for monitoring use cases.",
-    "technologies": ["Python", "OpenCV", "Computer Vision", "AI", "Real-time Tracking"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Computer Vision",
+      "AI",
+      "Real-time Tracking"
+    ],
     "github": "https://github.com/Arn-The-Wolf/FaceLocking",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": true,
     "priority": 89,
-    "challenges": ["Stable tracking under uncertainty", "CPU real-time performance", "Action audit logging"],
-    "results": ["Identity lock-on", "Continuous frame tracking", "Action history log"]
+    "challenges": [
+      "Stable tracking under uncertainty",
+      "CPU real-time performance",
+      "Action audit logging"
+    ],
+    "results": [
+      "Identity lock-on",
+      "Continuous frame tracking",
+      "Action history log"
+    ],
+    "image": "/images/projects/project-29.svg"
   },
   {
     "id": 30,
@@ -559,15 +998,30 @@
     "built": "Split stack: car_connect backend with carconnect_frontend / car_connect.rw TypeScript clients for browsing and booking vehicle services.",
     "longDescription": "Car Connect is a vehicle services platform with a Node/JavaScript backend and TypeScript React frontends (carconnect_frontend, car_connect.rw) for end-user journeys.",
     "outcome": "Working vehicle-services stack with separated frontend and backend repos.",
-    "technologies": ["TypeScript", "React", "JavaScript", "Node.js", "Full Stack"],
+    "technologies": [
+      "TypeScript",
+      "React",
+      "JavaScript",
+      "Node.js",
+      "Full Stack"
+    ],
     "github": "https://github.com/Arn-The-Wolf/car_connect",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": true,
     "priority": 81,
-    "challenges": ["Frontend/backend API sync", "Service booking flows", "Responsive UX"],
-    "results": ["Backend + TypeScript frontend", "Vehicle service workflows", "car_connect.rw client"]
+    "challenges": [
+      "Frontend/backend API sync",
+      "Service booking flows",
+      "Responsive UX"
+    ],
+    "results": [
+      "Backend + TypeScript frontend",
+      "Vehicle service workflows",
+      "car_connect.rw client"
+    ],
+    "image": "/images/projects/project-30.svg"
   },
   {
     "id": 31,
@@ -578,15 +1032,27 @@
     "built": "TypeScript frontend/app with marketplace-oriented product browsing and commerce flows.",
     "longDescription": "BinMart is a TypeScript marketplace project exploring product catalog and shopping UX for digital commerce.",
     "outcome": "TypeScript marketplace prototype with product-focused UI.",
-    "technologies": ["TypeScript", "React", "E-Commerce", "Frontend"],
+    "technologies": [
+      "TypeScript",
+      "React",
+      "E-Commerce",
+      "Frontend"
+    ],
     "github": "https://github.com/Arn-The-Wolf/BinMart",
     "demo": "",
     "status": "Active",
     "category": "frontend",
     "featured": false,
     "priority": 64,
-    "challenges": ["Catalog UX", "Type-safe commerce flows"],
-    "results": ["TypeScript marketplace UI", "Product browsing flows"]
+    "challenges": [
+      "Catalog UX",
+      "Type-safe commerce flows"
+    ],
+    "results": [
+      "TypeScript marketplace UI",
+      "Product browsing flows"
+    ],
+    "image": "/images/projects/project-31.svg"
   },
   {
     "id": 32,
@@ -597,15 +1063,31 @@
     "built": "Python web dashboard with WebSocket live updates, MQTT device control, and Arduino-linked light scheduling.",
     "longDescription": "Modern IoT light scheduler — graphical web dashboard, WebSocket feedback, MQTT messaging, and Arduino actuation for smart-home automation demos.",
     "outcome": "End-to-end light scheduling demo from web UI to hardware.",
-    "technologies": ["Python", "MQTT", "WebSocket", "Arduino", "IoT", "Flask"],
+    "technologies": [
+      "Python",
+      "MQTT",
+      "WebSocket",
+      "Arduino",
+      "IoT",
+      "Flask"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Web-based-Light-Scheduler",
     "demo": "",
     "status": "Active",
     "category": "devops",
     "featured": false,
     "priority": 71,
-    "challenges": ["WebSocket + MQTT sync", "Schedule reliability", "Arduino integration"],
-    "results": ["Graphical light scheduler", "MQTT device control", "Smart-home demo"]
+    "challenges": [
+      "WebSocket + MQTT sync",
+      "Schedule reliability",
+      "Arduino integration"
+    ],
+    "results": [
+      "Graphical light scheduler",
+      "MQTT device control",
+      "Smart-home demo"
+    ],
+    "image": "/images/projects/project-32.svg"
   },
   {
     "id": 33,
@@ -616,15 +1098,29 @@
     "built": "Socket.io messaging server and client UI for rooms, presence, and live message delivery.",
     "longDescription": "Socket.io-powered chat app enabling multiple users to connect and exchange messages in real time.",
     "outcome": "Working multi-user instant messaging prototype.",
-    "technologies": ["Socket.io", "JavaScript", "Node.js", "WebSockets", "Realtime"],
+    "technologies": [
+      "Socket.io",
+      "JavaScript",
+      "Node.js",
+      "WebSockets",
+      "Realtime"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Real-Time-Chat-Application",
     "demo": "",
     "status": "Active",
     "category": "fullstack",
     "featured": false,
     "priority": 62,
-    "challenges": ["Connection lifecycle", "Message ordering", "Multi-user rooms"],
-    "results": ["Live Socket.io chat", "Multi-user messaging"]
+    "challenges": [
+      "Connection lifecycle",
+      "Message ordering",
+      "Multi-user rooms"
+    ],
+    "results": [
+      "Live Socket.io chat",
+      "Multi-user messaging"
+    ],
+    "image": "/images/projects/project-33.svg"
   },
   {
     "id": 34,
@@ -635,15 +1131,28 @@
     "built": "MediaPipe-based face detection pipeline with landmark overlay and camera/video input support.",
     "longDescription": "Facial detection with MediaPipe — real-time landmarks for face presence and geometry, useful as a building block for tracking and HCI demos.",
     "outcome": "Working MediaPipe facial detection pipeline.",
-    "technologies": ["Python", "MediaPipe", "OpenCV", "Computer Vision", "AI"],
+    "technologies": [
+      "Python",
+      "MediaPipe",
+      "OpenCV",
+      "Computer Vision",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Facial_Detection_MediaPipe",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 69,
-    "challenges": ["Real-time landmark accuracy", "Camera input handling"],
-    "results": ["MediaPipe face landmarks", "Real-time detection overlay"]
+    "challenges": [
+      "Real-time landmark accuracy",
+      "Camera input handling"
+    ],
+    "results": [
+      "MediaPipe face landmarks",
+      "Real-time detection overlay"
+    ],
+    "image": "/images/projects/project-34.svg"
   },
   {
     "id": 35,
@@ -654,15 +1163,29 @@
     "built": "Face detection pipeline driving stepper-motor actuation for camera orientation.",
     "longDescription": "Combines facial detection with stepper-motor hardware so the camera physically follows detected faces.",
     "outcome": "CV + hardware demo where detection drives motor pan.",
-    "technologies": ["Python", "OpenCV", "Stepper Motor", "Hardware", "Computer Vision", "IoT"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Stepper Motor",
+      "Hardware",
+      "Computer Vision",
+      "IoT"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Face-Detection-Stepper-Motor",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 67,
-    "challenges": ["Motor timing", "Detection-to-actuation latency"],
-    "results": ["Face-driven pan", "Stepper motor integration"]
+    "challenges": [
+      "Motor timing",
+      "Detection-to-actuation latency"
+    ],
+    "results": [
+      "Face-driven pan",
+      "Stepper motor integration"
+    ],
+    "image": "/images/projects/project-35.svg"
   },
   {
     "id": 36,
@@ -673,15 +1196,30 @@
     "built": "C++ Arduino firmware with sensor reads, decision logic, servo gate motion, LED status, and buzzer alerts.",
     "longDescription": "Automatic Gate Demo Kit shows how a microcontroller decides from sensor input to control a servo, LEDs, and buzzer — a hardware access-control teaching kit.",
     "outcome": "Working Arduino gate automation with sensor-driven actuation.",
-    "technologies": ["C++", "Arduino", "Servo", "Sensors", "Embedded", "IoT"],
+    "technologies": [
+      "C++",
+      "Arduino",
+      "Servo",
+      "Sensors",
+      "Embedded",
+      "IoT"
+    ],
     "github": "https://github.com/Arn-The-Wolf/-Automatic-Gate-Demo-Kit",
     "demo": "",
     "status": "Active",
     "category": "devops",
     "featured": false,
     "priority": 55,
-    "challenges": ["Sensor noise", "Servo timing", "Clear demo UX"],
-    "results": ["Sensor-driven gate", "LED + buzzer feedback"]
+    "challenges": [
+      "Sensor noise",
+      "Servo timing",
+      "Clear demo UX"
+    ],
+    "results": [
+      "Sensor-driven gate",
+      "LED + buzzer feedback"
+    ],
+    "image": "/images/projects/project-36.svg"
   },
   {
     "id": 37,
@@ -692,15 +1230,29 @@
     "built": "Camera setup, live viewing, and recording workflows aimed at lightweight surveillance demos.",
     "longDescription": "Simple CCTV camera monitoring for home/office security — live feeds and recording with a straightforward UI.",
     "outcome": "Working surveillance monitor prototype with live view and recording.",
-    "technologies": ["Python", "OpenCV", "Flask", "Surveillance", "Computer Vision"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Flask",
+      "Surveillance",
+      "Computer Vision"
+    ],
     "github": "https://github.com/Arn-The-Wolf/cctv-camera",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 58,
-    "challenges": ["Live stream latency", "Recording storage", "Multi-camera UX"],
-    "results": ["Live camera feeds", "Footage recording"]
+    "challenges": [
+      "Live stream latency",
+      "Recording storage",
+      "Multi-camera UX"
+    ],
+    "results": [
+      "Live camera feeds",
+      "Footage recording"
+    ],
+    "image": "/images/projects/project-37.svg"
   },
   {
     "id": 38,
@@ -711,15 +1263,29 @@
     "built": "ML training pipeline: feature prep, model training/evaluation, and price prediction inference.",
     "longDescription": "AI model to check/predict house prices from structured property features — classic supervised learning valuation demo.",
     "outcome": "Trained house-price prediction model with evaluation metrics.",
-    "technologies": ["Python", "Machine Learning", "Scikit-learn", "AI", "Data Science"],
+    "technologies": [
+      "Python",
+      "Machine Learning",
+      "Scikit-learn",
+      "AI",
+      "Data Science"
+    ],
     "github": "https://github.com/Arn-The-Wolf/AI-TO-CHECK-THE-PRICE-OF-THE-HOUSE",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 60,
-    "challenges": ["Feature engineering", "Model accuracy", "Overfitting control"],
-    "results": ["Price prediction model", "Training & eval pipeline"]
+    "challenges": [
+      "Feature engineering",
+      "Model accuracy",
+      "Overfitting control"
+    ],
+    "results": [
+      "Price prediction model",
+      "Training & eval pipeline"
+    ],
+    "image": "/images/projects/project-38.svg"
   },
   {
     "id": 39,
@@ -730,15 +1296,29 @@
     "built": "React + Tailwind UI fetching OpenWeatherMap data for current conditions and weekly forecast.",
     "longDescription": "Weather website built with React.js and Tailwind CSS — location-based current weather and 7-day forecast via OpenWeatherMap.",
     "outcome": "Polished responsive weather frontend with live API data.",
-    "technologies": ["React", "Tailwind CSS", "OpenWeatherMap API", "Frontend", "JavaScript"],
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "OpenWeatherMap API",
+      "Frontend",
+      "JavaScript"
+    ],
     "github": "https://github.com/Arn-The-Wolf/weather-website",
     "demo": "",
     "status": "Active",
     "category": "frontend",
     "featured": false,
     "priority": 56,
-    "challenges": ["API error states", "Location UX", "Responsive forecast layout"],
-    "results": ["Current + 7-day forecast", "Responsive Tailwind UI"]
+    "challenges": [
+      "API error states",
+      "Location UX",
+      "Responsive forecast layout"
+    ],
+    "results": [
+      "Current + 7-day forecast",
+      "Responsive Tailwind UI"
+    ],
+    "image": "/images/projects/project-39.svg"
   },
   {
     "id": 40,
@@ -749,15 +1329,27 @@
     "built": "HTML/web client with Python MQTT bridge for on/off light control simulation.",
     "longDescription": "MQTT Light Control is a web app for toggling a simulated IoT light switch using MQTT and Python — a clear pub/sub teaching demo.",
     "outcome": "Working browser-to-MQTT light control simulator.",
-    "technologies": ["HTML", "Python", "MQTT", "IoT"],
+    "technologies": [
+      "HTML",
+      "Python",
+      "MQTT",
+      "IoT"
+    ],
     "github": "https://github.com/Arn-The-Wolf/MQTT-Light-Control",
     "demo": "",
     "status": "Active",
     "category": "devops",
     "featured": false,
     "priority": 52,
-    "challenges": ["Broker connectivity", "UI/state sync"],
-    "results": ["MQTT light toggle", "Web control UI"]
+    "challenges": [
+      "Broker connectivity",
+      "UI/state sync"
+    ],
+    "results": [
+      "MQTT light toggle",
+      "Web control UI"
+    ],
+    "image": "/images/projects/project-40.svg"
   },
   {
     "id": 41,
@@ -768,15 +1360,28 @@
     "built": "OpenCV/Python experiments covering core CV stages used in robotics perception stacks.",
     "longDescription": "Part 01 of Computer Vision for Intelligent Robotics — foundational Python CV work toward perception-driven robotic systems.",
     "outcome": "Foundational CV module for robotics perception experiments.",
-    "technologies": ["Python", "OpenCV", "Computer Vision", "Robotics", "AI"],
+    "technologies": [
+      "Python",
+      "OpenCV",
+      "Computer Vision",
+      "Robotics",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Computer-Vision-for-Intelligent-Robotics-Part-01",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 61,
-    "challenges": ["Perception pipeline design", "Real-world noise"],
-    "results": ["CV foundations for robotics", "Detection experiments"]
+    "challenges": [
+      "Perception pipeline design",
+      "Real-world noise"
+    ],
+    "results": [
+      "CV foundations for robotics",
+      "Detection experiments"
+    ],
+    "image": "/images/projects/project-41.svg"
   },
   {
     "id": 42,
@@ -787,15 +1392,27 @@
     "built": "TypeScript mobile UI exploring scroll performance and list interaction patterns.",
     "longDescription": "Mobile Scroll View is a TypeScript project focused on mobile scroll and list UX — useful as a building block for app frontends.",
     "outcome": "Reusable mobile scroll/list UI patterns in TypeScript.",
-    "technologies": ["TypeScript", "Mobile", "React Native", "Frontend"],
+    "technologies": [
+      "TypeScript",
+      "Mobile",
+      "React Native",
+      "Frontend"
+    ],
     "github": "https://github.com/Arn-The-Wolf/Mobile-Scroll-View",
     "demo": "",
     "status": "Active",
     "category": "mobile",
     "featured": false,
     "priority": 54,
-    "challenges": ["Scroll performance", "Touch UX"],
-    "results": ["Mobile scroll UI", "TypeScript list patterns"]
+    "challenges": [
+      "Scroll performance",
+      "Touch UX"
+    ],
+    "results": [
+      "Mobile scroll UI",
+      "TypeScript list patterns"
+    ],
+    "image": "/images/projects/project-42.svg"
   },
   {
     "id": 43,
@@ -806,14 +1423,26 @@
     "built": "Python conversational agent with message handling and response generation workflows.",
     "longDescription": "Simple Python chatbot prototype for experimenting with conversational AI flows and user message handling.",
     "outcome": "Working chatbot prototype with conversational turn handling.",
-    "technologies": ["Python", "NLP", "Chatbot", "AI"],
+    "technologies": [
+      "Python",
+      "NLP",
+      "Chatbot",
+      "AI"
+    ],
     "github": "https://github.com/Arn-The-Wolf/chatbot",
     "demo": "",
     "status": "Active",
     "category": "ai",
     "featured": false,
     "priority": 48,
-    "challenges": ["Response relevance", "Conversation state"],
-    "results": ["Chatbot prototype", "Conversational turn flow"]
+    "challenges": [
+      "Response relevance",
+      "Conversation state"
+    ],
+    "results": [
+      "Chatbot prototype",
+      "Conversational turn flow"
+    ],
+    "image": "/images/projects/project-43.svg"
   }
 ]

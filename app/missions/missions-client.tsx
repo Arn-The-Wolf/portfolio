@@ -5,7 +5,8 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Github, ExternalLink, ChevronRight, FolderGit2, Star, Loader2 } from "lucide-react"
+import { Github, ExternalLink, ChevronRight, Star, Loader2 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import PageHeader from "@/components/page-header"
 import { cn } from "@/lib/utils"
@@ -18,6 +19,7 @@ import {
   type ProjectFilter,
 } from "@/lib/project-categories"
 import { normalizeGithubUrl, type GithubRepoProject } from "@/lib/github-projects"
+import { getProjectImage } from "@/lib/project-images"
 
 type CmsProject = {
   id: number
@@ -27,6 +29,7 @@ type CmsProject = {
   technologies?: string[]
   github?: string
   demo?: string
+  image?: string
   featured?: boolean
   priority?: number
   category?: ProjectCategory
@@ -165,9 +168,11 @@ export default function MissionsClient({
               ? Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={`skeleton-${i}`} />)
               : filtered.map((project, index) => {
                   const isGithub = project.source === "github"
-                  const href = isGithub ? project.github : `/missions/${project.id}`
+                  const liveUrl = project.demo?.trim() || ""
+                  const detailHref = isGithub ? undefined : `/missions/${project.id}`
                   const stars = isGithub ? (project as GithubRepoProject).stars : 0
                   const cardKey = isGithub ? String(project.id) : `cms-${project.id}`
+                  const cover = getProjectImage(project)
 
                   return (
                     <motion.div
@@ -177,20 +182,21 @@ export default function MissionsClient({
                       transition={{ duration: 0.35, delay: Math.min(index, 12) * 0.03 }}
                     >
                       <Card className="glass-card-hover h-full flex flex-col overflow-hidden group">
-                        <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                          {isGithub ? (
-                            <FolderGit2 className="h-12 w-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
-                          ) : (
-                            <span className="font-display text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
-                              {project.title?.charAt(0)}
-                            </span>
-                          )}
+                        <div className="relative h-36 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
+                          <Image
+                            src={cover}
+                            alt={`${project.title} cover`}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
                           <div className="absolute top-3 right-3 flex gap-1">
                             {project.featured && (
                               <Badge className="btn-primary text-[10px]">Featured</Badge>
                             )}
                             {isGithub && (
-                              <Badge variant="outline" className="border-primary/40 text-primary text-[10px]">
+                              <Badge variant="outline" className="border-primary/40 text-primary text-[10px] bg-background/60">
                                 GitHub
                               </Badge>
                             )}
@@ -231,26 +237,30 @@ export default function MissionsClient({
                                 <Link
                                   href={project.github}
                                   target="_blank"
+                                  rel="noopener noreferrer"
                                   className="hover:text-primary transition-colors"
+                                  aria-label={`${project.title} GitHub repository`}
                                 >
                                   <Github className="h-4 w-4" />
                                 </Link>
                               )}
-                              {project.demo && (
-                                <Link
-                                  href={project.demo}
-                                  target="_blank"
-                                  className="hover:text-primary transition-colors"
-                                >
-                                  <ExternalLink className="h-4 w-4" />
-                                </Link>
-                              )}
                             </div>
-                            <Button asChild variant="ghost" size="sm" className="text-primary text-xs p-0 h-auto">
-                              <Link href={href} target={isGithub ? "_blank" : undefined}>
-                                {isGithub ? "View repo" : "Details"} <ChevronRight className="ml-1 h-3 w-3" />
-                              </Link>
-                            </Button>
+                            <div className="flex items-center gap-3">
+                              {detailHref && (
+                                <Button asChild variant="ghost" size="sm" className="text-muted-foreground text-xs p-0 h-auto">
+                                  <Link href={detailHref}>
+                                    Details <ChevronRight className="ml-1 h-3 w-3" />
+                                  </Link>
+                                </Button>
+                              )}
+                              {liveUrl ? (
+                                <Button asChild variant="ghost" size="sm" className="text-primary text-xs p-0 h-auto">
+                                  <Link href={liveUrl} target="_blank" rel="noopener noreferrer">
+                                    Live URL <ExternalLink className="ml-1 h-3 w-3" />
+                                  </Link>
+                                </Button>
+                              ) : null}
+                            </div>
                           </div>
                         </CardContent>
                       </Card>

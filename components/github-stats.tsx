@@ -161,11 +161,13 @@ export default function GitHubStats() {
                   <span className="flex items-center gap-1"><GitFork className="h-3 w-3" />{repo.forks_count}</span>
                   {repo.language && <Badge variant="secondary" className="text-[10px]">{repo.language}</Badge>}
                 </div>
-                <Button asChild variant="outline" size="sm" className="w-full btn-outline-primary text-xs">
-                  <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-1 h-3 w-3" /> View repo
-                  </Link>
-                </Button>
+                {repo.homepage ? (
+                  <Button asChild variant="outline" size="sm" className="w-full btn-outline-primary text-xs">
+                    <Link href={repo.homepage} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-1 h-3 w-3" /> Live URL
+                    </Link>
+                  </Button>
+                ) : null}
               </CardContent>
             </Card>
           </motion.div>
