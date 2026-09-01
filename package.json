@@ -9,6 +9,7 @@
     "start": "node scripts/start.mjs",
     "lint": "next lint",
     "generate:portfolio": "node scripts/generate-portfolio-docx.mjs",
+    "upload:resume": "node scripts/upload-resume.mjs",
     "seed:blob": "node scripts/seed-blob.mjs"
   },
   "dependencies": {
