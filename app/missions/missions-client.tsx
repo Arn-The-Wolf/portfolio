@@ -20,6 +20,7 @@ import {
 } from "@/lib/project-categories"
 import { normalizeGithubUrl, type GithubRepoProject } from "@/lib/github-projects"
 import { getProjectImage } from "@/lib/project-images"
+import { toLiveUrl } from "@/lib/live-url"
 
 type CmsProject = {
   id: number
@@ -168,7 +169,7 @@ export default function MissionsClient({
               ? Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={`skeleton-${i}`} />)
               : filtered.map((project, index) => {
                   const isGithub = project.source === "github"
-                  const liveUrl = project.demo?.trim() || ""
+                  const liveUrl = toLiveUrl(project.demo)
                   const detailHref = isGithub ? undefined : `/missions/${project.id}`
                   const stars = isGithub ? (project as GithubRepoProject).stars : 0
                   const cardKey = isGithub ? String(project.id) : `cms-${project.id}`

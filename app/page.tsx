@@ -164,7 +164,6 @@ export default function Portfolio() {
         viewUrl="/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf"
         downloadUrl="/resumes/RUYANGE_Arnold_Full_Stack_Resume.pdf"
         fileName="RUYANGE_Arnold_Full_Stack_Resume.pdf"
-        fileName="RUYANGE-Arnold-CV.pdf"
       />
     </div>
   )

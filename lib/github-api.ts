@@ -1,3 +1,5 @@
+import projectsData from "@/data/projects.json"
+import { resolveRepoLiveUrl, toLiveUrl } from "./live-url"
 import { siteConfig } from "./site-config"
 
 const USERNAME = process.env.GITHUB_USERNAME || "Arn-The-Wolf"
@@ -103,21 +105,48 @@ const PINNED = [
   "webscraping",
 ]
 
+function cmsLiveUrlByRepo(): Map<string, string> {
+  const map = new Map<string, string>()
+  for (const project of projectsData as { github?: string; demo?: string }[]) {
+    const live = toLiveUrl(project.demo)
+    const github = project.github?.trim()
+    if (!live || !github) continue
+    const name = github.split("/").filter(Boolean).pop()
+    if (name) map.set(name.toLowerCase(), live)
+  }
+  return map
+}
+
+function withLiveHomepage(repo: GithubRepoSummary, cmsLive: Map<string, string>): GithubRepoSummary {
+  const homepage =
+    toLiveUrl(repo.homepage) ||
+    cmsLive.get(repo.name.toLowerCase()) ||
+    resolveRepoLiveUrl(repo.name, null) ||
+    null
+  return { ...repo, homepage }
+}
+
 function buildFallbackRepos(): GithubRepoSummary[] {
-  return PINNED.map((name, index) => ({
-    id: index + 1,
-    name,
-    description: `Open-source project by ${siteConfig.name}`,
-    html_url: `${siteConfig.github}/${name}`,
-    homepage: null,
-    stargazers_count: 0,
-    forks_count: 0,
-    watchers_count: 0,
-    language: null,
-    topics: [],
-    updated_at: new Date().toISOString(),
-    fork: false,
-  }))
+  const cmsLive = cmsLiveUrlByRepo()
+  return PINNED.map((name, index) =>
+    withLiveHomepage(
+      {
+        id: index + 1,
+        name,
+        description: `Open-source project by ${siteConfig.name}`,
+        html_url: `${siteConfig.github}/${name}`,
+        homepage: null,
+        stargazers_count: 0,
+        forks_count: 0,
+        watchers_count: 0,
+        language: null,
+        topics: [],
+        updated_at: new Date().toISOString(),
+        fork: false,
+      },
+      cmsLive,
+    ),
+  )
 }
 
 export function buildFallbackGithubPayload(): GithubProfilePayload {
@@ -157,7 +186,9 @@ export async function fetchGithubProfile(): Promise<GithubProfilePayload> {
     }
 
     const user = await userRes.json()
-    const repos: GithubRepoSummary[] = reposRes?.ok ? await reposRes.json() : []
+    const cmsLive = cmsLiveUrlByRepo()
+    const reposRaw: GithubRepoSummary[] = reposRes?.ok ? await reposRes.json() : []
+    const repos = reposRaw.map((repo) => withLiveHomepage(repo, cmsLive))
 
     const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0)
     const featured = repos
@@ -197,7 +228,9 @@ export async function fetchGithubReposList(): Promise<GithubRepoSummary[]> {
   )
   if (!res?.ok) return []
   try {
-    return await res.json()
+    const cmsLive = cmsLiveUrlByRepo()
+    const repos: GithubRepoSummary[] = await res.json()
+    return repos.map((repo) => withLiveHomepage(repo, cmsLive))
   } catch {
     return []
   }

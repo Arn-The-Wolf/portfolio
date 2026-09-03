@@ -1,5 +1,6 @@
 import { fetchGithubReposList } from "./github-api"
 import { getProjectCategories } from "./project-categories"
+import { resolveRepoLiveUrl } from "./live-url"
 
 export interface GithubRepoProject {
   id: string
@@ -41,7 +42,7 @@ export async function fetchGithubRepos(): Promise<GithubRepoProject[]> {
         description: item.description,
         technologies,
         github: repo.html_url,
-        demo: repo.homepage || "",
+        demo: resolveRepoLiveUrl(repo.name, repo.homepage),
         status: "ACTIVE",
         featured: repo.stargazers_count > 0,
         categories: getProjectCategories(item),

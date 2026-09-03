@@ -56,6 +56,14 @@ const nextConfig = {
         ],
       },
       {
+        source: '/resumes/:path*',
+        headers: [
+          ...securityHeaders,
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+        ],
+      },
+      {
         source: '/api/resume',
         headers: [
           ...securityHeaders,

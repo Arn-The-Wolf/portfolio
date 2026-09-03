@@ -25,22 +25,18 @@ interface Resume {
 }
 
 function resolveViewUrl(resume: Resume): string {
-  const url = resume.fileUrl
-  // Prefer download API when a stored upload exists (avoids stale /resume.pdf links)
-  if ((resume as Resume & { storageKey?: string }).storageKey) {
-    return `/api/resumes/${resume.id}/download`
+  const fileName = resume.fileName?.replace(/[^a-zA-Z0-9._-]/g, "_")
+  // Match local: serve the public PDF path when available
+  if (fileName && /\.pdf$/i.test(fileName)) {
+    return `/resumes/${fileName}`
   }
-  if (!url) return `/api/resumes/${resume.id}/download`
-  if (url.startsWith("http")) return url
-  if (url.startsWith("/") && !url.startsWith("/api/")) return url
-  if (url.startsWith("/api/resumes/")) return url
-  if (resume.fileName) return `/api/resumes/${resume.id}/download`
-  return url
+  const url = resume.fileUrl
+  if (url?.startsWith("/") && !url.startsWith("/api/")) return url
+  return `/api/resumes/${resume.id}/download`
 }
 
 function resolveDownloadUrl(resume: Resume): string {
   const view = resolveViewUrl(resume)
-  if (view.startsWith("http")) return view
   if (view.startsWith("/api/resumes/")) {
     return `${view}${view.includes("?") ? "&" : "?"}download=1`
   }

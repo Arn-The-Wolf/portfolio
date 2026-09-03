@@ -7,9 +7,10 @@ import { ArrowLeft, Github, ExternalLink } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { getProjectImage } from "@/lib/project-images"
+import { toLiveUrl } from "@/lib/live-url"
 
 export default function ProjectDetailClient({ project }: { project: any }) {
-  const liveUrl = typeof project.demo === "string" ? project.demo.trim() : ""
+  const liveUrl = toLiveUrl(typeof project.demo === "string" ? project.demo : "")
   const cover = getProjectImage(project)
 
   return (
