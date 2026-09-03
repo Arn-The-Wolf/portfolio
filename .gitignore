@@ -40,3 +40,5 @@ ADMIN_CREDENTIALS.local.txt
 public/uploads/resumes/*
 !public/uploads/resumes/.gitkeep
 .vercel
+
+.env*
